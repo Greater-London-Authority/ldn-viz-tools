@@ -3,14 +3,14 @@
 	import MapMarker from './MapMarker.svelte';
 
 	const componentType = {
-		type: 'object',
-		control: 'none',
+		type: { name: 'object', value: {} },
+		control: false,
 		table: {
 			type: {
 				summary: 'Svelte component'
 			}
 		}
-	};
+	} as const;
 
 	/**
 	 * The `<MapMarker>` component allows tooltips and popups to easily be added
@@ -41,11 +41,11 @@
 		argTypes: {
 			layerId: {
 				type: 'string',
-				control: 'none'
+				control: false
 			},
 			noCursorStyle: {
 				type: 'boolean',
-				control: 'none'
+				control: false
 			},
 			tooltip: componentType,
 			popup: componentType

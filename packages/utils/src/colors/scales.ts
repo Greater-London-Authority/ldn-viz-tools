@@ -57,7 +57,7 @@ export const getThresholdBreaksColorsLabels = ({
 	even = true // chromas.js perceptually even scales
 } = {}) => {
 	const f = d3.format(labelFormat);
-	const labelNumFormat = (val) => (val === undefined ? '' : f(val));
+	const labelNumFormat = (val?: number | null) => (val === undefined ? '' : f(val as number));
 
 	const thresholdObj: { breaks: number[]; colors: string[]; labels: string[] } = {
 		breaks: [],
@@ -98,7 +98,7 @@ export const getThresholdBreaksColorsLabels = ({
 	// create breakCount x bins of values
 	const bin = d3.bin().thresholds(breakCount);
 	const binnedVals = bin(extent);
-	let binXType = 'x0';
+	let binXType: 'x0' | 'x1' = 'x0';
 	let binLen = binnedVals.length;
 
 	// simple
@@ -119,7 +119,7 @@ export const getThresholdBreaksColorsLabels = ({
 			thresholdObj.breaks.push(-offsetZeroVal);
 			thresholdObj.breaks.push(offsetZeroVal);
 		} else {
-			thresholdObj.breaks.push(binX);
+			thresholdObj.breaks.push(binX as number);
 		}
 	}
 

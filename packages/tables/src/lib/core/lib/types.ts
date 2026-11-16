@@ -21,6 +21,7 @@ export type ColGroup = {
 	label: string;
 	startCol: number;
 	endCol: number;
+	color?: string;
 };
 
 // ============================================================================
@@ -96,7 +97,7 @@ export type ColSpec = {
 	width?: number | string;
 	relativeWidth?: number;
 	computedWidth?: number;
-	href?: string;
+	href?: (row: DataRow) => string;
 
 	cell?: {
 		renderer?: string | Component;
@@ -163,7 +164,10 @@ export type TableSpec = {
 	filters?: Filter[];
 
 	showHeaderTopRule?: boolean;
+	showHeaderBottomRule?: boolean;
 	showTableHeader?: boolean;
+	showColumnControls?: boolean;
+	showColSummaries?: boolean;
 };
 
 // ============================================================================

@@ -22,7 +22,11 @@
 	const formatHigh = format(',.4~s'); // for 10000 and above, format commas and SI numbering (M & K)
 
 	// create a feature collection
-	const features = topojson.feature(ldnTopo, ldnTopo.objects.boroughs);
+	const features = topojson.feature<{ name: string; gss_code: string }>(
+		ldnTopo,
+		ldnTopo.objects.boroughs
+	);
+	type Borough = (typeof features.features)[number];
 	// collection of internal borders
 	const featuresMesh = topojson.mesh(ldnTopo, ldnTopo.objects.boroughs, (a, b) => a !== b);
 
@@ -68,7 +72,7 @@
 			Plot.geo(featuresMesh, { stroke: theme.tokenNameToValue('surface') }),
 
 			Plot.dot(
-				features,
+				features.features,
 				Plot.centroid({
 					// fill: theme.tokenNameToValue('data.primary'),
 					fillOpacity: 0.8,
@@ -80,11 +84,11 @@
 
 			// styled tooltip
 			Plot.tip(
-				features,
+				features.features,
 				Plot.pointer(
 					Plot.geoCentroid({
 						title: (d) =>
-							d.properties.name + '\n' + d3.format('.0%')(mapData.get(d.properties.gss_code))
+							d.properties.name + '\n' + d3.format('.0%')(mapData.get(d.properties.gss_code)!)
 					})
 				)
 			),
@@ -97,8 +101,8 @@
 
 				Plot.geoCentroid({
 					...getDefaultPlotStyles().defaultAnnotationTip,
-					title: (d) =>
-						d.properties.name + '\n' + d3.format('.0%')(mapData.get(d.properties.gss_code))
+					title: (d: Borough) =>
+						d.properties.name + '\n' + d3.format('.0%')(mapData.get(d.properties.gss_code)!)
 				})
 			)
 		]

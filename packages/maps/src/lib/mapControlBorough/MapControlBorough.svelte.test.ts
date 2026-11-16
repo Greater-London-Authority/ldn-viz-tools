@@ -1,6 +1,7 @@
 import { describe, test, expect, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { userEvent } from 'vitest/browser';
+import type { Map as MaplibreglMap } from 'maplibre-gl';
 import MapControlBorough from './MapControlBorough.svelte';
 import boroughs from './boroughs.json';
 import { GREATER_LONDON_BOUNDS } from '../themes/bounds';
@@ -26,6 +27,9 @@ const openDropdown = async () => {
 	});
 };
 
+// The component only calls `fitBounds`, so the tests pass a partial map.
+const asMap = (map: { fitBounds: unknown }) => map as unknown as MaplibreglMap;
+
 const dropdownOptionLabels = () =>
 	Array.from(
 		document.querySelectorAll('.sv_dropdown .sv-item--wrap.in-dropdown .sv-item--content')
@@ -43,7 +47,7 @@ const clickDropdownOption = (label: string) => {
 describe('MapControlBorough', () => {
 	test('the options list shows "Show all of Greater London" first, then boroughs sorted alphabetically by name', async () => {
 		const map = { fitBounds: vi.fn() };
-		render(MapControlBorough, { props: { map } });
+		render(MapControlBorough, { props: { map: asMap(map) } });
 
 		await openDropdown();
 
@@ -57,7 +61,7 @@ describe('MapControlBorough', () => {
 
 	test('defaults selectedBorough to "London Borough of Barnet" and zooms to its bounds on mount', async () => {
 		const map = { fitBounds: vi.fn() };
-		render(MapControlBorough, { props: { map } });
+		render(MapControlBorough, { props: { map: asMap(map) } });
 
 		const barnet = boroughs.find((b) => b.properties.borough === 'London Borough of Barnet')!;
 
@@ -68,7 +72,7 @@ describe('MapControlBorough', () => {
 
 	test('selecting "GREATER LONDON" calls map.fitBounds with GREATER_LONDON_BOUNDS', async () => {
 		const map = { fitBounds: vi.fn() };
-		render(MapControlBorough, { props: { map } });
+		render(MapControlBorough, { props: { map: asMap(map) } });
 
 		// Wait for (and discard) the initial mount effect for the default borough.
 		await vi.waitFor(() => expect(map.fitBounds).toHaveBeenCalledTimes(1));
@@ -84,7 +88,7 @@ describe('MapControlBorough', () => {
 
 	test("selecting a named borough calls map.fitBounds with that borough's bounds from boroughs.json", async () => {
 		const map = { fitBounds: vi.fn() };
-		render(MapControlBorough, { props: { map } });
+		render(MapControlBorough, { props: { map: asMap(map) } });
 
 		await vi.waitFor(() => expect(map.fitBounds).toHaveBeenCalledTimes(1));
 		map.fitBounds.mockClear();
@@ -105,9 +109,9 @@ describe('MapControlBorough', () => {
 		// that `selectedBorough` is a genuine two-way binding from the start
 		// (Svelte disallows binding `undefined` to a prop that has a
 		// `$bindable` fallback - see `props_invalid_value`).
-		const props = $state<{ selectedBorough?: string; map?: typeof map }>({
+		const props = $state<{ selectedBorough?: string; map?: MaplibreglMap }>({
 			selectedBorough: 'London Borough of Barnet',
-			map
+			map: asMap(map)
 		});
 		render(MapControlBorough, { props });
 

@@ -161,6 +161,6 @@
 	source="LDN Viz Tools Demo Data"
 	note="Data for demonstration only"
 	chartDescription="The line chart shows monthly time series data for Variable A and B, measured in GBP (Pounds Sterling). The x axis ranges in months from January 2015 to March 2024. The y axis ranges from £0 to £60,000. All variable values have fallen steadily since around 2017, but Variable A has fallen the most. Variable A's highest value was £61,816 in February 2015, its lowest value was £11,667 in July 2023, (a change of around -£50,149) and its mean average value was £30,758. Variable B follows a similar fall, with a mean average of £27,545."
-	imageDownloadButton={false}
-	dataDownloadButton={false}
+	imageDownload={false}
+	dataDownload={false}
 />

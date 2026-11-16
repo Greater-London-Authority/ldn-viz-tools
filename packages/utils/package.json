@@ -9,17 +9,19 @@
 	"type": "module",
 	"exports": {
 		".": {
+			"types": "./dist/types/main.d.ts",
 			"import": "./dist/ldn-viz-utils.js",
 			"require": "./dist/ldn-viz-utils.umd.cjs"
 		}
 	},
 	"main": "./dist/ldn-viz-utils.umd.cjs",
 	"module": "./dist/ldn-viz-utils.js",
+	"types": "./dist/types/main.d.ts",
 	"files": [
 		"dist"
 	],
 	"scripts": {
-		"build": "vite build",
+		"build": "vite build && tsc -p tsconfig.json",
 		"format": "prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore --write .",
 		"lint": "prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore  --check . && eslint .",
 		"test": "npm run test:unit",

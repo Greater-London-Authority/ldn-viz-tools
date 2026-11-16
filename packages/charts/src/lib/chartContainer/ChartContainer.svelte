@@ -16,9 +16,12 @@
 		Button,
 		ChromeFooter,
 		ChromeHeader,
-		ExportButtons,
+		DownloadButton,
 		Modal,
-		classNames
+		classNames,
+		resolveDownloadFormats,
+		type DataDownloadOption,
+		type ImageDownloadOption
 	} from '@ldn-viz/ui';
 
 	/** Controls whether the chart-description Modal is open. */
@@ -84,14 +87,12 @@
 		byline?: string;
 		note?: string;
 		/**
-		 * Data Download Button in the footer
+		 * The data formats offered by the download button in the footer.
 		 *
-		 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
-		 * Set to false to hide completely.
-		 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
-		 *
+		 * Defaults to `true`, which offers 'CSV' and 'JSON'. An array of formats offers only those formats.
+		 * `false` offers no data formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		dataDownloadButton?: true | false | ('CSV' | 'JSON')[];
+		dataDownload?: DataDownloadOption;
 		/**
 		 * The file name to be used for the downloaded data or image file.
 		 */
@@ -101,14 +102,17 @@
 		 */
 		data?: { [key: string]: any }[] | undefined;
 		/**
-		 * Image Download Button in the footer
+		 * The image formats offered by the download button in the footer.
 		 *
-		 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
-		 * Set to false to hide completely.
-		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
-		 *
+		 * Defaults to `true`, which offers 'PNG' and 'SVG'. An array of formats offers only those formats.
+		 * `false` offers no image formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
+		imageDownload?: ImageDownloadOption;
+		/**
+		 * How the download button in the footer is shown: a text button with the text "Download"
+		 * (`standard`), an icon-only button (`compact`), or an outline button with the text "Download" (`outline`).
+		 */
+		downloadButtonVariant?: 'standard' | 'compact' | 'outline';
 		/**
 		 * Tailwind class to set chart area height
 		 */
@@ -159,10 +163,11 @@
 		source = '',
 		byline = '',
 		note = '',
-		dataDownloadButton = true,
+		dataDownload = true,
 		filename = '',
 		data = undefined,
-		imageDownloadButton = true,
+		imageDownload = true,
+		downloadButtonVariant = 'standard',
 		chartHeight = 'h-60',
 		overrideClass = '',
 		chartWidth = 'w-full',
@@ -188,8 +193,16 @@
 
 	let hasDescription = $derived(!!description);
 	let descriptionIsString = $derived(typeof description === 'string');
+	let downloads = $derived(
+		resolveDownloadFormats({
+			dataDownload,
+			imageDownload,
+			hasData: !!data,
+			hasImage: !!chartToCapture
+		})
+	);
 	let hasActions = $derived(
-		!!(source || byline || note || hasDescription || dataDownloadButton || imageDownloadButton)
+		!!(source || byline || note || hasDescription || downloads.hasDownload)
 	);
 </script>
 
@@ -242,20 +255,22 @@
 				{byline}
 				{note}
 				footnoteExtra={hasDescription ? descriptionTrigger : undefined}
-				actions={exportBtns}
+				actions={downloads.hasDownload ? downloadBtn : undefined}
 			/>
 		</div>
 	{/if}
 </div>
 
-{#snippet exportBtns()}
-	<ExportButtons
-		elementToCapture={chartToCapture}
+{#snippet downloadBtn()}
+	<DownloadButton
+		htmlNode={chartToCapture}
 		{filename}
-		dataForDownload={data}
-		{dataDownloadButton}
-		{imageDownloadButton}
+		{data}
+		dataFormats={downloads.dataFormats}
+		imageFormats={downloads.imageFormats}
 		{columnMapping}
+		compact={downloadButtonVariant === 'compact'}
+		outline={downloadButtonVariant === 'outline'}
 	/>
 {/snippet}
 
@@ -275,7 +290,7 @@
 					variant="text"
 					size="xs"
 					emphasis="secondary"
-					class="!p-0"
+					slim
 					onclick={() => (descriptionOpen = true)}>View description</Button
 				>
 			</li>

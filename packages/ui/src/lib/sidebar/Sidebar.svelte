@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
+	import ScrollArea from '../scrollArea/ScrollArea.svelte';
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
-	import ScrollArea from '../scrollArea/ScrollArea.svelte';
 	import TabPanel from './../tabs/TabPanel.svelte';
 	import SidebarTabList from './elements/sidebarTabs/SidebarTabList.svelte';
 	import SidebarToggle from './elements/sidebarToggle/SidebarToggle.svelte';

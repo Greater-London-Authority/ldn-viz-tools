@@ -76,7 +76,7 @@
 		/**
 		 * If `true`, then color chips will be displayed even if the color control is disabled.
 		 */
-		alwaysShowcolorChip: false;
+		alwaysShowcolorChip?: boolean;
 
 		/**
 		 * minimum permitted value for the marker size

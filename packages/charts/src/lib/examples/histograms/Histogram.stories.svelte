@@ -1,4 +1,5 @@
 <script module lang="ts">
+	import type { RectYOptions } from '@observablehq/plot';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import { randomNormal } from 'd3';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
@@ -21,7 +22,7 @@
 			Plot.gridY(),
 			Plot.axisX({ label: 'Random Value Range' }),
 			Plot.axisY({ label: 'Frequency of value' }),
-			Plot.rectY(chartData, Plot.binX({ y: 'count' }, { x: 'x', tip: true })),
+			Plot.rectY(chartData, Plot.binX<RectYOptions>({ y: 'count' }, { x: 'x', tip: true })),
 			// baseline last
 			Plot.ruleY([0])
 		]

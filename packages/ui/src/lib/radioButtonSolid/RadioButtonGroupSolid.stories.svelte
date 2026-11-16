@@ -6,7 +6,7 @@
 	import ResizeIcon from '../layerControl/ResizeIcon.svelte';
 
 	import RadioButtonGroupSolid from './RadioButtonGroupSolid.svelte';
-	import type { RadioButtonSolidProps } from './types';
+	import type { RadioButtonSolidOption, RadioButtonSolidProps } from './types';
 
 	/**
 	 * The `RadioButtonGroupSolid` component contains a set of `RadioButtonSolid` buttons for switching between tabs or selecting one option from a small number of alternatives.
@@ -60,7 +60,7 @@
 		}
 	];
 
-	let optionsForGroupRawIcon: RadioButtonSolidProps[] = [
+	let optionsForGroupRawIcon: RadioButtonSolidOption[] = [
 		{ id: 'bus', label: 'Bus stops', rawIcon: OpacityIcon },
 		{ id: 'train', label: 'Train stations', rawIcon: ResizeIcon },
 		{ id: 'underground', label: 'Underground stations', rawIcon: OpacityIcon }

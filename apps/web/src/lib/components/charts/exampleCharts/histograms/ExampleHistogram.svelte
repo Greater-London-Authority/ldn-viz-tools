@@ -3,6 +3,7 @@
 	 * TODO: THIS EXAMPLE ALREADY EXISTS ESWHERE IN THIS REPO, SO THIS IS A REPETITION ??
 	 */
 	import { ObservablePlot, Plot } from '@ldn-viz/charts';
+	import type { RectYOptions } from '@observablehq/plot';
 	import { format, randomNormal } from 'd3';
 
 	//const formatLow = format(',.0f'); // for lower than 10000, format commas and not dp
@@ -20,7 +21,10 @@
 			Plot.gridY(),
 			Plot.axisX({ label: 'Random Value Range' }),
 			Plot.axisY({ label: 'Frequency of value' }),
-			Plot.rectY(chartData, Plot.binX({ y: 'count' }, { x: 'x', tip: true, inset: 0 })),
+			Plot.rectY(
+				chartData,
+				Plot.binX<RectYOptions>({ y: 'count' }, { x: 'x', tip: true, inset: 0 })
+			),
 			// baseline last
 			Plot.ruleY([0])
 		]

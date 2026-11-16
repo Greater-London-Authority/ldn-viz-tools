@@ -18,7 +18,7 @@
 	const getSpinnerColorClasses = (emphasis: AsyncButtonProps['emphasis']): string => {
 		const colorClasses = {
 			primary: 'stroke-color-surface-accent',
-			muted: 'stroke-color-surface-muted',
+			secondary: 'stroke-color-surface-muted',
 			positive: 'stroke-color-surface-positive',
 			negative: 'stroke-color-surface-negative',
 			caution: 'stroke-color-surface-caution'

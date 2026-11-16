@@ -102,8 +102,8 @@
 			{source}
 			{byline}
 			{note}
-			dataDownloadButton={true}
-			imageDownloadButton
+			dataDownload={true}
+			imageDownload
 			chartHeight="h-fit"
 			id={dataset}
 			{columnMapping}

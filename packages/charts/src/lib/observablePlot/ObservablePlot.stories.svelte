@@ -1,6 +1,5 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-
 	import ObservablePlot from './ObservablePlot.svelte';
 
 	/**
@@ -363,37 +362,19 @@
 
 <Story name="No downloads">
 	{#snippet template(args)}
-		<ObservablePlot
-			{...args}
-			{spec}
-			data={chartData}
-			dataDownloadButton={false}
-			imageDownloadButton={false}
-		/>
+		<ObservablePlot {...args} {spec} data={chartData} dataDownload={false} imageDownload={false} />
 	{/snippet}
 </Story>
 
 <Story name="Only (CSV) data downloads">
 	{#snippet template(args)}
-		<ObservablePlot
-			{...args}
-			{spec}
-			data={chartData}
-			imageDownloadButton={false}
-			dataDownloadButton={['CSV']}
-		/>
+		<ObservablePlot {...args} {spec} data={chartData} dataDownload={['CSV']} />
 	{/snippet}
 </Story>
 
 <Story name="Only (PNG) image downloads">
 	{#snippet template(args)}
-		<ObservablePlot
-			{...args}
-			{spec}
-			data={chartData}
-			imageDownloadButton={['PNG']}
-			dataDownloadButton={false}
-		/>
+		<ObservablePlot {...args} {spec} data={chartData} imageDownload={['PNG']} />
 	{/snippet}
 </Story>
 
@@ -409,13 +390,7 @@
 			</div>
 
 			<div class={width}>
-				<ObservablePlot
-					{...args}
-					{spec}
-					data={chartData}
-					imageDownloadButton={['PNG']}
-					dataDownloadButton={false}
-				/>
+				<ObservablePlot {...args} {spec} data={chartData} imageDownload={['PNG']} />
 			</div>
 		</div>
 	{/snippet}
@@ -437,13 +412,13 @@
 		<div class="w-full py-8">
 			<ChartContainer
 				title="Two ObservablePlotInner plots in one ChartContainer..."
-				subTitle="...should be combined into one SVG"
+				subtitle="...should be combined into one SVG"
 				source="The source of this chart data"
 				byline="A byline for the chart"
-				chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+				description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 				alt="Simple description of type of chart"
-				imageDownloadButton={['SVG']}
-				dataDownloadButton={true}
+				imageDownload={['SVG']}
+				dataDownload={['CSV']}
 				data={monthlyData}
 				chartHeight="h-fit"
 				id="multiple"
@@ -477,7 +452,7 @@
 			data={chartData}
 			columnMapping={{ Month: 'Date', Value: 'Amount (GBP)', Variable: 'Series' }}
 			filename="financial-data"
-			dataDownloadButton={['CSV', 'JSON']}
+			dataDownload={['CSV', 'JSON']}
 		/>
 	{/snippet}
 </Story>

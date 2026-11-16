@@ -6,11 +6,11 @@
 	 * @component
 	 */
 
-	import type { InputProps } from '$lib/input/types';
+	import type { InputProps } from '../input/types';
 	import InputWrapper from '../input/InputWrapper.svelte';
 	import { randomId } from '../utils/randomId';
 	import RadioButtonSolid from './RadioButtonSolid.svelte';
-	import type { RadioButtonSolidProps } from './types';
+	import type { RadioButtonSolidOption } from './types';
 
 	export interface RadioButtonGroupSolidProps extends Omit<InputProps, 'children'> {
 		/**
@@ -23,7 +23,7 @@
 		 * * `label` (string) - the text displayed within the button
 		 * * `disabled` (boolean, optional) - if `true`, users cannot change whether the checkbox is checked
 		 */
-		options?: RadioButtonSolidProps[];
+		options?: RadioButtonSolidOption[];
 	}
 
 	let {

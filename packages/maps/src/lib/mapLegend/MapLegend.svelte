@@ -17,7 +17,7 @@
 		/**
 		 * Value for width to pass into `ColorLegend` component
 		 */
-		width: number;
+		width?: number;
 		children?: Snippet;
 	}
 
