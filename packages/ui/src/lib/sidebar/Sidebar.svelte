@@ -2,6 +2,7 @@
 	import { slide } from 'svelte/transition';
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
+	import ScrollArea from '../scrollArea/ScrollArea.svelte';
 	import TabPanel from './../tabs/TabPanel.svelte';
 	import SidebarTabList from './elements/sidebarTabs/SidebarTabList.svelte';
 	import SidebarToggle from './elements/sidebarToggle/SidebarToggle.svelte';
@@ -148,39 +149,41 @@
 					<!-- usually contains a `<SidebarFooter>` -->
 					{@render footer?.()}
 				{:else}
-					<div class="scroll-area flex h-full flex-col overflow-y-auto px-6 pt-6 text-color-text">
-						{#if header}
-							<div class="pb-4">
-								<!-- typically contains a `<SidebarHeader>` -->
-								{@render header()}
-							</div>
-						{/if}
+					<ScrollArea class="h-full">
+						<div class="flex min-h-full flex-col px-6 pt-6 text-color-text">
+							{#if header}
+								<div class="pb-4">
+									<!-- typically contains a `<SidebarHeader>` -->
+									{@render header()}
+								</div>
+							{/if}
 
-						{#if tabs.length}
-							{#each tabs as tab}
-								{#if component && selectedTabId === tab.id}
-									<TabPanel
-										tabPanelId={`${tab.id}-panel`}
-										tabId={tab.id}
-										class="space-y-4 bg-color-surface-muted"
-									>
-										{@const SvelteComponent = component}
-										<SvelteComponent />
-									</TabPanel>
-								{/if}
-							{/each}
-						{/if}
+							{#if tabs.length}
+								{#each tabs as tab}
+									{#if component && selectedTabId === tab.id}
+										<TabPanel
+											tabPanelId={`${tab.id}-panel`}
+											tabId={tab.id}
+											class="space-y-4 bg-color-surface-muted"
+										>
+											{@const SvelteComponent = component}
+											<SvelteComponent />
+										</TabPanel>
+									{/if}
+								{/each}
+							{/if}
 
-						{#if sections || header}
-							<div class="space-y-4">
-								<!-- contains main sidebar content - typically a sequence of `<SidebarSection>`s -->
-								{@render sections?.()}
-							</div>
-						{/if}
+							{#if sections || header}
+								<div class="space-y-4">
+									<!-- contains main sidebar content - typically a sequence of `<SidebarSection>`s -->
+									{@render sections?.()}
+								</div>
+							{/if}
 
-						<!-- typically contains a `<SidebarFooter>` -->
-						{@render footer?.()}
-					</div>
+							<!-- typically contains a `<SidebarFooter>` -->
+							{@render footer?.()}
+						</div>
+					</ScrollArea>
 				{/if}
 			</div>
 		</aside>
