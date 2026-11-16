@@ -1,5 +1,5 @@
 ---
-'@ldn-viz/themes': major
+'@ldn-viz/themes': minor
 ---
 
-Add style for scrolling area
+ADD: style for scrolling area
