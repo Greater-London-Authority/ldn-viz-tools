@@ -63,7 +63,13 @@ export * from './mapDraw/utils';
 export * from './themes/animations';
 export * from './themes/bounds';
 
-export * as theme_os_dark from './themes/os_dark.json';
-export * as theme_os_dark_grey_muted_buildings from './themes/os_dark_grey_muted_buildings.json';
-export * as theme_os_greyscale from './themes/os_greyscale.json';
-export * as theme_os_light_vts from './themes/os_light_vts.json';
+import * as theme_os_dark from './themes/os_dark.json';
+import * as theme_os_dark_grey_muted_buildings from './themes/os_dark_grey_muted_buildings.json';
+import * as theme_os_greyscale from './themes/os_greyscale.json';
+import * as theme_os_light_vts from './themes/os_light_vts.json';
+export {
+	theme_os_dark,
+	theme_os_dark_grey_muted_buildings,
+	theme_os_greyscale,
+	theme_os_light_vts
+};

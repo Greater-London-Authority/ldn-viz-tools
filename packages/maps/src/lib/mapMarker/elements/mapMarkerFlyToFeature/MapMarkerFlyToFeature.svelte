@@ -1,4 +1,4 @@
-<script module>
+<script module lang="ts">
 	/**
 	 * The `<MapMarkerFlyToFeature>` component is a wrapping container for use
 	 * within tooltip and marker components. It moves the map so it centers
@@ -8,9 +8,11 @@
 
 	import { pointOnFeature } from '@turf/turf';
 	import { getContext, onMount } from 'svelte';
+	import type { LngLatLike, MapGeoJSONFeature } from 'maplibre-gl';
 	import { GLIDE_ANIMATION_OPTIONS } from '../../../themes/animations';
+	import type { MapLibre, MapLibreStore } from '../../../map/types';
 
-	const findFlyPoint = (map, containerHeight, mapCoords) => {
+	const findFlyPoint = (map: MapLibre, containerHeight: number, mapCoords: LngLatLike) => {
 		const mapRect = map.getContainer().getBoundingClientRect();
 		const offsetHalfMap = mapRect.height / 2;
 		const totalVertGap = mapRect.height - containerHeight;
@@ -31,11 +33,11 @@
 		return map.unproject(pixelCoords);
 	};
 
-	const findElementHeight = (container) => {
+	const findElementHeight = (container: HTMLElement): number => {
 		let tallest = container.offsetHeight;
 
 		for (const child of Object.values(container.children)) {
-			const childHeight = findElementHeight(child);
+			const childHeight = findElementHeight(child as HTMLElement);
 			if (childHeight && childHeight > tallest) {
 				tallest = childHeight;
 			}
@@ -56,17 +58,21 @@
 
 	let { disabled = false, children }: Props = $props();
 
-	const mapStore = getContext('mapStore');
-	const feature = getContext('mapMarkerFeature');
+	const mapStore: MapLibreStore = getContext('mapStore');
+	const feature: MapGeoJSONFeature = getContext('mapMarkerFeature');
 	const point = feature.geometry ? pointOnFeature(feature) : null;
 
-	let container = $state();
+	let container: HTMLDivElement | undefined = $state();
 
 	const flyToFeature = () => {
-		$mapStore.easeTo({
+		$mapStore!.easeTo({
 			...GLIDE_ANIMATION_OPTIONS,
 			duration: 600,
-			center: findFlyPoint($mapStore, findElementHeight(container), point.geometry.coordinates)
+			center: findFlyPoint(
+				$mapStore!,
+				findElementHeight(container!),
+				point!.geometry.coordinates as [number, number]
+			)
 		});
 	};
 

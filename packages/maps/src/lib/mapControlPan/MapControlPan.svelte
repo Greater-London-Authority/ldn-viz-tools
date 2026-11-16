@@ -1,14 +1,17 @@
-<script>
+<script lang="ts">
 	import { Button } from '@ldn-viz/ui';
 	import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { getContext } from 'svelte';
 	import { FLY_ANIMATION_OPTIONS } from '../themes/animations';
+	import type { MapLibreStore } from '../map/types';
 
-	const mapStore = getContext('mapStore');
+	type PanDirection = 'up' | 'down' | 'left' | 'right';
 
-	const newHandler = (handle) => {
-		return (event) => {
+	const mapStore: MapLibreStore = getContext('mapStore');
+
+	const newHandler = (handle: () => void) => {
+		return (event: MouseEvent) => {
 			if (!$mapStore) {
 				return;
 			}
@@ -26,14 +29,14 @@
 	const panLeft = () => panHandler('left');
 	const panRight = () => panHandler('right');
 
-	const panHandler = (direction) => {
+	const panHandler = (direction: PanDirection) => {
 		const moveAmount = calcMoveAmount(direction);
-		$mapStore.panBy(moveAmount, FLY_ANIMATION_OPTIONS);
+		$mapStore!.panBy(moveAmount, FLY_ANIMATION_OPTIONS);
 	};
 
-	const calcMoveAmount = (direction) => {
-		const rect = $mapStore.getContainer().getBoundingClientRect();
-		const calcDistance = (size) => size * 0.14;
+	const calcMoveAmount = (direction: PanDirection): [number, number] => {
+		const rect = $mapStore!.getContainer().getBoundingClientRect();
+		const calcDistance = (size: number) => size * 0.14;
 
 		switch (direction) {
 			case 'left':

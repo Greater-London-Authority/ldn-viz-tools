@@ -13,12 +13,13 @@
 	 */
 
 	import { onDestroy, getContext, setContext } from 'svelte';
-	import { writable } from 'svelte/store';
+	import { writable, type Readable } from 'svelte/store';
 	import MapMarker from '../mapMarker/MapMarker.svelte';
+	import type { MapLibreStore } from '../map/types';
 
-	const mapStore = getContext('mapStore');
-	const mapSourceId = getContext('mapLayerSourceId');
-	const mapSourceLoaded = getContext('mapLayerSourceLoaded');
+	const mapStore: MapLibreStore = getContext('mapStore');
+	const mapSourceId: string = getContext('mapLayerSourceId');
+	const mapSourceLoaded: Readable<boolean> = getContext('mapLayerSourceLoaded');
 
 	interface Props {
 		/**
@@ -87,7 +88,7 @@
 		loaded.set(false);
 		removeLayer();
 
-		$mapStore.addLayer(safeSpec, beforeId);
+		$mapStore!.addLayer(safeSpec, beforeId);
 		loaded.set(true);
 
 		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
@@ -104,7 +105,7 @@
 
 	const removeLayer = () => {
 		if ($mapStore?.getLayer(id)) {
-			$mapStore.removeLayer(id);
+			$mapStore!.removeLayer(id);
 		}
 	};
 
