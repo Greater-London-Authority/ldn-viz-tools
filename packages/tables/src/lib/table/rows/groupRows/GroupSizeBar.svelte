@@ -24,7 +24,7 @@
 		style:height="100%"
 		style:background={table.scales && fieldName && val ? table.scales[fieldName](val) : 'lightgrey'}
 		style:left={fPercentage(0)}
-		style:width={fPercentage(group.order.length / table.data.length)}
+		style:width={fPercentage((group?.order.length ?? 0) / table.data.length)}
 	>
 		<div>&nbsp;</div>
 	</div>

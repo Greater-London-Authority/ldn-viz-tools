@@ -55,7 +55,7 @@
 					<!-- <EncodingType {col} /> -->
 
 					{#if col.allowGrouping}
-						<MergeMenu {table} {col} />
+						<MergeMenu />
 					{/if}
 				</div>
 			{/if}

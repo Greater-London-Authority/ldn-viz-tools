@@ -4,10 +4,10 @@
 
 	interface Props {
 		table: TableState;
-		onChange: () => void;
+		onChange?: () => void;
 	}
 
-	let { table, onChange }: Props = $props();
+	let { table, onChange = () => undefined }: Props = $props();
 
 	type Options = {
 		label: string;
@@ -29,8 +29,8 @@
 		return new_fields;
 	});
 
-	let fieldSelection = $derived(table.visibleFields);
-	const updateVisibility = (newFields) => {
+	let fieldSelection = $derived([...table.visibleFields]);
+	const updateVisibility = (newFields: string[]) => {
 		table.visibleFields = newFields;
 		onChange();
 	};

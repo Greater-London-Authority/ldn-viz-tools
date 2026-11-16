@@ -74,10 +74,10 @@ flies to the location, and the clear button removes it again.
 			>
 				<MapControlGroup position="TopLeft">
 					<MapControlGeocoder
+						{...args}
 						adapter={adapterMapBox}
 						{onSearchError}
 						{onLocationSelected}
-						{...args}
 					/>
 				</MapControlGroup>
 			</Map>

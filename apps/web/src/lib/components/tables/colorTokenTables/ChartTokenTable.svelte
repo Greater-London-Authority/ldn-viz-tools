@@ -11,7 +11,7 @@
 	let { title }: Props = $props();
 
 	let tokenTableData = $derived(
-		Object.values(tokens.mode[theme.currentMode ? theme.currentMode : 'light'].color.chart)
+		Object.values(tokens.mode[theme.currentMode ? theme.currentMode : 'light'].chart)
 	);
 </script>
 

@@ -39,7 +39,7 @@
 		...restProps
 	}: ButtonProps = $props();
 
-	let cookieControlStore = $state(undefined);
+	let cookieControlStore: { open: () => void } | undefined = $state(undefined);
 
 	onMount(() => {
 		if (typeof window !== 'object') {

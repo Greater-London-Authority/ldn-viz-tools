@@ -21,7 +21,7 @@
 		},
 		args: {
 			value: 0.5,
-			colorScale: () => theme.tokenNameToValue('data.primary')
+			color: () => theme.tokenNameToValue('data.primary')
 		}
 	});
 </script>

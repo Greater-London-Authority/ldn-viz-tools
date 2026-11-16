@@ -1,5 +1,6 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import type { ComponentProps } from 'svelte';
 	import MapMarkerStyledContainer from './MapMarkerStyledContainer.svelte';
 
 	/**
@@ -11,7 +12,6 @@
 		title: 'Maps/Components/MapMarker/elements/MapMarkerStyledContainer',
 		component: MapMarkerStyledContainer,
 		tags: ['autodocs'],
-		render: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -46,12 +46,11 @@
 	setContext('mapStore', writable(null));
 </script>
 
-{#snippet defaultTemplate({ args })}
+{#snippet defaultTemplate(args: ComponentProps<typeof MapMarkerStyledContainer>)}
 	<div class="mb-4 mt-32 flex items-center justify-center">
 		<MapMarkerStyledContainer {...args}>
 			<div class="w-auto max-w-44">
-				{#if args?.noPad}
-					<!-- TODO: args is undefined? -->
+				{#if args.noPad}
 					<p>Suitable for edge-to-edge images. Any padding will need to be applied manually.</p>
 				{:else}
 					<p>Content goes here. Content goes here. Content goes here. Content goes here.</p>
@@ -61,7 +60,7 @@
 	</div>
 {/snippet}
 
-<Story name="Default" source />
+<Story name="Default" template={defaultTemplate} />
 
 <Story name="Mapping Context">
 	{#snippet template()}

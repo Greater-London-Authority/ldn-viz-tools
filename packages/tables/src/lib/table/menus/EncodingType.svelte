@@ -134,23 +134,38 @@
 		label="Rows"
 		options={unaggregatedOptions}
 		name="cell-encoding"
-		bind:selectedId={selectedCellEncoding}
-		onChange={setCellEncoding}
+		bind:selectedId={
+			() => selectedCellEncoding,
+			(id) => {
+				selectedCellEncoding = id;
+				setCellEncoding();
+			}
+		}
 	/>
 
 	<RadioButtonGroup
 		label="Groups"
 		options={aggregatedOptions}
 		name="group-encoding"
-		bind:selectedId={selectedGroupEncoding}
-		onChange={setGroupEncoding}
+		bind:selectedId={
+			() => selectedGroupEncoding,
+			(id) => {
+				selectedGroupEncoding = id;
+				setGroupEncoding();
+			}
+		}
 	/>
 
 	<RadioButtonGroup
 		label="Column Summary"
 		options={aggregatedOptions}
 		name="column-encoding"
-		bind:selectedId={selectedColumnEncoding}
-		onChange={() => selectedColumnEncoding && setColumnEncoding()}
+		bind:selectedId={
+			() => selectedColumnEncoding,
+			(id) => {
+				selectedColumnEncoding = id;
+				setColumnEncoding();
+			}
+		}
 	/>
 </Overlay>

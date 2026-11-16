@@ -22,7 +22,10 @@
 	const formatHigh = format(',.4~s'); // for 10000 and above, format commas and SI numbering (M & K)
 
 	// create a feature collection
-	const features = topojson.feature(ldnTopo, ldnTopo.objects.boroughs);
+	const features = topojson.feature<{ name: string; gss_code: string }>(
+		ldnTopo,
+		ldnTopo.objects.boroughs
+	);
 	// collection of internal borders
 	const featuresMesh = topojson.mesh(ldnTopo, ldnTopo.objects.boroughs, (a, b) => a !== b);
 
@@ -73,7 +76,7 @@
 		color: {
 			label: 'Count of something',
 			Count: true,
-			tickFormat: (d) => format('.0f')(d),
+			tickFormat: (d: number) => format('.0f')(d),
 			legend: true,
 			type: 'quantile', // linear / quantize / quantile etc
 			domain: [-100, -80, -60, -40, -20, -0.01, 0.01, 20, 40, 60, 80, 100],
@@ -99,7 +102,7 @@
 			Plot.geo(featuresMesh, { stroke: theme.tokenNameToValue('surface') }),
 			// styled tooltip
 			Plot.tip(
-				features,
+				features.features,
 				Plot.pointer(
 					Plot.geoCentroid({
 						title: (d) => d.properties.name + '\n' + mapData.get(d.properties.gss_code)

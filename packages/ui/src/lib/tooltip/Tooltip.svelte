@@ -10,7 +10,8 @@
 	import type { Snippet } from 'svelte';
 	import Trigger from '../overlay/Trigger.svelte';
 
-	type Props = Tooltip.RootProps & {
+	type Props = Omit<Tooltip.RootProps, 'children'> & {
+		children?: Snippet;
 		hintLabel?: string;
 		trigger?: Snippet<[Record<string, any>]>;
 		open?: boolean;

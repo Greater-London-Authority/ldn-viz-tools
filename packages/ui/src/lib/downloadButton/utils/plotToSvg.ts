@@ -7,9 +7,9 @@
 import * as Plot from '@observablehq/plot';
 import { sum } from 'd3-array';
 
-export function toSVG(origChart) {
+export function toSVG(origChart: Element) {
 	const chart = origChart.cloneNode(true);
-	origChart.parentElement.appendChild(chart);
+	origChart.parentElement!.appendChild(chart);
 	const removeClone = () => {
 		if (chart.parentElement) {
 			chart.parentElement.removeChild(chart);
@@ -33,8 +33,8 @@ export function toSVG(origChart) {
 	return chart;
 }
 
-function extractFigureNodes(chart) {
-	const nodes = [];
+function extractFigureNodes(chart: Element) {
+	const nodes: Element[] = [];
 
 	const selectedChildren = selectChildren(chart, 'h1,h2,h3,div,figcaption,svg');
 
@@ -47,13 +47,13 @@ function extractFigureNodes(chart) {
 					const children = selectChildren(node, 'div,span');
 					const divHeight = getBounds([node, ...children])[3] + 2;
 					const svg = createSVGElement('svg');
-					svg.setAttribute('width', width);
-					svg.setAttribute('height', divHeight);
+					svg.setAttribute('width', String(width));
+					svg.setAttribute('height', String(divHeight));
 					chart.appendChild(svg);
 					nodes.push(svg);
 
 					const swatchData = Array.from(children, (d) => {
-						const svgEl = d.querySelector('svg');
+						const svgEl = d.querySelector('svg') as SVGSVGElement;
 						const bbox = svgEl.getBBox();
 						return {
 							style: window.getComputedStyle(d),
@@ -70,15 +70,15 @@ function extractFigureNodes(chart) {
 						g.setAttribute('transform', `translate(${d.bounds[0] - x0},${10 + d.bounds[1] - y0})`);
 
 						const swatchSvg = d.svg;
-						swatchSvg.setAttribute('width', d.width);
-						swatchSvg.setAttribute('height', d.height);
-						swatchSvg.setAttribute('y', `${-parseFloat(d.height) / 2}px`);
+						swatchSvg.setAttribute('width', String(d.width));
+						swatchSvg.setAttribute('height', String(d.height));
+						swatchSvg.setAttribute('y', `${-d.height / 2}px`);
 						g.appendChild(swatchSvg);
 
 						const text = createSVGElement('text');
 						text.textContent = d.text;
-						text.setAttribute('x', d.width);
-						text.setAttribute('dx', 5);
+						text.setAttribute('x', String(d.width));
+						text.setAttribute('dx', '5');
 						text.setAttribute('dy', '0.38em');
 						text.setAttribute('font-family', d.style.fontFamily);
 						text.setAttribute('font-size', d.style.fontSize);
@@ -96,7 +96,7 @@ function extractFigureNodes(chart) {
 			case 'h3':
 				{
 					const svg = createSVGElement('svg');
-					svg.setAttribute('width', width);
+					svg.setAttribute('width', String(width));
 					svg.setAttribute('overflow', 'visible');
 					chart.appendChild(svg);
 					nodes.push(svg);
@@ -122,9 +122,9 @@ function extractFigureNodes(chart) {
 							frameAnchor: 'top-left'
 						}).plot();
 
-						const textEl = plotted.querySelector('text');
+						const textEl = plotted.querySelector('text') as SVGTextElement;
 						textEl.setAttribute('font-family', style.fontFamily);
-						textEl.setAttribute('font-size', 1.08 * parseFloat(style.fontSize));
+						textEl.setAttribute('font-size', String(1.08 * parseFloat(style.fontSize)));
 						textEl.setAttribute('font-weight', style.fontWeight);
 						textEl.setAttribute('fill', style.color);
 
@@ -132,7 +132,7 @@ function extractFigureNodes(chart) {
 						svg.appendChild(g);
 						h += getBounds([g])[3] + 4;
 					}
-					svg.setAttribute('height', h);
+					svg.setAttribute('height', String(h));
 				}
 				break;
 
@@ -148,18 +148,18 @@ function extractFigureNodes(chart) {
 
 // Helpers
 
-function createSVGElement(tag) {
+function createSVGElement(tag: string) {
 	return document.createElementNS('http://www.w3.org/2000/svg', tag);
 }
 
-function selectChildren(parent, selector) {
+function selectChildren(parent: Element, selector: string) {
 	return Array.from(parent.querySelectorAll(`:scope > ${selector.split(',').join(', :scope > ')}`));
 }
 
 //
 
-function lines(text, targetWidth) {
-	const CHAR_W = {
+function lines(text: string, targetWidth: number) {
+	const CHAR_W: Record<string, number> = {
 		a: 7,
 		B: 8,
 		C: 8,
@@ -198,18 +198,18 @@ function lines(text, targetWidth) {
 		':': 2,
 		';': 2
 	};
-	function measureWidth(text) {
-		return sum(text, (char) => CHAR_W[char] || CHAR_W['a']) * 0.8;
+	function measureWidth(text: string) {
+		return sum(text, (char: string) => CHAR_W[char] || CHAR_W['a']) * 0.8;
 	}
 
 	const words = text.split(' ');
-	let line;
+	let line: { width: number; text: string } | undefined;
 	let lineWidth0 = Infinity;
 	const lines = [];
 	for (let i = 0, n = words.length; i < n; ++i) {
 		let lineText1 = (line ? line.text + ' ' : '') + words[i];
 		let lineWidth1 = measureWidth(lineText1);
-		if ((lineWidth0 + lineWidth1) / 2 < targetWidth) {
+		if (line && (lineWidth0 + lineWidth1) / 2 < targetWidth) {
 			line.width = lineWidth0 = lineWidth1;
 			line.text = lineText1;
 		} else {
@@ -223,7 +223,7 @@ function lines(text, targetWidth) {
 
 //
 
-function getBounds(elements) {
+function getBounds(elements: Element[]) {
 	let x1 = Infinity;
 	let y1 = x1;
 	let x2 = -x1;
@@ -244,33 +244,33 @@ function getBounds(elements) {
  * Given an array of SVG elements, composites them into a single SVG element,
  * and then serializes the result to a blob.
  */
-async function serializeAll(elements, { padding = 10 } = {}) {
+async function serializeAll(elements: Element[], { padding = 10 } = {}) {
 	const svgns = 'http://www.w3.org/2000/svg';
 	const xmlns = 'http://www.w3.org/2000/xmlns/';
 	const xlinkns = 'http://www.w3.org/1999/xlink';
 
 	const fragment = location.href + '#';
-	let root;
+	let root: Element;
 	if (elements.length === 1) {
-		root = elements[0].cloneNode(true); // optimize common case
+		root = elements[0].cloneNode(true) as Element; // optimize common case
 	} else {
 		const [ox, oy, dx, dy] = getBounds(elements);
 		root = document.createElementNS(svgns, 'svg');
-		root.setAttribute('width', dx + 2 * padding);
-		root.setAttribute('height', dy + 2 * padding);
-		root.setAttribute('viewBox', [-padding, -padding, dx + 2 * padding, dy + 2 * padding]);
+		root.setAttribute('width', String(dx + 2 * padding));
+		root.setAttribute('height', String(dy + 2 * padding));
+		root.setAttribute('viewBox', String([-padding, -padding, dx + 2 * padding, dy + 2 * padding]));
 		for (const element of elements) {
-			const svg = root.appendChild(element.cloneNode(true));
+			const svg = root.appendChild(element.cloneNode(true) as Element);
 			const { x, y, width, height } = element.getBoundingClientRect();
-			svg.setAttribute('x', x - ox);
-			svg.setAttribute('y', y - oy);
-			svg.setAttribute('width', width);
-			svg.setAttribute('height', height);
+			svg.setAttribute('x', String(x - ox));
+			svg.setAttribute('y', String(y - oy));
+			svg.setAttribute('width', String(width));
+			svg.setAttribute('height', String(height));
 		}
 	}
 	const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT);
 	while (walker.nextNode()) {
-		const node = walker.currentNode;
+		const node = walker.currentNode as Element;
 		for (const attr of node.attributes) {
 			if (attr.value.includes(fragment)) {
 				attr.value = attr.value.replace(fragment, '#');

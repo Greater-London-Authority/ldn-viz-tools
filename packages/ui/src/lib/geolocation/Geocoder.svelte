@@ -42,7 +42,7 @@
 		/**
 		 * called when a user clicks a location from the suggestions list.
 		 */
-		onLocationSelected: undefined | OnGeolocationSearchResult;
+		onLocationSelected?: OnGeolocationSearchResult;
 		/**
 		 * called when the adapter promise rejects a search request.
 		 */
@@ -299,8 +299,8 @@
 		onSearchClear();
 	};
 
-	const updateQuery = (ev: KeyboardEvent) => {
-		query = ev.target?.value;
+	const updateQuery = (ev: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
+		query = ev.currentTarget.value;
 
 		if (!silentQueryTextUpdate) {
 			scheduleUpdate();

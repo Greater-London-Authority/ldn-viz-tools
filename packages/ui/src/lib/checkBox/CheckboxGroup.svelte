@@ -6,7 +6,7 @@
 	 * @component
 	 */
 
-	import type { InputProps } from '$lib/input/types';
+	import type { InputProps } from '../input/types';
 	import InputWrapper from '../input/InputWrapper.svelte';
 	import { randomId } from '../utils/randomId';
 	import Checkbox from './Checkbox.svelte';

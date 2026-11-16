@@ -9,10 +9,10 @@
 
 	interface Props {
 		table: TableState;
-		onChange: () => void;
+		onChange?: () => void;
 	}
 
-	let { table, onChange }: Props = $props();
+	let { table, onChange = () => undefined }: Props = $props();
 
 	type Options = {
 		label: string;

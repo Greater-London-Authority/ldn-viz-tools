@@ -9,7 +9,6 @@
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapControls/MapControlBorough',
 		component: MapControlBorough,
-		render: defaultTemplate,
 		tags: ['autodocs'],
 
 		parameters: {
@@ -36,10 +35,6 @@
 	let greaterLondon = $state('GREATER LONDON');
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<MapControlBorough {...args} />
-{/snippet}
-
 <!--
  When the map loads, the control's effect runs `map.fitBounds(...)` so the map opens already zoomed to the preselected borough.
  Subsequent changes cause a zoom to the newly selected borough.
@@ -54,7 +49,10 @@
 				bind:mapStore={mapStorePreselected}
 			>
 				<MapControlGroup position="TopLeft">
-					<MapControlBorough map={$mapStorePreselected} bind:selectedBorough={preselectedBorough} />
+					<MapControlBorough
+						map={$mapStorePreselected ?? undefined}
+						bind:selectedBorough={preselectedBorough}
+					/>
 				</MapControlGroup>
 
 				<BoroughsContextLayer />
@@ -78,7 +76,10 @@ borough. Here it is preselected so the map opens showing all of Greater London.
 				bind:mapStore={mapStoreGreaterLondon}
 			>
 				<MapControlGroup position="TopLeft">
-					<MapControlBorough map={$mapStoreGreaterLondon} bind:selectedBorough={greaterLondon} />
+					<MapControlBorough
+						map={$mapStoreGreaterLondon ?? undefined}
+						bind:selectedBorough={greaterLondon}
+					/>
 				</MapControlGroup>
 
 				<BoroughsContextLayer />

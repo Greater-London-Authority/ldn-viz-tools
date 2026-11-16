@@ -17,7 +17,7 @@
 
 	import type { Feature } from 'geojson';
 	import type { Component } from 'svelte';
-	import { getAllContexts, mount, onDestroy, onMount, unmount, type SvelteComponent } from 'svelte';
+	import { getAllContexts, mount, onDestroy, onMount, unmount } from 'svelte';
 
 	import maplibre_gl from 'maplibre-gl';
 
@@ -39,7 +39,7 @@
 		 * Feature to which the popover should be attached.
 		 * This is used to position the popover, and is also passed to the popover component via the `mapMarkerFeature` context.
 		 */
-		feature: Feature;
+		feature: Feature | undefined;
 		/**
 		 * Name of layer containing this feature.
 		 * This is passed to the popover component via the `mapMarkerLayer` context.
@@ -50,9 +50,9 @@
 	let { popup = null, msgString = null, feature, layer = '' }: Props = $props();
 
 	let popupMaplibrePopup: maplibre_gl.Popup | null = null;
-	let popupInstance: SvelteComponent | null = null;
+	let popupInstance: ReturnType<typeof mount> | null = null;
 
-	const renderComponent = (feature: Feature, component: Component | null) => {
+	const renderComponent = (feature: Feature | undefined, component: Component | null) => {
 		if (!$mapStore || !component) {
 			return;
 		}

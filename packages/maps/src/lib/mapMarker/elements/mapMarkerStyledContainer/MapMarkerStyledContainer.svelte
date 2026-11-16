@@ -21,10 +21,10 @@
 
 	let { noTip = false, noPad = false, children, ...rest }: Props = $props();
 
-	let container = $state();
+	let container: HTMLDivElement | undefined = $state();
 
-	const preventZoom = (e) => {
-		const hasVerticalScroll = container.scrollHeight > container.clientHeight;
+	const preventZoom = (e: Event) => {
+		const hasVerticalScroll = container!.scrollHeight > container!.clientHeight;
 		if (hasVerticalScroll) {
 			e.stopPropagation();
 		}

@@ -1,3 +1,4 @@
+import type { Layer } from '@deck.gl/core';
 import { MapboxOverlay } from '@deck.gl/mapbox';
 import { writable } from 'svelte/store';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
@@ -12,6 +13,9 @@ vi.mock('@deck.gl/mapbox', () => {
 		})
 	};
 });
+
+// The overlay is mocked, so the tests pass layer stubs that only have an `id`.
+const stubLayers = (...ids: string[]) => ids.map((id) => ({ id }) as unknown as Layer);
 
 describe('MapDeckOverlay', () => {
 	beforeEach(() => {
@@ -29,7 +33,7 @@ describe('MapDeckOverlay', () => {
 	test('constructs a DeckOverlay and adds it as a control when $mapStore becomes available', async () => {
 		const mockMap = createMockMap();
 		const mapStore = writable(mockMap);
-		const layers = [{ id: 'layer-1' }];
+		const layers = stubLayers('layer-1');
 		const options = { pickingRadius: 5 };
 
 		render(MapDeckOverlay, {
@@ -54,14 +58,14 @@ describe('MapDeckOverlay', () => {
 	test('changing the layers prop calls setProps({ layers }) without recreating the overlay', async () => {
 		const mockMap = createMockMap();
 		const mapStore = writable(mockMap);
-		const props = $state({ layers: [{ id: 'layer-1' }] });
+		const props = $state({ layers: stubLayers('layer-1') });
 
 		render(MapDeckOverlay, { props, context: new Map([['mapStore', mapStore]]) });
 
 		expect(MapboxOverlay).toHaveBeenCalledTimes(1);
 		const instance = mockMap.addControl.mock.calls[0][0];
 
-		const newLayers = [{ id: 'layer-2' }];
+		const newLayers = stubLayers('layer-2');
 		props.layers = newLayers;
 
 		await vi.waitFor(() => {

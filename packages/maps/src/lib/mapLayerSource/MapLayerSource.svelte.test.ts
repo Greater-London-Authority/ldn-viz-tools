@@ -6,7 +6,10 @@ import { writable } from 'svelte/store';
 import MapLayerSource from './MapLayerSource.svelte';
 
 describe('MapLayerSource', () => {
-	function createMockMap({ existingLayers = [], hasSource = false } = {}) {
+	function createMockMap({
+		existingLayers = [],
+		hasSource = false
+	}: { existingLayers?: { id: string }[]; hasSource?: boolean } = {}) {
 		return {
 			addSource: vi.fn(),
 			removeSource: vi.fn(),

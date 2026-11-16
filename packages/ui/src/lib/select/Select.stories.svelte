@@ -347,7 +347,7 @@ For very long option lists, set `virtualList` to only render the visible rows.
 				label="London Borough"
 				placeholder="Select a borough..."
 				fetch="https://api2.ldn-gis.co.uk/tables/geographies/core_london_borough?select=name,gss_code"
-				fetchCallback={(response) => {
+				fetchCallback={(response: { name: string; gss_code: string }[]) => {
 					return response.map((item) => ({
 						label: item.name,
 						value: item.gss_code

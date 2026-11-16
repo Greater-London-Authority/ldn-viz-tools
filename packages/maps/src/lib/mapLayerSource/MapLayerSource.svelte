@@ -15,8 +15,9 @@
 
 	import { onDestroy, getContext, setContext } from 'svelte';
 	import { writable } from 'svelte/store';
+	import type { MapLibreStore } from '../map/types';
 
-	const mapStore = getContext('mapStore');
+	const mapStore: MapLibreStore = getContext('mapStore');
 
 	interface Props {
 		/**
@@ -61,7 +62,7 @@
 		loaded.set(false);
 		removeSource();
 
-		$mapStore.addSource(id, safeSpec);
+		$mapStore!.addSource(id, safeSpec);
 		loaded.set(true);
 
 		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
@@ -84,9 +85,9 @@
 	};
 
 	const removeLayers = () => {
-		for (const layer of $mapStore.getStyle().layers) {
+		for (const layer of $mapStore!.getStyle().layers) {
 			if (layer.id.startsWith(id + '/')) {
-				$mapStore.removeLayer(layer.id);
+				$mapStore!.removeLayer(layer.id);
 			}
 		}
 	};

@@ -160,7 +160,7 @@
 
 	let colorScale = $derived(
 		options.chartType === 'choropleth'
-			? scaleThreshold()
+			? scaleThreshold<number | string, string | number>()
 					.domain(options.colorScale?.domain ?? [0])
 					.range(
 						theme.currentMode === 'light'
@@ -172,7 +172,7 @@
 </script>
 
 {#if chartFn && data.length > 0}
-	<div class="w-full py-8" bind:clientWidth={width}>
+	<div class="w-full chart" bind:clientWidth={width}>
 		{#snippet plotControls()}
 			{@render controls?.()}
 			{#if options.chartType === 'choropleth'}

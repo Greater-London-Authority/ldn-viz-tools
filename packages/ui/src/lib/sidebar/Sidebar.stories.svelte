@@ -13,6 +13,7 @@
 	import SidebarSection from './elements/sidebarSection/SidebarSection.svelte';
 	import SidebarGroupTitle from './elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
 	import { First, Fourth, Second, Third } from './elements/sidebarTabs/demoSections';
+	import type { SidebarState } from './sidebarState.svelte';
 	import type { SidebarProps } from './types';
 
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -48,7 +49,7 @@
 		title: 'Ui/Components - Layout And Themes/Sidebar',
 		component: Sidebar,
 		tags: ['autodocs'],
-		decorators: [() => ({ Component: SidebarLeftContext })],
+		decorators: [() => ({ Component: SidebarLeftContext as any })],
 		render: defaultTemplate,
 		parameters: {
 			layout: 'fullscreen',
@@ -90,7 +91,7 @@
 
 	let selectedTabId = $state('markers');
 
-	let sidebarState = $state();
+	let sidebarState: SidebarState | undefined = $state();
 
 	// Snippets for stories. Defaults defined as args, overridden per story as needed
 </script>
@@ -192,8 +193,16 @@
 <Story name="Externally Controlled">
 	{#snippet template(args: SidebarProps)}
 		<div class="w-96">
-			<Button onclick={() => (sidebarState.isOpen = true)}>Open</Button>
-			<Button onclick={() => (sidebarState.isOpen = false)}>Close</Button>
+			<Button
+				onclick={() => {
+					if (sidebarState) sidebarState.isOpen = true;
+				}}>Open</Button
+			>
+			<Button
+				onclick={() => {
+					if (sidebarState) sidebarState.isOpen = false;
+				}}>Close</Button
+			>
 		</div>
 
 		<Sidebar {...args} bind:state={sidebarState}></Sidebar>

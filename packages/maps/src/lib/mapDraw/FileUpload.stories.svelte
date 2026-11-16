@@ -3,13 +3,13 @@
 	import FileUpload from './FileUpload.svelte';
 
 	const componentType = {
-		control: 'none',
+		control: false,
 		table: {
 			type: {
 				summary: 'object'
 			}
 		}
-	};
+	} as const;
 
 	/**
 	 * The `<FileUpload>` component is used internally by  [MapDraw](./?path=/docs/maps-components-mapdraw-mapdraw--documentation)
