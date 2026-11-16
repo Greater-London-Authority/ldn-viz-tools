@@ -1,6 +1,5 @@
 ---
-'@ldn-viz/themes': minor
 '@ldn-viz/ui': minor
 ---
 
-adds atyle and component to handle scrollable areas
+ADD: component to handle scrollable areas based on bits-ui scrollable area
