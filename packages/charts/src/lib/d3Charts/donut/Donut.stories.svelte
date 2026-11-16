@@ -3,12 +3,25 @@
 
 	import { ChartContainer } from '@ldn-viz/charts';
 	import { Card, Metric, theme } from '@ldn-viz/ui';
-	import Donut from './Donut.svelte';
+	import Donut, { type DonutSize } from './Donut.svelte';
 
+	/**
+	 * Each size's ring diameter, and the narrowest container it is drawn in.
+	 * A container narrower than `minWidth` steps the donut down a size.
+	 */
+	export const donutSizes: Record<DonutSize, { diameter: number; minWidth: number }> = {
+		sm: { diameter: 80, minWidth: 0 },
+		md: { diameter: 160, minWidth: 200 },
+		lg: { diameter: 300, minWidth: 320 }
+	};
+
+	const sizeOrder: DonutSize[] = ['sm', 'md', 'lg'];
+</script>
+
+<script lang="ts" generics="T extends Record<string, any>">
 	/**
 	 * The `Donut` is a D3 chart component that displays categorical data as slices (or arcs) within a ring, representing proportions of a total (100%).
 	 *
-	 * `size` sets the largest size to draw: `sm`, `md` or `lg`. A container narrower than that size needs steps the donut down, so it never shrinks its text or disappears.
 	 */
 
 	const { Story } = defineMeta({
