@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { DataDownloadOption, ImageDownloadOption } from '@ldn-viz/ui';
 	import VirtualScroll from 'svelte-virtual-scroll-list';
 	import { TableState } from '../core/lib/tableState.svelte';
 	import type { TableSpec } from '../core/lib/types';
@@ -49,23 +50,19 @@
 		byline?: string;
 		note?: string;
 		/**
-		 * Data Download Button in the footer
+		 * The data formats offered by the download button in the footer.
 		 *
-		 * Defaults to `true` which allows user to select download in either 'CSV' or 'JSON' format.
-		 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'.
-		 * If set to `false`, then the button is hidden.
-		 *
+		 * Defaults to `true`, which offers 'CSV' and 'JSON'. An array of formats offers only those formats.
+		 * `false` offers no data formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		dataDownloadButton?: true | false | ('CSV' | 'JSON')[];
+		dataDownload?: DataDownloadOption;
 		/**
-		 * Image Download Button in the footer
+		 * The image formats offered by the download button in the footer.
 		 *
-		 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
-		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'.
-		 * If set to `false`, then the button is hidden.
-		 *
+		 * Defaults to `['PNG']`. `true` offers 'PNG' and 'SVG'. An array of formats offers only those formats.
+		 * `false` offers no image formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
+		imageDownload?: ImageDownloadOption;
 		/**
 		 * The file name to be used for the downloaded data or image file.
 		 */
@@ -135,8 +132,8 @@
 		source = '',
 		byline = '',
 		note = '',
-		dataDownloadButton = true,
-		imageDownloadButton = ['PNG'],
+		dataDownload = true,
+		imageDownload = ['PNG'],
 		filename = '',
 		height = 1000,
 		// tableObj = $bindable(undefined),
@@ -240,8 +237,8 @@
 			{source}
 			{byline}
 			{note}
-			{dataDownloadButton}
-			{imageDownloadButton}
+			{dataDownload}
+			{imageDownload}
 			{filename}
 			{columnMapping}
 		>

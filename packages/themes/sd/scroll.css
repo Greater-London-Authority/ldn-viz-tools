@@ -1,0 +1,45 @@
+/*===============================================
+  SCROLL STYLES
+  .scroll-area gives a scrolling element a thin scrollbar that shows while
+  the pointer is over the element or focus is inside it, and is transparent
+  otherwise. Written here by hand; sd/system.js checks every var() against
+  the tokens and writes the sheet into system.css.
+
+  Browsers without scrollbar-color (older Safari) use the
+  ::-webkit-scrollbar rules instead. Chrome and Edge ignore those rules once
+  scrollbar-color is set.
+*/
+
+.scroll-area {
+	scrollbar-width: thin;
+	scrollbar-color: transparent transparent;
+}
+
+.scroll-area:hover,
+.scroll-area:focus-within {
+	scrollbar-color: var(--color-border-muted) transparent;
+}
+
+@supports not (scrollbar-color: auto) {
+	.scroll-area::-webkit-scrollbar {
+		width: var(--spacing-2);
+		height: var(--spacing-2);
+		background-color: transparent;
+	}
+
+	.scroll-area::-webkit-scrollbar-thumb {
+		background-color: transparent;
+		border: 2px solid transparent;
+		border-radius: 9999px;
+		background-clip: padding-box;
+	}
+
+	.scroll-area:hover::-webkit-scrollbar-thumb,
+	.scroll-area:focus-within::-webkit-scrollbar-thumb {
+		background-color: var(--color-border-muted);
+	}
+
+	.scroll-area::-webkit-scrollbar-thumb:hover {
+		background-color: var(--color-border);
+	}
+}

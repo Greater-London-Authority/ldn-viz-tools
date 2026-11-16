@@ -17,6 +17,7 @@ import { readUsage } from './sd/usage.js';
 import {
 	content as contentConfig,
 	forms as formsConfig,
+	scroll as scrollConfig,
 	usage as usageConfig
 } from './sd/system.config.js';
 
@@ -317,11 +318,13 @@ StyleDictionary.registerFormat({
 
 // Every class the specification names (sd/system.js). The usage aliases are
 // read from the Figma usage export, which is not part of the token graph; the
-// content and form styles from the hand-written sd/content.css and sd/forms.css.
+// content, form and scroll styles from the hand-written sd/content.css,
+// sd/forms.css and sd/scroll.css.
 const aliases = readUsage(JSON.parse(readFileSync(usageConfig.file, 'utf8')), usageConfig);
 const sheets = {
 	content: readFileSync(contentConfig.file, 'utf8'),
-	forms: readFileSync(formsConfig.file, 'utf8')
+	forms: readFileSync(formsConfig.file, 'utf8'),
+	scroll: readFileSync(scrollConfig.file, 'utf8')
 };
 
 StyleDictionary.registerFormat({

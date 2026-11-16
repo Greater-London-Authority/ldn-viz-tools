@@ -184,8 +184,8 @@
 									data={byTeam}
 									tableSpec={teamTableSpec}
 									allowSorting
-									dataDownloadButton={false}
-									imageDownloadButton={false}
+									dataDownload={false}
+									imageDownload={false}
 								/>
 							</Card>
 						{:else}

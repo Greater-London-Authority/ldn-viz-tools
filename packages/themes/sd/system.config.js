@@ -163,6 +163,11 @@ export const forms = {
 	file: 'sd/forms.css'
 };
 
+// The .scroll-area class, hand-written in `file`.
+export const scroll = {
+	file: 'sd/scroll.css'
+};
+
 export const emphasis = {
 	'text-strong': 'var(--primitive-typography-font-weight-semi-bold)',
 	'text-soft': 'var(--primitive-typography-font-weight-regular)'
