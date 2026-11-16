@@ -15,10 +15,13 @@ const makeValues = (x: number[], y: number[]) => ({
 	}
 });
 
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+// Observable Plot render functions return SVG elements, so the marks are built as SVG nodes.
 const makeMarksContainer = (tagNames: string[]) => {
-	const el = document.createElement('div');
+	const el = document.createElementNS(SVG_NS, 'g');
 	for (const tagName of tagNames) {
-		el.appendChild(document.createElement(tagName));
+		el.appendChild(document.createElementNS(SVG_NS, tagName));
 	}
 	return el;
 };
@@ -83,7 +86,7 @@ describe('registerTooltip', () => {
 
 	it('does not throw when the produced element has zero matching marks', async () => {
 		const posStore = { set: vi.fn() };
-		const el = document.createElement('div'); // no <circle> children
+		const el = document.createElementNS(SVG_NS, 'g'); // no <circle> children
 		const next = vi.fn(() => el);
 		const renderFn = registerTooltip(posStore);
 
