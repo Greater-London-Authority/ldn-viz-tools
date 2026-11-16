@@ -27,10 +27,57 @@ jobs:
       - name: Build
         run: npm run build
 
+      # Everything the build generates. Not all of it is listed in the
+      # turbo.json outputs, so the Turbo cache can't be used to share it.
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          include-hidden-files: true
+          retention-days: 1
+          if-no-files-found: error
+          path: |
+            packages/*/dist
+            packages/*/build
+            packages/*/.svelte-kit
+            packages/themes/styles
+            packages/themes/docs
+            apps/*/build
+            apps/*/.svelte-kit
+            apps/web/.velite
+
+  check:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        check: [lint, docstrings, tests]
+    name: ${{ matrix.check }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.0.2'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Download build output
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+
       - name: Lint
+        if: matrix.check == 'lint'
         run: npm run lint
 
       - name: Check docstrings are in sync with Storybook
+        if: matrix.check == 'docstrings'
         run: |
           npm run sync-docstrings
           if ! git diff --quiet -- 'packages/*/src/**'; then
@@ -39,6 +86,7 @@ jobs:
           fi
 
       - name: Run tests
+        if: matrix.check == 'tests'
         run: |
           PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright install
           npm run test
