@@ -372,6 +372,23 @@ describe('form styles', () => {
 	});
 });
 
+describe('scroll styles', () => {
+	const scroll = readFileSync(new URL('./scroll.css', import.meta.url), 'utf8');
+
+	it('writes .scroll-area after elevation', () => {
+		const out = formatSystem(dictionary, aliases, { scroll });
+		expect(out).toContain('.scroll-area {');
+		expect(out.indexOf('/* Scroll */')).toBeGreaterThan(out.indexOf('/* Elevation */'));
+	});
+
+	it('fails when scroll.css reads a property that is not a token', () => {
+		const bad = '.scroll-area { scrollbar-color: var(--color-nope) transparent; }';
+		expect(() => formatSystem(dictionary, aliases, { scroll: bad })).toThrow(
+			/scroll\.css reads --color-nope/
+		);
+	});
+});
+
 describe('muted colour', () => {
 	const ruleFor = (selector) => {
 		const start = css.indexOf(`\n${selector} {`);

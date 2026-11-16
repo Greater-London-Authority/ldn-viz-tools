@@ -15,5 +15,17 @@
 	"svelte.plugin.svelte.compilerWarnings": {
 		"css_unused_selector": "ignore"
 	},
-	"cSpell.words": ["colour", "visualisation", "visualisations", "WCAG"]
+	"cSpell.words": [
+		"Basemap",
+		"Basemaps",
+		"colour",
+		"Donut",
+		"Geocoder",
+		"Geolocator",
+		"mockups",
+		"Topo",
+		"visualisation",
+		"visualisations",
+		"WCAG"
+	]
 }

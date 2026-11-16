@@ -21,16 +21,85 @@ jobs:
           node-version: '24.0.2'
           cache: npm
 
+      - name: Cache node_modules
+        id: node-modules-cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node24.0.2-${{ hashFiles('package-lock.json') }}
+
       - name: Install dependencies
-        run: npm install
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: npm ci
 
       - name: Build
         run: npm run build
 
+      # Everything the build generates. Not all of it is listed in the
+      # turbo.json outputs, so the Turbo cache can't be used to share it.
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          include-hidden-files: true
+          retention-days: 1
+          if-no-files-found: error
+          path: |
+            packages/*/dist
+            packages/*/build
+            packages/*/.svelte-kit
+            packages/themes/styles
+            packages/themes/docs
+            apps/*/build
+            apps/*/.svelte-kit
+            apps/web/.velite
+
+  check:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        check: [lint, docstrings, unit-tests, e2e-tests, storybook-tests]
+    name: ${{ matrix.check }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.0.2'
+          cache: npm
+
+      - name: Cache node_modules
+        id: node-modules-cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node24.0.2-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Download build output
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+
       - name: Lint
+        if: matrix.check == 'lint'
         run: npm run lint
 
       - name: Check docstrings are in sync with Storybook
+        if: matrix.check == 'docstrings'
         run: |
           npm run sync-docstrings
           if ! git diff --quiet -- 'packages/*/src/**'; then
@@ -38,7 +107,25 @@ jobs:
             exit 1
           fi
 
-      - name: Run tests
-        run: |
-          PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright install
-          npm run test
+      - name: Cache Playwright browsers
+        if: endsWith(matrix.check, '-tests')
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Playwright browsers
+        if: endsWith(matrix.check, '-tests')
+        run: PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright install
+
+      - name: Run unit tests
+        if: matrix.check == 'unit-tests'
+        run: npm run test:unit -- --filter='./packages/*'
+
+      - name: Run Playwright tests
+        if: matrix.check == 'e2e-tests'
+        run: npm run test:e2e -- --filter='./packages/*'
+
+      - name: Run Storybook tests
+        if: matrix.check == 'storybook-tests'
+        run: npm run test -- --filter='./apps/storybook'

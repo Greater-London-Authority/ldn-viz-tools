@@ -1,7 +1,8 @@
 <script lang="ts">
+	import type { Feature } from 'geojson';
 	import { getContext } from 'svelte';
 	import MapMarkerStyledContainer from '../../mapMarker/elements/mapMarkerStyledContainer/MapMarkerStyledContainer.svelte';
-	const feature = getContext('mapMarkerFeature');
+	const feature: Feature = getContext('mapMarkerFeature');
 </script>
 
 <MapMarkerStyledContainer>

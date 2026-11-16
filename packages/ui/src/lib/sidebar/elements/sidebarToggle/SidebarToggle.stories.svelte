@@ -15,7 +15,7 @@
 	const { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarToggle',
 		component: SidebarToggle,
-		decorators: [() => ({ Component: SidebarLeftContext })],
+		decorators: [() => ({ Component: SidebarLeftContext as any })],
 		tags: ['autodocs']
 	});
 </script>

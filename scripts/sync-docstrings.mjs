@@ -37,7 +37,12 @@ for (const componentPath of componentFiles) {
 	const componentContent = readFileSync(componentPath, 'utf-8');
 
 	// Match the pattern: /** ... @component ... */
-	const docstringMatch = componentContent.match(/\/\*\*[\s\S]*?@component[\s\S]*?\*\//m);
+	// The match cannot cross a "*/" before @component. Without this, an earlier
+	// /** comment in the file starts the match and pulls in the code between it
+	// and the @component docstring.
+	const docstringMatch = componentContent.match(
+		/\/\*\*(?:(?!\*\/)[\s\S])*?@component[\s\S]*?\*\//m
+	);
 
 	if (!docstringMatch) {
 		noDocstring++;

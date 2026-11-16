@@ -9,6 +9,7 @@
 	import { Button } from '@ldn-viz/ui';
 
 	import type { Feature } from 'geojson';
+	import type { GeoJSONStoreFeatures } from 'terra-draw';
 	import MapDraw from './MapDraw.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
@@ -22,12 +23,12 @@
 	let features1: Feature[] = $state([]);
 	let features2: Feature[] = $state([]);
 	let features3: Feature[] = $state([]);
-	let features4: Feature[] = $state([]);
+	let features4: GeoJSONStoreFeatures[] = $state([]);
 	let features5: Feature[] = $state([]);
 	let features6: Feature[] = $state([]);
 	let features7: Feature[] = $state([]);
 
-	const newFeatures = [
+	const newFeatures: GeoJSONStoreFeatures[] = [
 		{
 			id: 'cdb20d21-a866-4e4e-819a-4397da10f988',
 			type: 'Feature',

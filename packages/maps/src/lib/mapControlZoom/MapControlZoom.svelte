@@ -5,7 +5,7 @@
 	import { getContext } from 'svelte';
 	import { ZOOM_ANIMATION_OPTIONS } from '../themes/animations';
 
-	import type { MapStore } from '../map/Map.svelte';
+	import type { MapStore } from '../map/types';
 
 	type Handler = () => void;
 	type ClickEvent = MouseEvent | TouchEvent;

@@ -68,18 +68,7 @@ describe('Popover', () => {
 		await expect.element(trigger).toHaveAttribute('aria-expanded', 'true');
 	});
 
-	// NOTE: bits-ui's `PopoverTriggerState` derives `aria-controls` from its
-	// internal `contentNode` ref (see `getAriaControls()` in
-	// bits-ui/dist/bits/popover/popover.svelte.js), which is meant to be set to
-	// the id of the rendered content. In practice, with the installed bits-ui
-	// version (2.18.0) the id ends up only on the outer floating-position
-	// wrapper (`[data-bits-floating-content-wrapper]`), not on the
-	// `[data-popover-content]` element itself, and the trigger's `aria-controls`
-	// attribute is never populated in this real-browser test environment even
-	// once the popover is open and `aria-expanded="true"`. This looks like a
-	// real gap in bits-ui's ref wiring rather than a quirk of the test setup,
-	// so it's documented here rather than asserted as working.
-	it('does not set aria-controls on the trigger even while open (documents a bits-ui limitation)', async () => {
+	it('sets aria-controls on the trigger to the content id while open', async () => {
 		render(Popover, {
 			children: makeSnippet('The contents of the popover...')
 		});
@@ -90,7 +79,9 @@ describe('Popover', () => {
 		await trigger.click();
 		await expect.element(page.getByText('The contents of the popover...')).toBeInTheDocument();
 
-		await expect.element(trigger).not.toHaveAttribute('aria-controls');
+		await expect.element(trigger).toHaveAttribute('aria-controls');
+		const controlsId = (trigger.element() as HTMLElement).getAttribute('aria-controls') as string;
+		expect(document.getElementById(controlsId)).toHaveTextContent('The contents of the popover...');
 	});
 
 	it('closes when the trigger is clicked again', async () => {

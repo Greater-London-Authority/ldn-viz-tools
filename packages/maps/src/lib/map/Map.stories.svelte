@@ -1,6 +1,8 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Map from './Map.svelte';
+	import type { MapCursorTypeStore } from './mapCursor/types';
+	import type { MapLibreStore } from './types';
 
 	import * as os_light_vts from '../themes/os_light_vts.json';
 
@@ -25,7 +27,6 @@
 		title: 'Maps/Components/Map',
 		component: Map,
 		tags: ['autodocs'],
-		render: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -41,7 +42,7 @@
 				}
 			},
 			options: {
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'object',
@@ -50,7 +51,7 @@
 				}
 			},
 			mapStore: {
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'Svelte store',
@@ -59,7 +60,7 @@
 				}
 			},
 			mapCursorStore: {
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'Svelte store',
@@ -68,7 +69,7 @@
 				}
 			},
 			whenMapLoads: {
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'function',
@@ -77,7 +78,7 @@
 				}
 			},
 			whenMapUnloads: {
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'function',
@@ -86,7 +87,7 @@
 				}
 			},
 			lightStyle: {
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'object',
@@ -95,7 +96,7 @@
 				}
 			},
 			darkStyle: {
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'object',
@@ -111,7 +112,7 @@
 		}
 	});
 
-	let map = $state();
+	let map: MapLibreStore | undefined = $state();
 </script>
 
 <script lang="ts">
@@ -131,16 +132,10 @@
 		return style as MapLibreStyle;
 	};
 
-	let mapCursor = $state();
+	let mapCursor: MapCursorTypeStore | undefined = $state();
 	let mapMounted = $state(true);
 	let unloadCount = $state(0);
 </script>
-
-{#snippet defaultTemplate({ args })}
-	<div class="h-[100dvh] w-[100dvw]">
-		<Map {...args}>I'm a map!</Map>
-	</div>
-{/snippet}
 
 <Story name="Responsive to theme">
 	{#snippet template(args)}
@@ -235,7 +230,7 @@ This demonstrates how you can bind to the maplibre `map` object.
 -->
 <Story name="Accessing map object">
 	{#snippet template()}
-		<Button onclick={() => $map.flyTo({ center: [-0.124, 51.5], zoom: 15 })}>Fly!</Button>
+		<Button onclick={() => $map?.flyTo({ center: [-0.124, 51.5], zoom: 15 })}>Fly!</Button>
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				whenMapLoads={loadTestLayers}

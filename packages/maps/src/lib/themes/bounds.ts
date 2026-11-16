@@ -50,7 +50,7 @@ export const GREATER_LONDON_BOUNDS: BoundsPoints = [
 	[0.342, 51.698]
 ];
 
-export const GREATER_LONDON_BOUNDS_BNG = [
+export const GREATER_LONDON_BOUNDS_BNG: BoundsPoints = [
 	[503535, 154250],
 	[561950, 202513]
 ];

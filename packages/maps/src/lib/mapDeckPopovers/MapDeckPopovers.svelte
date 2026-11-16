@@ -26,16 +26,14 @@
 	// layers.find(l => l.id === $clickedLayer)?.visible;
 </script>
 
-{#if layerObj && layerObj.visible !== false && $clickedFeature && $clickedLayer}
+{#if layerObj && layerObj.props.visible !== false && $clickedFeature && $clickedLayer}
 	{#if typeof tooltipSpec === 'string'}
 		<MapPopover
 			feature={$clickedFeature}
 			layer={$clickedLayer}
 			popup={DefaultPopover}
 			msgString={tooltipSpec}
-		>
-			{tooltipSpec}
-		</MapPopover>
+		/>
 	{:else if tooltipSpec && isConstructor(tooltipSpec)}
 		<MapPopover feature={$clickedFeature} layer={$clickedLayer} popup={tooltipSpec} />
 	{:else if typeof tooltipSpec === 'function'}

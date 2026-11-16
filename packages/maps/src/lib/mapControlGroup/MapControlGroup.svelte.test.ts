@@ -4,6 +4,10 @@ import { page } from '@vitest/browser/context';
 import MapControlGroup from './MapControlGroup.svelte';
 import { createRawSnippet } from 'svelte';
 
+const textSnippet = createRawSnippet(() => ({
+	render: () => '<span>Test</span>'
+}));
+
 // N.B. could test positioning based on which classes are applied, but this feels brittle
 
 describe('MapControlGroup', () => {
@@ -43,7 +47,7 @@ describe('MapControlGroup', () => {
 			const { container } = render(MapControlGroup, {
 				props: {
 					classes: 'custom-class-1 custom-class-2',
-					children: () => 'Test'
+					children: textSnippet
 				}
 			});
 
@@ -57,7 +61,7 @@ describe('MapControlGroup', () => {
 				props: {
 					position: 'TopRight',
 					classes: 'my-custom-class',
-					children: () => 'Test'
+					children: textSnippet
 				}
 			});
 
@@ -72,7 +76,7 @@ describe('MapControlGroup', () => {
 			const { container } = render(MapControlGroup, {
 				props: {
 					classes: '',
-					children: () => 'Test'
+					children: textSnippet
 				}
 			});
 

@@ -31,7 +31,7 @@ export const authError = writable('');
  * Store containing name of role that is authorized to access the site.
  * You must set this, as the config object is not accessible here.
  */
-export const authorizedRoleName = writable(undefined);
+export const authorizedRoleName = writable<string | undefined>(undefined);
 /**
  * Store containing a Boolean value indicating whether a user is logged in, and has the role defined in the OAuth config.
  * This is used to control whether the login form is displayed.
@@ -39,7 +39,9 @@ export const authorizedRoleName = writable(undefined);
 export const hasAccess = derived(
 	[accessToken, roles, authorizedRoleName],
 	([$accessToken, $roles, $authorizedRoleName]) => {
-		return $accessToken && $roles.includes($authorizedRoleName);
+		return (
+			$accessToken && $authorizedRoleName !== undefined && $roles.includes($authorizedRoleName)
+		);
 	}
 );
 

@@ -12,13 +12,14 @@
 	 * @component
 	 */
 
-	import { onDestroy, getContext, setContext } from 'svelte';
-	import { writable } from 'svelte/store';
+	import { onDestroy, getContext, setContext, untrack } from 'svelte';
+	import { writable, type Readable } from 'svelte/store';
 	import MapMarker from '../mapMarker/MapMarker.svelte';
+	import type { MapLibreStore } from '../map/types';
 
-	const mapStore = getContext('mapStore');
-	const mapSourceId = getContext('mapLayerSourceId');
-	const mapSourceLoaded = getContext('mapLayerSourceLoaded');
+	const mapStore: MapLibreStore = getContext('mapStore');
+	const mapSourceId: string = getContext('mapLayerSourceId');
+	const mapSourceLoaded: Readable<boolean> = getContext('mapLayerSourceLoaded');
 
 	interface Props {
 		/**
@@ -74,12 +75,14 @@
 
 	const loaded = writable(false);
 
-	let safeSpec = structuredClone(spec);
-	safeSpec.id = id;
+	// The layer is added once, so the spec and context use the initial props.
+	const initialId = untrack(() => id);
+	const safeSpec = untrack(() => structuredClone(spec));
+	safeSpec.id = initialId;
 	safeSpec.source = mapSourceId;
 	Object.freeze(safeSpec);
 
-	setContext('mapLayerViewId', id);
+	setContext('mapLayerViewId', initialId);
 	setContext('mapLayerViewSpec', safeSpec);
 	setContext('mapLayerViewLoaded', loaded);
 
@@ -87,7 +90,7 @@
 		loaded.set(false);
 		removeLayer();
 
-		$mapStore.addLayer(safeSpec, beforeId);
+		$mapStore!.addLayer(safeSpec, beforeId);
 		loaded.set(true);
 
 		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
@@ -104,7 +107,7 @@
 
 	const removeLayer = () => {
 		if ($mapStore?.getLayer(id)) {
-			$mapStore.removeLayer(id);
+			$mapStore!.removeLayer(id);
 		}
 	};
 

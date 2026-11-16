@@ -221,7 +221,7 @@
 	];
 
 	const { Story } = defineMeta({
-		title: 'Charts/Components/Chart',
+		title: 'Charts/Components/ChartFactory',
 		component: Chart,
 		tags: ['autodocs'],
 		render: chartTemplate,

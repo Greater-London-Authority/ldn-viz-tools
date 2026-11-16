@@ -56,7 +56,7 @@
 				}}
 			>
 				<MapControlGroup position="TopLeft">
-					<MapControlLocationSearch adapter={adapterMapBox} {onSearchError} {...args} />
+					<MapControlLocationSearch {...args} adapter={adapterMapBox} {onSearchError} />
 				</MapControlGroup>
 			</Map>
 		</div>
@@ -77,7 +77,7 @@ Note that this API allows searches for "specific address accurately using a full
 				}}
 			>
 				<MapControlGroup position="TopLeft">
-					<MapControlLocationSearch adapter={adapterOSPlaces} {onSearchError} {...args} />
+					<MapControlLocationSearch {...args} adapter={adapterOSPlaces} {onSearchError} />
 				</MapControlGroup>
 			</Map>
 		</div>

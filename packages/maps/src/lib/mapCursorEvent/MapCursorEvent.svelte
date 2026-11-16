@@ -21,7 +21,11 @@
 	 */
 
 	import { getContext, onDestroy } from 'svelte';
-	import type { MapStore, MapCursorStore, MapCursorFeatureHandler } from '../map';
+	import type { MapStore } from '../map/types';
+	import type {
+		MapCursorTypeStore as MapCursorStore,
+		MapCursorFeatureHandler
+	} from '../map/mapCursor/types';
 
 	type MaybeMapCursorFeatureHandler = null | MapCursorFeatureHandler;
 

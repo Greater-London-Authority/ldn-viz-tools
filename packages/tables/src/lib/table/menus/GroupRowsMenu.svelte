@@ -4,10 +4,10 @@
 
 	interface Props {
 		table: TableState;
-		onChange: () => void;
+		onChange?: () => void;
 	}
 
-	let { table = $bindable(), onChange }: Props = $props();
+	let { table = $bindable(), onChange = () => undefined }: Props = $props();
 
 	type Options = { label: string; id: string; value: string }[];
 
@@ -25,7 +25,7 @@
 		return new_fields;
 	});
 
-	let groupingSelection: string[] = $state(table.groupingFields);
+	let groupingSelection: string[] = $state([...table.groupingFields]);
 	const applyGrouping = (groupingSelection: any[]) => {
 		if (table) {
 			// re-order cols

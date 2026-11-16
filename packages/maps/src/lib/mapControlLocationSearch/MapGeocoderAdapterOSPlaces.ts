@@ -209,7 +209,7 @@ export class MapGeocoderAdapterOSPlaces implements GeocoderAdapter {
 		// if (!match) {
 		// 	return Promise.reject(new Error(`Location with id ${id} not found.`));
 		// }
-		return Promise.resolve(match); // Return the full object with center
+		return Promise.resolve(match as GeolocationNamed); // Return the full object with center
 	}
 
 	attribution() {

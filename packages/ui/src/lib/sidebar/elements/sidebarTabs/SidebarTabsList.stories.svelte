@@ -23,7 +23,7 @@
 	let { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarTabs',
 		component: SidebarTabList,
-		decorators: [() => ({ Component: SidebarLeftContext })],
+		decorators: [() => ({ Component: SidebarLeftContext as any })],
 		tags: ['autodocs'],
 		args: { tabs: tabs }
 	});

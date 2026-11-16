@@ -6,7 +6,7 @@ export interface CategoricalTickProps {
 	/**
 	 * Scale used to determine color of tick.
 	 */
-	color: string | ((value: number) => string);
+	color: string | ((value: any) => string);
 	/**
 	 * Categorical scale used to determine horizontal position of tick.
 	 */

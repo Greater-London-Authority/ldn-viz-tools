@@ -2,6 +2,13 @@
 	import { ArrowsPointingIn, ArrowsPointingOut, ArrowTopRightOnSquare } from '@steeze-ui/heroicons';
 	import { writable } from 'svelte/store';
 
+	type WebkitFullscreenElement = HTMLElement & {
+		webkitRequestFullscreen?: () => Promise<void>;
+	};
+	type WebkitFullscreenDocument = Document & {
+		webkitExitFullscreen?: () => Promise<void>;
+	};
+
 	const isFullscreen = writable(false);
 
 	const isPageEmbedded = () => window !== window.top;
@@ -13,7 +20,7 @@
 	const MODE_EMBED = {
 		titleOut: 'View as full page',
 		iconOut: ArrowTopRightOnSquare,
-		enterFullscreen: () => (window.top.location.href = window.location.href)
+		enterFullscreen: () => (window.top!.location.href = window.location.href)
 	};
 
 	const MODE_API = {
@@ -21,7 +28,7 @@
 		titleIn: 'Exit fullscreen',
 		iconOut: ArrowsPointingOut,
 		iconIn: ArrowsPointingIn,
-		enterFullscreen: (element = document.body) => {
+		enterFullscreen: (element: WebkitFullscreenElement = document.body) => {
 			const updateState = () => isFullscreen.set(true);
 
 			if (element.requestFullscreen) {
@@ -36,20 +43,22 @@
 		exitFullscreen: () => {
 			const updateState = () => isFullscreen.set(false);
 
-			if (document.exitFullscreen) {
-				document.exitFullscreen().then(updateState);
+			const doc: WebkitFullscreenDocument = document;
+
+			if (doc.exitFullscreen) {
+				doc.exitFullscreen().then(updateState);
 				return;
 			}
 
-			if (document.webkitExitFullscreen) {
-				document.webkitExitFullscreen().then(updateState); // Safari
+			if (doc.webkitExitFullscreen) {
+				doc.webkitExitFullscreen().then(updateState); // Safari
 			}
 		}
 	};
 </script>
 
 <script lang="ts">
-	import type { MapStore } from '$lib/map/Map.svelte';
+	import type { MapStore } from '../map/types';
 	import { Button } from '@ldn-viz/ui';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { getContext, onMount } from 'svelte';
