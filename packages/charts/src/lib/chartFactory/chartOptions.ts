@@ -1,6 +1,8 @@
 import type { PlotOptions, ScaleType } from '@observablehq/plot';
 
-// Fields common to all chart types.
+/**
+ * Fields common to all chart types.
+ */
 interface BaseChartOptions {
 	/********************************************/
 	/* Definitions of the structure of the data */
@@ -309,7 +311,9 @@ export interface ChoroplethOptions extends BaseChartOptions {
 	missingDataColor?: string;
 }
 
-// Chart types that need no fields beyond BaseChartOptions.
+/**
+ * Chart types that need no fields beyond BaseChartOptions.
+ */
 export interface CoreChartOptions extends BaseChartOptions {
 	chartType:
 		| 'barChartVertical'

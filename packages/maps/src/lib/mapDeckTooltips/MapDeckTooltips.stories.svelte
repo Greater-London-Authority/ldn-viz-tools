@@ -19,6 +19,7 @@
 </script>
 
 <script lang="ts">
+	import type { Feature } from 'geojson';
 	import { MVTLayer } from '@deck.gl/geo-layers';
 
 	import Map from '../map/Map.svelte';
@@ -153,8 +154,8 @@
 				<MapDeckTooltips
 					{layers}
 					spec={{
-						wardLayer: (feature) => feature?.properties?.wd22nm,
-						boroughLayer: (feature) => feature?.properties?.name
+						wardLayer: (feature?: Feature) => feature?.properties?.wd22nm,
+						boroughLayer: (feature?: Feature) => feature?.properties?.name
 					}}
 				/>
 			</Map>
@@ -189,7 +190,7 @@ when the cursor leaves the map.
 						<MapDeckTooltips
 							layers={l1}
 							spec={{
-								boroughLayer: (feature) => feature?.properties?.name
+								boroughLayer: (feature?: Feature) => feature?.properties?.name
 							}}
 						/>
 					</Map>
@@ -213,7 +214,7 @@ when the cursor leaves the map.
 						<MapDeckTooltips
 							layers={l2}
 							spec={{
-								boroughLayer: (feature) => feature?.properties?.name
+								boroughLayer: (feature?: Feature) => feature?.properties?.name
 							}}
 						/>
 					</Map>
@@ -272,7 +273,7 @@ when the cursor leaves the map.
 					{layers}
 					spec={{
 						wardLayer: 'This is one of the Wards',
-						boroughLayer: (feature) => feature?.properties?.name
+						boroughLayer: (feature?: Feature) => feature?.properties?.name
 					}}
 				/>
 			</Map>

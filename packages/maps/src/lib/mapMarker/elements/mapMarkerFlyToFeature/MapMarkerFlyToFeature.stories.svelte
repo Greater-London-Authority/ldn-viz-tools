@@ -11,7 +11,6 @@
 		title: 'Maps/Components/MapMarker/elements/MapMarkerFlyToFeature',
 		component: MapMarkerFlyToFeature,
 		tags: ['autodocs'],
-		render: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -19,7 +18,7 @@
 		argTypes: {
 			disabled: {
 				type: 'boolean',
-				control: 'none'
+				control: false
 			}
 		}
 	});
@@ -39,10 +38,6 @@
 
 	setContext('mapMarkerFeature', {});
 </script>
-
-{#snippet defaultTemplate({ args })}
-	<MapMarkerFlyToFeature {...args} />
-{/snippet}
 
 <Story name="Interactive Example">
 	{#snippet template()}

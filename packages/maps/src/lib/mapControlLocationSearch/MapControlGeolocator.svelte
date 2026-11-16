@@ -11,7 +11,6 @@
 	 */
 
 	import { Geolocator } from '@ldn-viz/ui';
-	import mapgl from 'maplibre-gl';
 	import { getContext } from 'svelte';
 	import type { MapLibreStore } from '../map/types';
 	import { clearFeature, setFeature } from './map-layer';
@@ -43,7 +42,7 @@
 			return;
 		}
 
-		setFeature('geolocator', $mapStore, mapgl, location, { zoom: zoomLevel });
+		setFeature('geolocator', $mapStore, location, { zoom: zoomLevel });
 
 		if (onLocationFound) {
 			onLocationFound(location);

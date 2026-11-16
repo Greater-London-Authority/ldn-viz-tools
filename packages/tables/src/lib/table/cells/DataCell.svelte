@@ -1,9 +1,10 @@
 <script lang="ts">
+	import type { DataRow } from '$lib/core/lib/types';
 	import type { Snippet } from 'svelte';
 
 	type DataCellProps = {
-		href: (d: any) => string;
-		row: any;
+		href?: (row: DataRow) => string;
+		row: DataRow;
 		children: Snippet;
 	};
 

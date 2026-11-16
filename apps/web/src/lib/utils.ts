@@ -1,7 +1,7 @@
 import { docs, index, type Doc } from '$content/index';
 import { error } from '@sveltejs/kit';
 import type { Component } from 'svelte';
-import type { Attachment } from 'svelte/attachments';
+import type { Action } from 'svelte/action';
 
 const allContent = [...docs, index];
 
@@ -61,9 +61,9 @@ export const getContent = async (slug: string = 'index') => {
 /** Utility Functions */
 
 // Action that copies details to clipboard
-export const clickToCopy: Attachment = (node: HTMLElement, target: any) => {
+export const clickToCopy: Action<HTMLElement, string | undefined> = (node, target) => {
 	async function copyText() {
-		let text = target ? document.querySelector(target).innerText : node.innerText;
+		let text = target ? document.querySelector<HTMLElement>(target)!.innerText : node.innerText;
 
 		try {
 			await navigator.clipboard.writeText(text);

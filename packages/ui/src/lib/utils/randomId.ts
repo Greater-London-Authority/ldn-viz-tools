@@ -1,5 +1,7 @@
-// randomId returns a random twelve character string. It is suitable as a
-// unique ID for non-cryptographic applications, e.g. HTML element id.
+/**
+ * randomId returns a random twelve character string. It is suitable as a
+ * unique ID for non-cryptographic applications, e.g. HTML element id.
+ */
 export const randomId = () => {
 	const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 

@@ -1,7 +1,7 @@
 import { describe, test, expect, vi, beforeEach } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { writable } from 'svelte/store';
-import { tick } from 'svelte';
+import { tick, type ComponentProps } from 'svelte';
 import type { Feature } from 'geojson';
 import MapPopover from './MapPopover.svelte';
 import ContextProbe from '../mapMarker/ContextProbe.svelte';
@@ -50,7 +50,7 @@ describe('MapPopover', () => {
 		};
 	}
 
-	async function renderMapPopover(props: Record<string, unknown>) {
+	async function renderMapPopover(props: ComponentProps<typeof MapPopover>) {
 		const mockMap = createMockMap();
 		const mapStore = writable(mockMap);
 
@@ -100,7 +100,7 @@ describe('MapPopover', () => {
 
 	test('changing feature unmounts the previous instance and mounts a new one', async () => {
 		const featureA = makePointFeature([10, 20]);
-		const props = $state<{ popup: unknown; feature: Feature; layer: string }>({
+		const props = $state<ComponentProps<typeof MapPopover>>({
 			popup: ContextProbe,
 			feature: featureA,
 			layer: 'my-layer'
@@ -134,7 +134,7 @@ describe('MapPopover', () => {
 
 	test('changing popup unmounts the previous instance and mounts a new one', async () => {
 		const featureA = makePointFeature([10, 20]);
-		const props = $state<{ popup: unknown; feature: Feature }>({
+		const props = $state<ComponentProps<typeof MapPopover>>({
 			popup: ContextProbe,
 			feature: featureA
 		});

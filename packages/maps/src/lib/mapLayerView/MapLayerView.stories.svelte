@@ -11,7 +11,7 @@
 				detail: '({\n  id: string,\n  spec: LayerSpecification\n}) => void'
 			}
 		}
-	};
+	} as const;
 
 	const componentType = {
 		control: undefined,
@@ -20,7 +20,7 @@
 				summary: 'Svelte component'
 			}
 		}
-	};
+	} as const;
 
 	/**
 	 * The `<MapLayerView>` component is slotted within a `<MapLayerSource>`

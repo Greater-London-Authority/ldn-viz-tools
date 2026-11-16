@@ -284,8 +284,8 @@
 								title="Issues closed"
 								emphasis="secondary"
 								alt="Bar chart of issues closed in each release"
-								dataDownloadButton={false}
-								imageDownloadButton={false}
+								dataDownload={false}
+								imageDownload={false}
 							>
 								<ObservablePlotInner
 									id="overview-issues-closed-plot"
@@ -298,8 +298,8 @@
 								title="Issues opened"
 								emphasis="secondary"
 								alt="Bar chart of issues opened in each release"
-								dataDownloadButton={false}
-								imageDownloadButton={false}
+								dataDownload={false}
+								imageDownload={false}
 							>
 								<ObservablePlotInner
 									id="overview-issues-opened-plot"
@@ -314,8 +314,8 @@
 							data={releaseRows}
 							{tableSpec}
 							allowSorting
-							dataDownloadButton={false}
-							imageDownloadButton={false}
+							dataDownload={false}
+							imageDownload={false}
 						/>
 					</Card>
 				</div>

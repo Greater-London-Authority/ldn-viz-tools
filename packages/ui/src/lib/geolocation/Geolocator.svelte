@@ -35,7 +35,7 @@
 		 * The last found location. This will be reset to `null` each time a new search
 		 * is started.
 		 */
-		location?: GeolocationCoords[2] | null;
+		location?: GeolocationCoords | null;
 		/**
 		 * Bind to be reactively informed when searching is in progress.
 		 */

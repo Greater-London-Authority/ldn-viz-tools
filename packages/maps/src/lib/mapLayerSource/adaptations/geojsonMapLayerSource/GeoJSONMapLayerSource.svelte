@@ -8,12 +8,16 @@
 	 * @component
 	 */
 
-	import { getContext } from 'svelte';
+	import { getContext, untrack } from 'svelte';
 	import { writable } from 'svelte/store';
-	import type { FeatureCollection } from 'geojson';
+	import type { FeatureCollection, GeoJSON } from 'geojson';
+	import type { GeoJSONSource, GeoJSONSourceSpecification } from 'maplibre-gl';
 	import MapLayerSource from '../../MapLayerSource.svelte';
+	import type { MapLibreStore } from '../../../map/types';
 
-	const mapStore = getContext('mapStore');
+	type SourceContext = { id: string; spec: GeoJSONSourceSpecification };
+
+	const mapStore: MapLibreStore = getContext('mapStore');
 
 	interface Props {
 		/**
@@ -76,7 +80,8 @@
 		children
 	}: Props = $props();
 
-	const dataStore = writable(initialData);
+	// The effect below keeps the store in sync with later initialData changes.
+	const dataStore = writable(untrack(() => initialData));
 	let loaded = false;
 
 	/*
@@ -91,7 +96,7 @@
 		$dataStore = initialData;
 	});
 
-	const internalLoad = (ctx) => {
+	const internalLoad = (ctx: SourceContext) => {
 		loaded = true;
 
 		if (!url) {
@@ -129,7 +134,7 @@
 			});
 	};
 
-	const internalUnload = (ctx) => {
+	const internalUnload = (ctx: SourceContext) => {
 		loaded = false;
 		dataStore.set(null);
 
@@ -138,12 +143,12 @@
 		}
 	};
 
-	const updateData = (geojson) => {
+	const updateData = (geojson: GeoJSON) => {
 		if (!loaded) {
 			return;
 		}
 
-		$mapStore.getSource(id).setData(geojson);
+		($mapStore!.getSource(id) as GeoJSONSource).setData(geojson);
 	};
 
 	$effect(() => {

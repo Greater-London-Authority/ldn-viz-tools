@@ -21,7 +21,7 @@
 
 	const gridClass = $derived(classNames(sizeClasses[size as keyof typeof sizeClasses]));
 
-	const tokensToHex = (tokensObj = []) => {
+	const tokensToHex = (tokensObj: { [key: string]: any } = {}): string[] => {
 		return Object.values(tokensObj).map((token) => token['value']);
 	};
 
@@ -41,7 +41,7 @@
 <div class="flex pb-6">
 	<div class="float-left flex-1 pr-4 pt-4">
 		<CopyButton
-			content={hex}
+			content={hex.join(',')}
 			label="Copy Hex Values"
 			emphasis="secondary"
 			variant="outline"

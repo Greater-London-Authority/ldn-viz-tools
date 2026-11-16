@@ -1,3 +1,4 @@
+import type { Feature } from 'geojson';
 import { describe, test, expect } from 'vitest';
 import { get } from 'svelte/store';
 import { clickedFeature, clickedLayer, onClickPopoverHandler } from './stores';
@@ -9,7 +10,7 @@ describe('mapDeckPopovers stores', () => {
 	});
 
 	test('onClickPopoverHandler sets clickedFeature and clickedLayer from the event', () => {
-		const feature = {
+		const feature: Feature = {
 			type: 'Feature',
 			geometry: { type: 'Point', coordinates: [0, 0] },
 			properties: {}

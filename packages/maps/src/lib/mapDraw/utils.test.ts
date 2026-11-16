@@ -1,4 +1,4 @@
-import type { FeatureCollection, Geometry, Polygon } from 'geojson';
+import type { FeatureCollection, Geometry, LineString, Point, Polygon } from 'geojson';
 import { describe, expect, test } from 'vitest';
 import { fixImportedGeoJSON } from './utils';
 
@@ -319,7 +319,7 @@ describe('fixImportedGeoJSON', () => {
 	// TODO: maybe this behaviour should be changed
 	describe('Non-Polygon geometries', () => {
 		test('does not modify Point geometries', () => {
-			const geojson: FeatureCollection = {
+			const geojson: FeatureCollection<Point> = {
 				type: 'FeatureCollection',
 				features: [
 					{
@@ -348,7 +348,7 @@ describe('fixImportedGeoJSON', () => {
 
 		// TODO: maybe this behaviour should be changed
 		test('does not modify LineString geometries', () => {
-			const geojson: FeatureCollection = {
+			const geojson: FeatureCollection<LineString> = {
 				type: 'FeatureCollection',
 				features: [
 					{

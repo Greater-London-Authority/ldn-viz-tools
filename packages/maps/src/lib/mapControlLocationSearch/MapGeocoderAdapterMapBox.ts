@@ -88,7 +88,9 @@ export class MapGeocoderAdapterMapBox implements GeocoderAdapter {
 	}
 }
 
-// Searchbox api 'suggest' endpoint to return a list of a suggestions based off of users input
+/**
+ * Searchbox api 'suggest' endpoint to return a list of a suggestions based off of users input
+ */
 const buildSuggestionUrl = (
 	text: string,
 	token: string,
@@ -108,7 +110,9 @@ const buildSuggestionUrl = (
 	return `https://api.mapbox.com/search/searchbox/v1/suggest?q=${text}&${queryString}`;
 };
 
-// Searchbox api 'retrieve' endpoint to return the geometry of selected value from sugestion list
+/**
+ * Searchbox api 'retrieve' endpoint to return the geometry of selected value from sugestion list
+ */
 const buildRetrieveUrl = (suggestionId: string, token: string, session_token: string): string => {
 	suggestionId = encodeURIComponent(suggestionId);
 	const queryString = new URLSearchParams({

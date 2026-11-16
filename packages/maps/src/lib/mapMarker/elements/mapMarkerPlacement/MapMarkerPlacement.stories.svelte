@@ -10,7 +10,6 @@
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapMarker/elements/MapMarkerPlacement',
 		component: MapMarkerPlacement,
-		render: defaultTemplate,
 		tags: ['autodocs'],
 
 		parameters: {
@@ -20,7 +19,7 @@
 			placement: {
 				options: ['center', 'follow', 'none'],
 				type: 'string',
-				control: 'none'
+				control: false
 			}
 		}
 	});
@@ -44,10 +43,6 @@
 	setContext('mapMarkerFeature', {});
 	setContext('mapStore', writable(null));
 </script>
-
-{#snippet defaultTemplate({ args })}
-	<MapMarkerPlacement {...args} />
-{/snippet}
 
 <Story name="Default">
 	{#snippet template()}

@@ -11,7 +11,7 @@
     base, layout, typeset properties, flow contexts, typeset text,
     longform element aliases, content styles, product aliases, forms, role
     classes, emphasis,
-    flow rules and utilities, elevation
+    flow rules and utilities, elevation, scroll styles
 
   Every custom property a rule reads is checked against the dictionary, so a
   token renamed or dropped in the export fails the build instead of shipping
@@ -20,6 +20,7 @@
 
 import { boundary, formatContent, scopeSelector } from './content.js';
 import { formatForms } from './forms.js';
+import { printSheet, readSheet } from './sheet.js';
 import * as config from './system.config.js';
 
 const INDENT = '  ';
@@ -42,10 +43,11 @@ const section = (title, rules) => `/* ${title} */\n${rules.filter(Boolean).join(
 /**
  * Builds the sheet from a Style Dictionary dictionary (names already
  * transformed), the alias list from sd/usage.js and the text of the
- * hand-written sheets: { content: sd/content.css, forms: sd/forms.css }.
+ * hand-written sheets: { content: sd/content.css, forms: sd/forms.css,
+ * scroll: sd/scroll.css }.
  */
 export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => {
-	const { content = '', forms = '' } = sheets;
+	const { content = '', forms = '', scroll = '' } = sheets;
 	const tokens = new Map(dictionary.allTokens.map((token) => [token.name, token]));
 
 	// var(--name), after checking the token exists.
@@ -355,6 +357,10 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 		? section('Forms', [formatForms(forms, checkSheet('forms.css'), resolveColour)])
 		: '';
 
+	const scrollStyles = scroll
+		? section('Scroll', [printSheet(readSheet(scroll, checkSheet('scroll.css')))])
+		: '';
+
 	// Product aliases resolve against the nearest typeset, like role classes.
 	const classAliases = section(
 		'Usage aliases',
@@ -476,7 +482,8 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 		emphasis,
 		flowRules,
 		flowUtilities,
-		elevation
+		elevation,
+		scrollStyles
 	]
 		.filter(Boolean)
 		.join('\n\n');

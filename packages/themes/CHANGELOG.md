@@ -1,5 +1,11 @@
 # @ldn-viz/themes
 
+## 10.0.2
+
+### Patch Changes
+
+- 47f9c91: FIXED: adjust `interactive-` color tokens to improve contrast.
+
 ## 10.0.1
 
 ### Patch Changes

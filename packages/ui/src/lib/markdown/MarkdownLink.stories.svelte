@@ -13,6 +13,8 @@
 	 * from `'$app/paths'`, so that links include the app's base path.
 	 * Without a resolver, the href is unchanged.
 	 *
+	 * Other props are passed through to the `<a>` element.
+	 *
 	 */
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Markdown/MarkdownLink',

@@ -1,5 +1,11 @@
 # ldn-viz-tools-charts
 
+## 10.0.1
+
+### Patch Changes
+
+- a90116e: CHANGED: several chart factory functions are now exported (`chartFns`, `getDescription`, `getEndOfLineLabelMarks`)
+
 ## 10.0.0
 
 ### Major Changes

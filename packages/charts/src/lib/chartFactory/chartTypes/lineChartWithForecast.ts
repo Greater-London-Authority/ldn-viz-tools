@@ -12,7 +12,9 @@ import {
 	makeTooltip
 } from '../utils';
 
-// Fraction of a tick step to pad the y-domain beyond the outermost grid-lines
+/**
+ * Fraction of a tick step to pad the y-domain beyond the outermost grid-lines
+ */
 const Y_DOMAIN_PADDING = 0.2;
 
 const getComparableX = (value: ChartDataRow['xd']) =>

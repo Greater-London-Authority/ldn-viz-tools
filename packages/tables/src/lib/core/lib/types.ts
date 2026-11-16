@@ -1,5 +1,5 @@
+import type { ScaleBand, ScaleOrdinal, ScaleThreshold } from 'd3-scale';
 import type { Component } from 'svelte';
-import type { ScaleBand, ScaleThreshold, ScaleOrdinal } from 'd3-scale';
 
 // ============================================================================
 // Core Data Types
@@ -21,6 +21,7 @@ export type ColGroup = {
 	label: string;
 	startCol: number;
 	endCol: number;
+	color?: string;
 };
 
 // ============================================================================
@@ -96,7 +97,7 @@ export type ColSpec = {
 	width?: number | string;
 	relativeWidth?: number;
 	computedWidth?: number;
-	href?: string;
+	href?: (row: DataRow) => string;
 
 	cell?: {
 		renderer?: string | Component;
@@ -121,7 +122,9 @@ export type ColSpec = {
 	};
 };
 
-// Resolved column spec with renderer components (not strings)
+/**
+ * Resolved column spec with renderer components (not strings)
+ */
 export type ResolvedColSpec = Omit<ColSpec, 'cell' | 'group' | 'column' | 'header'> & {
 	cell?: {
 		renderer?: Component;
@@ -161,7 +164,10 @@ export type TableSpec = {
 	filters?: Filter[];
 
 	showHeaderTopRule?: boolean;
+	showHeaderBottomRule?: boolean;
 	showTableHeader?: boolean;
+	showColumnControls?: boolean;
+	showColSummaries?: boolean;
 };
 
 // ============================================================================

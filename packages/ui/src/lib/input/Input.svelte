@@ -1,5 +1,5 @@
 <script lang="ts" module>
-	import type { FormatFunction } from '$lib/input/types';
+	import type { FormatFunction } from './types';
 
 	export const trimInput: FormatFunction = (value) => value.trim();
 </script>
@@ -85,8 +85,10 @@
 		}
 	});
 
-	// Svelte does not allow bind:type and bind:value simultaneously so this
-	// function acts as the input change handler.
+	/**
+	 * Svelte does not allow bind:type and bind:value simultaneously so this
+	 * function acts as the input change handler.
+	 */
 	const formatAndUpdateValue = () => {
 		if (!format) {
 			return;

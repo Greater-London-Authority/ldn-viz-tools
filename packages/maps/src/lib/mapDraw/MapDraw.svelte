@@ -66,7 +66,7 @@
 	let mapDrawControls:
 		| {
 				clickEdit: () => void;
-				clickMode: () => void;
+				clickMode: (mode: string) => void;
 				clickSelect: () => void;
 				clickClear: () => void;
 				clickCancel: () => void;
@@ -80,8 +80,8 @@
 	export const clickEdit = () => {
 		mapDrawControls?.clickEdit();
 	};
-	export const clickMode = () => {
-		mapDrawControls?.clickMode();
+	export const clickMode = (mode: string) => {
+		mapDrawControls?.clickMode(mode);
 	};
 	export const clickSelect = () => {
 		mapDrawControls?.clickSelect();

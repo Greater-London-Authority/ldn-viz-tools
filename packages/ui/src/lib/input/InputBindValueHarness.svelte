@@ -6,5 +6,5 @@
 	let { label = 'Label', value = $bindable('') }: { label?: string; value?: string } = $props();
 </script>
 
-<Input {label} name="bind-value-input" bind:value />
+<Input {label} type="text" name="bind-value-input" bind:value />
 <div data-testid="bound-value">{value}</div>

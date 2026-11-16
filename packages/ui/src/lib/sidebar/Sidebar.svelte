@@ -148,7 +148,7 @@
 					<!-- usually contains a `<SidebarFooter>` -->
 					{@render footer?.()}
 				{:else}
-					<div class="flex h-full flex-col overflow-y-auto px-6 pt-6 text-color-text">
+					<div class="scroll-area flex h-full flex-col overflow-y-auto px-6 pt-6 text-color-text">
 						{#if header}
 							<div class="pb-4">
 								<!-- typically contains a `<SidebarHeader>` -->

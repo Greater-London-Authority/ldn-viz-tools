@@ -23,7 +23,7 @@
 			.join(' ');
 	};
 
-	const group = (data: any, [name, ...path]: string[]): any => {
+	const group = (data: Record<string, string | undefined>[], [name, ...path]: string[]): any => {
 		return d3
 			.groups(data, (d) => d[name])
 			.map(([value, rows]) =>

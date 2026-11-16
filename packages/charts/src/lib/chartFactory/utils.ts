@@ -24,7 +24,9 @@ export function getTooltip(
 	return [d.b, d.xd, y].join('\n');
 }
 
-// N.B. we need to define the format locale to ensure the currency formatter is set to use £ rather than $
+/**
+ * N.B. we need to define the format locale to ensure the currency formatter is set to use £ rather than $
+ */
 export const enGBLocale = formatLocale({
 	currency: ['£', ''],
 	thousands: ',',
