@@ -24,6 +24,12 @@
 			"dependsOn": ["transit", "@ldn-viz/config-vitest#build"],
 			"outputs": ["coverage.json"]
 		},
+		"test:unit": {
+			"dependsOn": ["transit", "@ldn-viz/config-vitest#build"]
+		},
+		"test:e2e": {
+			"dependsOn": ["transit", "@ldn-viz/config-vitest#build"]
+		},
 		"transit": {
 			"dependsOn": ["^transit"]
 		}
