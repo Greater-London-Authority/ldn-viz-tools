@@ -1,6 +1,6 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import ExportButtons from '../exportButtons/ExportButtons.svelte';
+	import DownloadButton from '../downloadButton/DownloadButton.svelte';
 	import Input from '../input/Input.svelte';
 	import Card from './Card.svelte';
 
@@ -100,7 +100,7 @@
 </Story>
 
 <Story
-	name="With Export Buttons"
+	name="With Download Button"
 	args={{
 		title: 'Card title',
 		subtitle: 'A supporting subtitle',
@@ -113,11 +113,7 @@
 			<Card {...args}>
 				{@render body()}
 				{#snippet actions()}
-					<ExportButtons
-						dataForDownload={[{ test: 'yes' }]}
-						dataDownload={true}
-						imageDownload={true}
-					/>
+					<DownloadButton data={[{ test: 'yes' }]} dataFormats={['JSON']} imageFormats={['PNG']} />
 				{/snippet}
 			</Card>
 		</div>

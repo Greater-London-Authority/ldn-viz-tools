@@ -51,7 +51,7 @@
 </script>
 
 <script lang="ts">
-	import LogoByCiu from '../../logos/LogoByCIU.svelte';
+	import LogoByCiu from '../logos/LogoByCIU.svelte';
 
 	let htmlNode: HTMLElement = $state() as HTMLElement;
 </script>
@@ -77,6 +77,12 @@
 <Story name="Compact">
 	{#snippet template(args)}
 		<DownloadButton {...args} {htmlNode} compact />
+	{/snippet}
+</Story>
+
+<Story name="Outline">
+	{#snippet template(args)}
+		<DownloadButton {...args} {htmlNode} outline />
 	{/snippet}
 </Story>
 

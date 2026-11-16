@@ -26,10 +26,13 @@
 		Button,
 		ChromeFooter,
 		ChromeHeader,
-		ExportButtons,
+		DownloadButton,
 		Modal,
 		classNames,
-		randomId
+		randomId,
+		resolveDownloadFormats,
+		type DataDownloadOption,
+		type ImageDownloadOption
 	} from '@ldn-viz/ui';
 	import type { Snippet } from 'svelte';
 
@@ -93,32 +96,28 @@
 		byline?: string;
 		note?: string;
 		/**
-		 * Data Download Button in the footer
+		 * The data formats offered by the download button in the footer.
 		 *
-		 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
-		 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'.
-		 * If set to `false`, then the button is hidden.
-		 *
+		 * Defaults to `true`, which offers 'CSV' and 'JSON'. An array of formats offers only those formats.
+		 * `false` offers no data formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		dataDownload?: true | false | ('CSV' | 'JSON')[];
+		dataDownload?: DataDownloadOption;
 		/**
 		 * The Data passed to the data Download Button(s) in the footer
 		 */
 		data?: { [key: string]: any }[] | undefined;
 		/**
-		 * Image Download Button in the footer
+		 * The image formats offered by the download button in the footer.
 		 *
-		 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
-		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'.
-		 * If set to `false`, then the button is hidden.
-		 *
+		 * Defaults to `['PNG']`. `true` offers 'PNG' and 'SVG'. An array of formats offers only those formats.
+		 * `false` offers no image formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		imageDownload?: true | false | ('PNG' | 'SVG')[];
+		imageDownload?: ImageDownloadOption;
 		/**
-		 * How the download controls in the footer are shown: one icon-only button (`compact`), one button
-		 * with a text label (`standard`), or a data button and an image button (`separate`).
+		 * How the download button in the footer is shown: a text button with the text "Download"
+		 * (`standard`), an icon-only button (`compact`), or an outline button with the text "Download" (`outline`).
 		 */
-		exportButtonsVariant?: 'standard' | 'compact' | 'separate';
+		downloadButtonVariant?: 'standard' | 'compact' | 'outline';
 		filename?: string;
 		/**
 		 * Tailwind class to set table area height
@@ -156,7 +155,7 @@
 		dataDownload = true,
 		data = undefined,
 		imageDownload = ['PNG'],
-		exportButtonsVariant = 'standard',
+		downloadButtonVariant = 'standard',
 		filename = '',
 		tableHeight = 'h-auto',
 		overrideClass = '',
@@ -178,6 +177,15 @@
 
 	// For save as image
 	let tableToCapture: HTMLDivElement | undefined = $state();
+
+	let downloads = $derived(
+		resolveDownloadFormats({
+			dataDownload,
+			imageDownload,
+			hasData: !!data,
+			hasImage: !!tableToCapture
+		})
+	);
 </script>
 
 {@render numRowsControlSlot?.()}
@@ -225,14 +233,14 @@
 
 	{@render paginationControls?.()}
 
-	{#if source || byline || note || hasDescription || dataDownload || imageDownload}
+	{#if source || byline || note || hasDescription || downloads.hasDownload}
 		<div class="mt-2">
 			<ChromeFooter
 				{source}
 				{byline}
 				{note}
 				footnoteExtra={hasDescription ? descriptionTrigger : undefined}
-				actions={exportBtns}
+				actions={downloads.hasDownload ? downloadBtn : undefined}
 			/>
 		</div>
 	{/if}
@@ -270,18 +278,17 @@
 	</Modal>
 {/snippet}
 
-{#snippet exportBtns()}
-	{#if tableToCapture}
-		<ExportButtons
-			elementToCapture={tableToCapture}
-			{columnMapping}
-			dataForDownload={data}
-			{dataDownload}
-			{imageDownload}
-			{filename}
-			variant={exportButtonsVariant}
-		/>
-	{/if}
+{#snippet downloadBtn()}
+	<DownloadButton
+		htmlNode={tableToCapture}
+		{filename}
+		{data}
+		dataFormats={downloads.dataFormats}
+		imageFormats={downloads.imageFormats}
+		{columnMapping}
+		compact={downloadButtonVariant === 'compact'}
+		outline={downloadButtonVariant === 'outline'}
+	/>
 {/snippet}
 
 <style lang="postcss">

@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { ColorLegend, NonIdealState, theme } from '@ldn-viz/ui';
+	import {
+		ColorLegend,
+		NonIdealState,
+		theme,
+		type DataDownloadOption,
+		type ImageDownloadOption
+	} from '@ldn-viz/ui';
 	import { scaleThreshold } from 'd3-scale';
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
 	import ObservablePlot from '../observablePlot/ObservablePlot.svelte';
@@ -59,30 +65,26 @@
 		controls?: Snippet;
 
 		/**
-		 * Data Download Button in the footer
+		 * The data formats offered by the download button in the footer.
 		 *
-		 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
-		 * Set to false to hide completely.
-		 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
-		 *
+		 * Defaults to `true`, which offers 'CSV' and 'JSON'. An array of formats offers only those formats.
+		 * `false` offers no data formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		dataDownload?: true | false | ('CSV' | 'JSON')[];
+		dataDownload?: DataDownloadOption;
 
 		/**
-		 * Image Download Button in the footer
+		 * The image formats offered by the download button in the footer.
 		 *
-		 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
-		 * Set to false to hide completely.
-		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
-		 *
+		 * Defaults to `true`, which offers 'PNG' and 'SVG'. An array of formats offers only those formats.
+		 * `false` offers no image formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		imageDownload?: true | false | ('PNG' | 'SVG')[];
+		imageDownload?: ImageDownloadOption;
 
 		/**
-		 * How the download controls in the footer are shown: one icon-only button (`compact`), one button
-		 * with a text label (`standard`), or a data button and an image button (`separate`).
+		 * How the download button in the footer is shown: a text button with the text "Download"
+		 * (`standard`), an icon-only button (`compact`), or an outline button with the text "Download" (`outline`).
 		 */
-		exportButtonsVariant?: 'standard' | 'compact' | 'separate';
+		downloadButtonVariant?: 'standard' | 'compact' | 'outline';
 	};
 
 	let {
@@ -98,7 +100,7 @@
 		controls,
 		dataDownload,
 		imageDownload,
-		exportButtonsVariant
+		downloadButtonVariant
 	}: ChartProps = $props();
 
 	const sortByField = (data: ChartDataRow[], fieldName: string) => {
@@ -189,7 +191,7 @@
 			{byline}
 			{dataDownload}
 			{imageDownload}
-			{exportButtonsVariant}
+			{downloadButtonVariant}
 			{note}
 			id={dataset}
 			{columnMapping}
@@ -207,7 +209,7 @@
 		{byline}
 		{dataDownload}
 		{imageDownload}
-		{exportButtonsVariant}
+		{downloadButtonVariant}
 		{note}
 		id={dataset}
 		{columnMapping}

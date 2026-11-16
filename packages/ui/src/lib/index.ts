@@ -25,10 +25,20 @@ export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';
 export { default as ColorLegendOrdinalChips } from './colorLegends/ColorLegendOrdinalChips.svelte';
 export { default as ColorLegendOrdinalHorizontalAlt } from './colorLegends/ColorLegendOrdinalHorizontalAlt.svelte';
 export { default as CopyButton } from './copyButton/CopyButton.svelte';
-export { downloadCSV, downloadJSON } from './downloadButtons/dataDownloadButton/utils';
-export { default as DownloadButton } from './downloadButtons/downloadButton/DownloadButton.svelte';
-export { default as ExportButtons } from './exportButtons/ExportButtons.svelte';
-export { downloadImage } from './downloadButtons/imageDownloadButton/utils';
+export { default as DownloadButton } from './downloadButton/DownloadButton.svelte';
+export { downloadCSV, downloadJSON } from './downloadButton/utils/dataDownloadUtils';
+export { downloadImage } from './downloadButton/utils/imageDownloadUtils';
+export {
+	allDataFormats,
+	allImageFormats,
+	resolveDownloadFormats
+} from './downloadButton/utils/resolveDownloadFormats';
+export type {
+	DataDownloadOption,
+	DataFormat,
+	ImageDownloadOption,
+	ImageFormat
+} from './downloadButton/utils/resolveDownloadFormats';
 export { default as Flag } from './flag/Flag.svelte';
 export { default as Footer } from './footer/Footer.svelte';
 export { default as Geocoder } from './geolocation/Geocoder.svelte';
@@ -108,17 +118,3 @@ export { prefersDarkMode, prefersReducedMotion } from './userPreference/userPref
 export { classNames } from './utils/classNames.js';
 export { randomId } from './utils/randomId.js';
 export { default as Well } from './well/Well.svelte';
-
-// Re-exported as constants so that editors show the deprecation, which a JSDoc tag on `export { default as … }` does not.
-import DataDownloadButtonComponent from './downloadButtons/dataDownloadButton/DataDownloadButton.svelte';
-import ImageDownloadButtonComponent from './downloadButtons/imageDownloadButton/ImageDownloadButton.svelte';
-
-/** @deprecated Use `DownloadButton` instead. To be removed from the exports in the next major version. */
-export const DataDownloadButton = DataDownloadButtonComponent;
-/** @deprecated Use `DownloadButton` instead. To be removed from the exports in the next major version. */
-export type DataDownloadButton = ReturnType<typeof DataDownloadButtonComponent>;
-
-/** @deprecated Use `DownloadButton` instead. To be removed from the exports in the next major version. */
-export const ImageDownloadButton = ImageDownloadButtonComponent;
-/** @deprecated Use `DownloadButton` instead. To be removed from the exports in the next major version. */
-export type ImageDownloadButton = ReturnType<typeof ImageDownloadButtonComponent>;

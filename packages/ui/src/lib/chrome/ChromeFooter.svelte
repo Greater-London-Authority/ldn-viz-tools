@@ -1,10 +1,11 @@
 <script lang="ts">
 	/**
-	 * `ChromeFooter` — renders the footer row at the bototm of a `Card`, `ChartContainer` and
-	 * `TableContainer` (the byline / source / note, and download buttons).
+	 * `ChromeFooter` — renders the footer row at the bottom of a `Card`, `ChartContainer` and
+	 * `TableContainer` (the byline / source / note, and the download button).
 	 *
 	 * The optional `footnoteExtra` snippet (e.g. a "View description" trigger) renders on the left;
-	 * an optional `actions` snippet (e.g. alternative export buttons) renders on the right.
+	 * an optional `actions` snippet (e.g. a `DownloadButton`) renders on the right. The footer is
+	 * left out when there are no footnotes and no `actions`, so pass `actions` only when it has content.
 	 *
 	 * @component
 	 */

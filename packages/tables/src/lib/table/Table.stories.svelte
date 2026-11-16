@@ -315,7 +315,7 @@
 
 <Story name="No Export buttons">
 	{#snippet template()}
-		<Table {data} {tableSpec} dataDownload={false} imageDownload={false} />
+		<Table {data} {tableSpec} />
 	{/snippet}
 </Story>
 
@@ -457,6 +457,6 @@
 <!-- Restrict data downloads to CSV only, and hide the image download button entirely -->
 <Story name="Restricted download formats">
 	{#snippet template()}
-		<Table {data} {tableSpec} dataDownload={['CSV']} imageDownload={false} />
+		<Table {data} {tableSpec} dataDownload={['CSV']} />
 	{/snippet}
 </Story>

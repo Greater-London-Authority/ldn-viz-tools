@@ -13,7 +13,7 @@ describe('ChartContainer', () => {
 
 		const captureElement = container.querySelector('#captureElement');
 		expect(captureElement).toBeTruthy();
-		expect(captureElement.textContent).toContain('Test Chart');
+		expect(captureElement!.textContent).toContain('Test Chart');
 	});
 
 	it('should render subtitle when provided', async () => {
@@ -23,7 +23,7 @@ describe('ChartContainer', () => {
 
 		const captureElement = container.querySelector('#captureElement');
 		expect(captureElement).toBeTruthy();
-		expect(captureElement.textContent).toContain('Subtitle');
+		expect(captureElement!.textContent).toContain('Subtitle');
 	});
 
 	it('should render source when provided', async () => {
@@ -32,7 +32,7 @@ describe('ChartContainer', () => {
 		});
 		const captureElement = container.querySelector('#captureElement');
 		expect(captureElement).toBeTruthy();
-		expect(captureElement.textContent).toContain('Some data source');
+		expect(captureElement!.textContent).toContain('Some data source');
 	});
 
 	it('should render byline when provided', async () => {
@@ -42,51 +42,58 @@ describe('ChartContainer', () => {
 
 		const captureElement = container.querySelector('#captureElement');
 		expect(captureElement).toBeTruthy();
-		expect(captureElement.textContent).toContain('A byline');
+		expect(captureElement!.textContent).toContain('A byline');
 	});
 
-	it('should set alt-test', async () => {
+	it('should set alt-text', async () => {
 		const { container } = render(ChartContainer, {
 			props: { alt: 'Alt-text for the chart....' }
 		});
 
 		const altElement = container.querySelector('.sr-only');
 		expect(altElement).toBeTruthy();
-		expect(altElement.textContent).toContain('Alt-text for the chart....');
+		expect(altElement!.textContent).toContain('Alt-text for the chart....');
 	});
 
-	it('should show export buttons when showExport is true', async () => {
-		const { container } = render(ChartContainer, {
-			props: { imageDownload: true }
-		});
+	it('should show the download button by default', async () => {
+		const { container } = render(ChartContainer, { props: {} });
 
 		const captureElement = container.querySelector('#captureElement');
 		expect(captureElement).toBeTruthy();
-		expect(
-			Array.from(captureElement.querySelectorAll('button')).some(
-				(b) => b.textContent?.trim() === 'Download'
+		await expect
+			.poll(() =>
+				Array.from(captureElement!.querySelectorAll('button')).some(
+					(b) => b.textContent?.trim() === 'Download'
+				)
 			)
-		).toBe(true);
+			.toBe(true);
 	});
 
-	it('should show separate data and image buttons when exportButtonsVariant is separate', async () => {
+	it('should show the download button when imageDownload lists a format', async () => {
 		const { container } = render(ChartContainer, {
-			props: { imageDownload: true, exportButtonsVariant: 'separate' }
+			props: { imageDownload: ['PNG'] }
 		});
 
 		const captureElement = container.querySelector('#captureElement');
-		expect(captureElement?.textContent).toContain('Download as');
+		expect(captureElement).toBeTruthy();
+		await expect
+			.poll(() =>
+				Array.from(captureElement!.querySelectorAll('button')).some(
+					(b) => b.textContent?.trim() === 'Download'
+				)
+			)
+			.toBe(true);
 	});
 
-	it('should hide export buttons when showExport is false', async () => {
+	it('should hide the download button when dataDownload and imageDownload are false', async () => {
 		const { container } = render(ChartContainer, {
-			props: { imageDownload: false }
+			props: { data: [{ a: 1 }], dataDownload: false, imageDownload: false }
 		});
 
 		const captureElement = container.querySelector('#captureElement');
 		expect(captureElement).toBeTruthy();
 		expect(
-			Array.from(captureElement.querySelectorAll('button')).some(
+			Array.from(captureElement!.querySelectorAll('button')).some(
 				(b) => b.textContent?.trim() === 'Download'
 			)
 		).toBe(false);
@@ -99,7 +106,7 @@ describe('ChartContainer', () => {
 
 		const captureElement = container.querySelector('#captureElement') as HTMLElement;
 		expect(captureElement).toBeTruthy();
-		expect(captureElement.textContent).toContain('A footnote');
+		expect(captureElement!.textContent).toContain('A footnote');
 	});
 
 	it('should render the "View description" trigger and show description inside the Modal when opened', async () => {
@@ -137,8 +144,8 @@ describe('ChartContainer', () => {
 		const captureElement = container.querySelector('#captureElement') as HTMLElement;
 		expect(captureElement).toBeTruthy();
 		expect(captureElement.querySelector('ul')).toBeNull();
-		expect(captureElement.textContent).not.toContain('Download as');
-		expect(captureElement.textContent).not.toContain('View description');
+		expect(captureElement!.textContent).not.toContain('Download as');
+		expect(captureElement!.textContent).not.toContain('View description');
 	});
 
 	it('should use "contents"/no "min-w-0" classes when alignMultiple is false, and toggle them when true', async () => {

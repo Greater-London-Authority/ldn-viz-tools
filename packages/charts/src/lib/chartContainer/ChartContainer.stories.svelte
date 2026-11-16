@@ -140,7 +140,7 @@
 			note="Be aware that you can provide a note if required"
 			dataDownload={['JSON', 'CSV']}
 			data={[]}
-			imageDownload
+			imageDownload={['PNG']}
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -159,7 +159,7 @@
 			byline="A byline for the chart"
 			dataDownload={['JSON', 'CSV']}
 			data={[]}
-			imageDownload
+			imageDownload={['PNG']}
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -281,7 +281,7 @@ It can also be used to add liks.
 			note="Be aware that you can provide a <i>note</i> if required"
 			dataDownload={['JSON', 'CSV']}
 			data={[]}
-			imageDownload
+			imageDownload={['PNG']}
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -301,7 +301,7 @@ It can also be used to add liks.
 			note="Be aware that you can provide a <i>note</i> if required"
 			dataDownload={['JSON', 'CSV']}
 			data={[]}
-			imageDownload
+			imageDownload={['PNG']}
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 			id="MyCustomChart"
@@ -356,8 +356,8 @@ It can also be used to add liks.
 	{#snippet template(args)}
 		<ChartContainer
 			{...args}
-			dataDownload={false}
-			imageDownload={false}
+			dataDownload={['CSV']}
+			imageDownload={['PNG']}
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -367,7 +367,7 @@ It can also be used to add liks.
 </Story>
 
 <!--
-	The download button can be hidden by setting `dataDownload={false}` and `imageDownload={false}`.
+	The download button can be hidden by setting `` and ``.
 -->
 <Story name="No download buttons">
 	{#snippet template(args)}
@@ -378,8 +378,6 @@ It can also be used to add liks.
 			source="GLA city intelligence"
 			byline="A byline for the chart"
 			note="Be aware that you can provide a note if required"
-			dataDownload={false}
-			imageDownload={false}
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -406,7 +404,7 @@ It can also be used to add liks.
 			columnMapping={{ Month: 'Date', Value: 'Amount (GBP)' }}
 			filename="my-custom-chart-data"
 			dataDownload={['CSV', 'JSON']}
-			imageDownload
+			imageDownload={['PNG']}
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -416,23 +414,23 @@ It can also be used to add liks.
 </Story>
 
 <!--
-	`exportButtonsVariant` sets how the download controls are shown: a button with the text "Download" (`standard`, the default),
+	`downloadButtonVariant` sets how the download controls are shown: a button with the text "Download" (`standard`, the default),
 	an icon (`compact`), or separate data and image buttons (`separate`).
 -->
 <Story name="Download button variants">
 	{#snippet template(args)}
 		<div class="flex flex-col gap-8">
-			{#each ['compact', 'standard', 'outline', 'separate'] as const as variant (variant)}
+			{#each ['compact', 'standard', 'outline'] as const as variant (variant)}
 				<ChartContainer
 					{...args}
 					id={`variant-${variant}`}
-					title={`exportButtonsVariant="${variant}"`}
+					title={`downloadButtonVariant="${variant}"`}
 					source="GLA city intelligence"
 					data={[
 						{ Month: '2015-01-01', Value: 53623.9 },
 						{ Month: '2015-02-01', Value: 61816.0 }
 					]}
-					exportButtonsVariant={variant}
+					downloadButtonVariant={variant}
 					description="A description of the chart."
 				>
 					{@render placeholderChart()}

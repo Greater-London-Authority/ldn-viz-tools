@@ -11,17 +11,20 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { DropdownMenu } from 'bits-ui';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
-	import Button from '../../button/Button.svelte';
-	import { classNames } from '../../utils/classNames';
-	import { downloadCSV, downloadJSON } from '../dataDownloadButton/utils';
-	import { downloadImage } from '../imageDownloadButton/utils';
-
-	type DataFormat = 'CSV' | 'JSON';
-	type ImageFormat = 'PNG' | 'SVG';
+	import Button from '../button/Button.svelte';
+	import { classNames } from '../utils/classNames';
+	import { downloadCSV, downloadJSON } from './utils/dataDownloadUtils';
+	import { downloadImage } from './utils/imageDownloadUtils';
+	import {
+		allDataFormats,
+		allImageFormats,
+		type DataFormat,
+		type ImageFormat
+	} from './utils/resolveDownloadFormats';
 
 	type DownloadButtonProps = Omit<HTMLButtonAttributes, 'children' | 'class' | 'disabled'> & {
 		/**
-		 * The available data formats for the downloaded file.
+		 * The available data formats for the downloaded file. Defaults to every format.
 		 */
 		dataFormats?: DataFormat[];
 
@@ -42,7 +45,7 @@
 		columnMapping?: undefined | { [oldName: string]: string };
 
 		/**
-		 * The available file formats for the downloaded image.
+		 * The available file formats for the downloaded image. Defaults to every format.
 		 */
 		imageFormats?: ImageFormat[];
 
@@ -98,11 +101,11 @@
 	};
 
 	let {
-		dataFormats = ['CSV', 'JSON'],
+		dataFormats = allDataFormats,
 		data,
 		dataFn = undefined,
 		columnMapping = undefined,
-		imageFormats = ['PNG', 'SVG'],
+		imageFormats = allImageFormats,
 		htmlNode,
 		padding = 30,
 		scaleFactor = 2,

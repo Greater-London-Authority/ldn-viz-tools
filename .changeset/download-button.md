@@ -1,9 +1,8 @@
 ---
-'@ldn-viz/ui': minor
+'@ldn-viz/ui': major
 ---
 
-ADDED: `DownloadButton`, one button that opens a menu of data formats (CSV, JSON) and image formats (PNG, SVG). Set `compact` for an icon-only button.
+ADDED: `DownloadButton`, one button that opens a menu of data formats (CSV, JSON) and image formats (PNG, SVG). Set `compact` for an icon-only button, or `outline` for an outline button.
 ADDED: `downloadCSV`, `downloadJSON` and `downloadImage` are exported, for building a custom download control.
-CHANGED: `ExportButtons` has a `variant` prop. `standard` (the default) shows a `DownloadButton` with the text "Download", `compact` shows an icon-only `DownloadButton`, and `separate` shows the previous data and image buttons.
-DEPRECATED: `DataDownloadButton` and `ImageDownloadButton`. Use `DownloadButton` instead. They will be removed from the package exports in the next major version.
-FIXED: `ExportButtons` is exported from the package again.
+ADDED: `resolveDownloadFormats` converts `dataDownload` and `imageDownload` values (`true`, `false` or an array of formats) into the format lists that `DownloadButton` takes. The types `DataFormat`, `ImageFormat`, `DataDownloadOption` and `ImageDownloadOption` are exported with it.
+REMOVED: `ExportButtons`, `DataDownloadButton` and `ImageDownloadButton`. Use `DownloadButton` instead.

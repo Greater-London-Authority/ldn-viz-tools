@@ -168,7 +168,7 @@ A card with only text has no other title group, so its group can have an eyebrow
 	</Card>
 </div>
 
-`ChartContainer` adds the download button and the description button. Its `exportButtonsVariant` prop sets the download button to a button with the text "Download" (`standard`, the default), an icon (`compact`), or separate data and image buttons (`separate`). The middle of a chart container has separate slots for the controls, the legend and the plot, so that plots side by side stay aligned when their legends wrap to different heights. The [Data visualisation](/design-system/data-visualisation) pages describe the plot.
+`ChartContainer` adds the download button and the description button. Its `downloadButtonVariant` prop sets the download button to a button with the text "Download" (`standard`, the default), an icon (`compact`), or an outline button with the text "Download" (`outline`). The middle of a chart container has separate slots for the controls, the legend and the plot, so that plots side by side stay aligned when their legends wrap to different heights. The [Data visualisation](/design-system/data-visualisation) pages describe the plot.
 
 <div class="my-4 border border-dashed border-color-border p-4 body-sm text-color-text-muted">Placeholder: a TableContainer example, once TableContainer is exported from @ldn-viz/tables.</div>
 
