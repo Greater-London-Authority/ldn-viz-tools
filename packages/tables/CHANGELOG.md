@@ -1,5 +1,30 @@
 # @ldn-viz/tables
 
+## 9.0.0
+
+### Major Changes
+
+- 64f5ed0: CHANGED: the footer of `ChartContainer` and `TableContainer` shows one `DownloadButton` that opens a menu of every format, instead of separate data and image buttons.
+  CHANGED: `exportButtonsVariant` is renamed `downloadButtonVariant`. Its values are `standard` (the default), `compact` and `outline`. The `separate` value is removed. `ObservablePlot` and `Chart` pass `downloadButtonVariant` to `ChartContainer`.
+
+### Patch Changes
+
+- fda1ca6: FIXED: the `ColSpec.href` type is a function that takes the row and returns a string, which is how `DataCell` calls it
+- fda1ca6: FIXED: range filters in `FilterMenu` filter the data
+  FIXED: changing grouping, group sorting or column visibility from the table menus no longer throws
+  FIXED: `GroupSizeBar` no longer throws when a row has no group
+- Updated dependencies [64f5ed0]
+- Updated dependencies [949e833]
+- Updated dependencies [b45566d]
+- Updated dependencies [fda1ca6]
+- Updated dependencies [fda1ca6]
+- Updated dependencies [fda1ca6]
+- Updated dependencies [fda1ca6]
+- Updated dependencies [949e833]
+  - @ldn-viz/ui@26.0.0
+  - @ldn-viz/themes@10.1.0
+  - @ldn-viz/utils@4.1.0
+
 ## 8.0.0
 
 ### Major Changes

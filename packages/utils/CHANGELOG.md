@@ -1,5 +1,16 @@
 # @ldn-viz/utils
 
+## 4.1.0
+
+### Minor Changes
+
+- fda1ca6: ADDED: the build generates TypeScript declarations in `dist/types`, and `package.json` points `types` at them
+
+### Patch Changes
+
+- Updated dependencies [949e833]
+  - @ldn-viz/themes@10.1.0
+
 ## 4.0.0
 
 ### Major Changes
