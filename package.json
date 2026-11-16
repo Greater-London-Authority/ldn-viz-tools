@@ -18,6 +18,7 @@
 		"sync-docstrings": "turbo run sync-docstrings",
 		"test": "turbo run test",
 		"test:coverage": "turbo run test:coverage",
+		"test:e2e": "turbo run test:e2e",
 		"test:unit": "turbo run test:unit",
 		"test-storybook": "npm run test-storybook -w apps/storybook",
 		"view-report": "turbo run view-report",

@@ -63,7 +63,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        check: [lint, docstrings, tests]
+        check: [lint, docstrings, unit-tests, e2e-tests, storybook-tests]
     name: ${{ matrix.check }}
     steps:
       - name: Checkout
@@ -108,14 +108,24 @@ jobs:
           fi
 
       - name: Cache Playwright browsers
-        if: matrix.check == 'tests'
+        if: endsWith(matrix.check, '-tests')
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
-      - name: Run tests
-        if: matrix.check == 'tests'
-        run: |
-          PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright install
-          npm run test
+      - name: Install Playwright browsers
+        if: endsWith(matrix.check, '-tests')
+        run: PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright install
+
+      - name: Run unit tests
+        if: matrix.check == 'unit-tests'
+        run: npm run test:unit -- --filter='./packages/*'
+
+      - name: Run Playwright tests
+        if: matrix.check == 'e2e-tests'
+        run: npm run test:e2e -- --filter='./packages/*'
+
+      - name: Run Storybook tests
+        if: matrix.check == 'storybook-tests'
+        run: npm run test -- --filter='./apps/storybook'
