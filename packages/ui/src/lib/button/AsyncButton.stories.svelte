@@ -29,7 +29,7 @@
 				}
 			},
 			emphasis: {
-				options: ['primary', 'muted', 'positive', 'negative', 'caution'],
+				options: ['primary', 'secondary', 'positive', 'negative', 'caution'],
 				control: { type: 'radio' }
 			},
 			working: {
@@ -68,7 +68,7 @@
 	const variants: AsyncButtonProps['variant'][] = ['solid', 'brand', 'outline', 'text', 'square'];
 	const emphasis: AsyncButtonProps['emphasis'][] = [
 		'primary',
-		'muted',
+		'secondary',
 		'positive',
 		'caution',
 		'negative'

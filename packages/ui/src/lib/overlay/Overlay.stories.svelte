@@ -24,7 +24,7 @@
 	});
 
 	let open = $state(false);
-	let type = $state('modal');
+	let type: 'modal' | 'tooltip' | 'popover' = $state('modal');
 </script>
 
 <Story name="Default">

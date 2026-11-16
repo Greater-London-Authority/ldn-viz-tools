@@ -4,7 +4,7 @@ export const ToastType = {
 	Success: 'Success',
 	Warning: 'Warning',
 	Error: 'Error'
-};
+} as const;
 
 // ToasterPosition is an enumeration of valid positions that can be passed to
 // the Toaster component via the 'position' property.

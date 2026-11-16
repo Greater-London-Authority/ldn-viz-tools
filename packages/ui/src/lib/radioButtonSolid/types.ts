@@ -8,6 +8,13 @@ export interface RadioButtonSolidProps {
 	name?: string;
 	disabled?: boolean;
 	icon?: IconSource;
-	rawIcon?: Component;
+	RawIcon?: Component;
 	iconPlacement?: 'above' | 'below';
+}
+
+/**
+ * An entry in the `options` array of `RadioButtonGroupSolid`. The group passes `rawIcon` to the `RawIcon` prop of each button.
+ */
+export interface RadioButtonSolidOption extends Omit<RadioButtonSolidProps, 'RawIcon'> {
+	rawIcon?: Component;
 }

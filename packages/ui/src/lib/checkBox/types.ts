@@ -1,4 +1,4 @@
-import type { InputProps } from '$lib/input/types';
+import type { InputProps } from '../input/types';
 import type { ChangeEventHandler } from 'svelte/elements';
 
 export interface CheckboxProps extends InputProps {

@@ -201,8 +201,8 @@
 					<div class="flex">
 						<input
 							onchange={(ev) => {
-								if (ev.target && !renameGroup(groupName, ev.target.value)) {
-									ev.target.value = groupName;
+								if (!renameGroup(groupName, ev.currentTarget.value)) {
+									ev.currentTarget.value = groupName;
 								}
 							}}
 							value={groupName}

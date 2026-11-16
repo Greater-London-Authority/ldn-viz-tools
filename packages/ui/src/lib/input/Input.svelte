@@ -1,5 +1,5 @@
 <script lang="ts" module>
-	import type { FormatFunction } from '$lib/input/types';
+	import type { FormatFunction } from './types';
 
 	export const trimInput: FormatFunction = (value) => value.trim();
 </script>

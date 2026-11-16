@@ -18,4 +18,4 @@
 </script>
 
 <!-- This story is empty, as we don't actually want to redirect from Storybook. -->
-<Story name="Default" source />
+<Story name="Default" />
