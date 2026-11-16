@@ -1,5 +1,11 @@
 # @ldn-viz/themes
 
+## 10.1.0
+
+### Minor Changes
+
+- 949e833: ADD: style for scrolling area
+
 ## 10.0.2
 
 ### Patch Changes
