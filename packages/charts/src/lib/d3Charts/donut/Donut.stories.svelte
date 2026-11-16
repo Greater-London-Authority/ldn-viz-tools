@@ -14,8 +14,6 @@
 		md: { diameter: 160, minWidth: 200 },
 		lg: { diameter: 300, minWidth: 320 }
 	};
-
-	const sizeOrder: DonutSize[] = ['sm', 'md', 'lg'];
 </script>
 
 <script lang="ts" generics="T extends Record<string, any>">
