@@ -1,5 +1,31 @@
 # ldn-viz-tools-charts
 
+## 11.0.0
+
+### Major Changes
+
+- 64f5ed0: CHANGED: the footer of `ChartContainer` and `TableContainer` shows one `DownloadButton` that opens a menu of every format, instead of separate data and image buttons.
+  CHANGED: `exportButtonsVariant` is renamed `downloadButtonVariant`. Its values are `standard` (the default), `compact` and `outline`. The `separate` value is removed. `ObservablePlot` and `Chart` pass `downloadButtonVariant` to `ChartContainer`.
+
+### Minor Changes
+
+- 77bde86: CHANGED: remove `py-8` class from `Chart` component
+- d07aef9: ADDED: `Donut` commponent
+
+### Patch Changes
+
+- Updated dependencies [64f5ed0]
+- Updated dependencies [949e833]
+- Updated dependencies [b45566d]
+- Updated dependencies [fda1ca6]
+- Updated dependencies [fda1ca6]
+- Updated dependencies [fda1ca6]
+- Updated dependencies [fda1ca6]
+- Updated dependencies [949e833]
+  - @ldn-viz/ui@26.0.0
+  - @ldn-viz/themes@10.1.0
+  - @ldn-viz/utils@4.1.0
+
 ## 10.0.1
 
 ### Patch Changes

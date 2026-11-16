@@ -1,5 +1,29 @@
 # ldn-viz-tools-maps
 
+## 24.0.0
+
+### Minor Changes
+
+- fda1ca6: CHANGED: `MapDraw.clickMode()` takes the draw mode to select and passes it to `MapDrawControls`
+  CHANGED: `MapCursor` feature handlers receive Maplibre's `MapGeoJSONFeature`
+  ADDED: the `MapCursor` types, including `MapCursorFeatureHandler`, are exported from the package
+
+### Patch Changes
+
+- fda1ca6: FIXED: `MapControlGeolocator` places the location feature at the user's position
+  FIXED: `MapDeckPopovers` checks whether a deck.gl layer is visible before showing its popover
+- Updated dependencies [64f5ed0]
+- Updated dependencies [949e833]
+- Updated dependencies [b45566d]
+- Updated dependencies [fda1ca6]
+- Updated dependencies [fda1ca6]
+- Updated dependencies [fda1ca6]
+- Updated dependencies [fda1ca6]
+- Updated dependencies [949e833]
+  - @ldn-viz/ui@26.0.0
+  - @ldn-viz/themes@10.1.0
+  - @ldn-viz/utils@4.1.0
+
 ## 23.0.0
 
 ### Patch Changes

@@ -1,5 +1,27 @@
 # ldn-viz-tools-ui
 
+## 26.0.0
+
+### Major Changes
+
+- 64f5ed0: ADDED: `DownloadButton`, one button that opens a menu of data formats (CSV, JSON) and image formats (PNG, SVG). Set `compact` for an icon-only button, or `outline` for an outline button.
+  ADDED: `downloadCSV`, `downloadJSON` and `downloadImage` are exported, for building a custom download control.
+  ADDED: `resolveDownloadFormats` converts `dataDownload` and `imageDownload` values (`true`, `false` or an array of formats) into the format lists that `DownloadButton` takes. The types `DataFormat`, `ImageFormat`, `DataDownloadOption` and `ImageDownloadOption` are exported with it.
+  REMOVED: `ExportButtons`, `DataDownloadButton` and `ImageDownloadButton`. Use `DownloadButton` instead.
+
+### Minor Changes
+
+- 949e833: ADD: component to handle scrollable areas based on bits-ui scrollable area
+
+### Patch Changes
+
+- b45566d: CHANGED: Adjust positioning of hint in chrome header
+- fda1ca6: FIXED: the `AsyncButton` spinner has a stroke colour when `emphasis="secondary"`
+- fda1ca6: FIXED: `AnalyticsAndCookieConsent` applies its cookie banner style overrides. The compiler had removed them because `<style global>` isn't supported.
+- fda1ca6: FIXED: `RadioButtonSolidProps` names the icon prop `RawIcon`, which is the prop `RadioButtonSolid` reads. Options passed to `RadioButtonGroupSolid` and `CheckboxGroupSolid` still use `rawIcon`.
+- Updated dependencies [949e833]
+  - @ldn-viz/themes@10.1.0
+
 ## 25.3.0
 
 ### Minor Changes
