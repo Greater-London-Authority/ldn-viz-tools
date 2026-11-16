@@ -19,7 +19,7 @@
 		[key: string]: any;
 	}
 
-	let { noTip = false, noPad = false, children, ...rest }: Props = $props();
+	let { noTip = false, noPad = false, children, class: className = '', ...rest }: Props = $props();
 
 	let container: HTMLDivElement | undefined = $state();
 
@@ -30,11 +30,9 @@
 		}
 	};
 
-	let classes = $state(
-		`elevation-4 border border-color-border-wash absolute w-max bottom-[calc(1rem-1px)] left-1/2 transform -translate-x-1/2 bg-color-surface overflow-y-auto`
+	const classes = $derived(
+		`elevation-4 border border-color-border-wash absolute w-max bottom-[calc(1rem-1px)] left-1/2 transform -translate-x-1/2 bg-color-surface overflow-y-auto ${className}`
 	);
-	classes += ' ' + (rest.class || '');
-	delete rest.class;
 </script>
 
 <!--

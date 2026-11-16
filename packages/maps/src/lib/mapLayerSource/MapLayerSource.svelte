@@ -13,7 +13,7 @@
 	 * @component
 	 */
 
-	import { onDestroy, getContext, setContext } from 'svelte';
+	import { onDestroy, getContext, setContext, untrack } from 'svelte';
 	import { writable } from 'svelte/store';
 	import type { MapLibreStore } from '../map/types';
 
@@ -54,7 +54,11 @@
 	spec.generateId = true;
 	Object.freeze(safeSpec);
 
-	setContext('mapLayerSourceId', id);
+	// The source is added once, so context holds the initial id.
+	setContext(
+		'mapLayerSourceId',
+		untrack(() => id)
+	);
 	setContext('mapLayerSourceSpec', safeSpec);
 	setContext('mapLayerSourceLoaded', loaded);
 

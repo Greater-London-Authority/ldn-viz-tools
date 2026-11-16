@@ -82,8 +82,12 @@
 
 	let showOptions = $state(true);
 
-	terraDraw.on('change', () => {
-		showOptions = false;
+	$effect(() => {
+		const hideOptions = () => {
+			showOptions = false;
+		};
+		terraDraw.on('change', hideOptions);
+		return () => terraDraw.off('change', hideOptions);
 	});
 
 	const toggleOptions = () => {

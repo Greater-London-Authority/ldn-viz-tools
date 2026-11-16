@@ -54,7 +54,7 @@
 		children
 	}: Props = $props();
 
-	const positionClass = positionClasses[position];
+	const positionClass = $derived(positionClasses[position]);
 </script>
 
 <div class="absolute {positionClass} pointer-events-none z-10 flex flex-col space-y-2 {classes} ">

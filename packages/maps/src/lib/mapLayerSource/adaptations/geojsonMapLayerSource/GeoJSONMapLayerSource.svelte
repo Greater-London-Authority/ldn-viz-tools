@@ -8,7 +8,7 @@
 	 * @component
 	 */
 
-	import { getContext } from 'svelte';
+	import { getContext, untrack } from 'svelte';
 	import { writable } from 'svelte/store';
 	import type { FeatureCollection, GeoJSON } from 'geojson';
 	import type { GeoJSONSource, GeoJSONSourceSpecification } from 'maplibre-gl';
@@ -80,7 +80,8 @@
 		children
 	}: Props = $props();
 
-	const dataStore = writable(initialData);
+	// The effect below keeps the store in sync with later initialData changes.
+	const dataStore = writable(untrack(() => initialData));
 	let loaded = false;
 
 	/*
