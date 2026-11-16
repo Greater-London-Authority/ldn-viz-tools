@@ -21,8 +21,19 @@ jobs:
           node-version: '24.0.2'
           cache: npm
 
+      - name: Cache node_modules
+        id: node-modules-cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node24.0.2-${{ hashFiles('package-lock.json') }}
+
       - name: Install dependencies
-        run: npm install
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: npm ci
 
       - name: Build
         run: npm run build
@@ -64,8 +75,19 @@ jobs:
           node-version: '24.0.2'
           cache: npm
 
+      - name: Cache node_modules
+        id: node-modules-cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node24.0.2-${{ hashFiles('package-lock.json') }}
+
       - name: Install dependencies
-        run: npm install
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: npm ci
 
       - name: Download build output
         uses: actions/download-artifact@v4
@@ -84,6 +106,13 @@ jobs:
             echo "Component docstrings and Storybook are not in sync"
             exit 1
           fi
+
+      - name: Cache Playwright browsers
+        if: matrix.check == 'tests'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
       - name: Run tests
         if: matrix.check == 'tests'
