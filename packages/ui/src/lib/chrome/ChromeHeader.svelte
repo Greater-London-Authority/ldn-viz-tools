@@ -71,15 +71,13 @@
 	<div class={classNames('flex items-start justify-between gap-2', classes)}>
 		<TitleGroup {title} {subtitle} {eyebrow} {emphasis} {headingLevel} />
 		{#if hint}
-			<div class="shrink-0 pt-0.5">
-				{#if typeof hint === 'string'}
-					<Overlay overlayType={hintType} modalTitle={hintTitle} {hintLabel} trigger={hintTrigger}>
-						{hint}
-					</Overlay>
-				{:else}
-					{@render hint()}
-				{/if}
-			</div>
+			{#if typeof hint === 'string'}
+				<Overlay overlayType={hintType} modalTitle={hintTitle} {hintLabel} trigger={hintTrigger}>
+					{hint}
+				</Overlay>
+			{:else}
+				{@render hint()}
+			{/if}
 		{/if}
 	</div>
 {/if}
