@@ -73,15 +73,13 @@
 		...rest
 	}: Props = $props();
 
-	let limitWidthClass = $state('');
-
-	if (hideGeolocator) {
-		// 100% - left margin - right margin
-		limitWidthClass = 'max-w-[calc(100dvw-1.5rem-1.5rem)]';
-	} else {
-		// 100% - geolocator button width - left margin - right margin
-		limitWidthClass = 'max-w-[calc(100dvw-2.5rem-1.5rem-1.5rem)]';
-	}
+	const limitWidthClass = $derived(
+		hideGeolocator
+			? // 100% - left margin - right margin
+				'max-w-[calc(100dvw-1.5rem-1.5rem)]'
+			: // 100% - geolocator button width - left margin - right margin
+				'max-w-[calc(100dvw-2.5rem-1.5rem-1.5rem)]'
+	);
 
 	$effect(() => {
 		if ($mapStore) {
