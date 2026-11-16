@@ -9,6 +9,8 @@ describe('MapCursorEvent', () => {
 		return { on: vi.fn(), offLayer: vi.fn() };
 	}
 
+	type MockMapCursorStore = ReturnType<typeof createMockMapCursorStore>;
+
 	test('registers each supplied handler against layerId via mapCursorStore.on', async () => {
 		const mockMap = {};
 		const mockCursorStore = createMockMapCursorStore();
@@ -107,7 +109,7 @@ describe('MapCursorEvent', () => {
 
 	test('calls mapCursorStore.offLayer(layerId) when mapStore becomes falsy', async () => {
 		const mockCursorStore = createMockMapCursorStore();
-		const mapStore = writable({});
+		const mapStore = writable<object | null>({});
 		const mapCursorStore = writable(mockCursorStore);
 
 		const enterFeature = vi.fn();
@@ -142,7 +144,7 @@ describe('MapCursorEvent', () => {
 	test('does not call offLayer when mapCursorStore itself becomes falsy (optional-chaining short-circuits on the new falsy value)', async () => {
 		const mockCursorStore = createMockMapCursorStore();
 		const mapStore = writable({});
-		const mapCursorStore = writable(mockCursorStore);
+		const mapCursorStore = writable<MockMapCursorStore | null>(mockCursorStore);
 
 		const enterFeature = vi.fn();
 
@@ -151,7 +153,7 @@ describe('MapCursorEvent', () => {
 				layerId: 'my-layer',
 				enterFeature
 			},
-			context: new Map([
+			context: new Map<string, unknown>([
 				['mapStore', mapStore],
 				['mapCursorStore', mapCursorStore]
 			])

@@ -19,7 +19,7 @@
 				summary: 'string'
 			}
 		}
-	};
+	} as const;
 
 	const opacityOrWidth = {
 		type: 'number',
@@ -29,7 +29,7 @@
 				summary: 'number'
 			}
 		}
-	};
+	} as const;
 
 	/**
 	 * The `<BoroughsContextLayer>` component is slotted into a `<Map>` to show

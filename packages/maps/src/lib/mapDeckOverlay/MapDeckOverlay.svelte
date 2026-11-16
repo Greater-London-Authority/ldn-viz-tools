@@ -27,7 +27,7 @@
 	let { layers = [], options = {} }: Props = $props();
 
 	let loaded = $state(false);
-	let deckOverlay;
+	let deckOverlay: DeckOverlay | undefined;
 
 	const removeOverlay = () => {
 		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
@@ -51,7 +51,7 @@
 			}
 		});
 
-		$mapStore.addControl(deckOverlay, 'top-left');
+		$mapStore!.addControl(deckOverlay, 'top-left');
 
 		loaded = true;
 	};
@@ -61,7 +61,7 @@
 		loaded = false;
 	};
 
-	const updateLayers = (newLayers) => {
+	const updateLayers = (newLayers: Layer[]) => {
 		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		deckOverlay && deckOverlay.setProps({ layers: newLayers });
 	};

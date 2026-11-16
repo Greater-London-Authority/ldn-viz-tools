@@ -3,7 +3,6 @@
 		ColorLegend,
 		CopyButton,
 		Input,
-		randomId,
 		Select,
 		Switch,
 		theme,
@@ -43,13 +42,17 @@
 	});
 
 	// get width & height of wrappers around content components
-	let contentWidth = $state();
-	let contentHeight = $state();
+	let contentWidth = $state<number>();
+	let contentHeight = $state<number>();
 
 	const typeOptions = ['Sequential', 'Diverging'];
 
 	// const breaksOptions = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 	// let breaks = $state(5);
+
+	// `Input` binds a string, so the field edits this text and the ramps read the number.
+	let breaksText = $derived(String(breaks));
+	let breakCount = $derived(Number(breaksText));
 
 	const colorOptions = [
 		'grey',
@@ -67,28 +70,10 @@
 	const paletteStepOptions = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100];
 	let paletteMid = $derived(paletteStart + Math.round((paletteEnd - paletteStart) / 2 / 100) * 100);
 
-	const id = randomId();
-
-	const doCopy = (id: string, content: string) => {
-		navigator.clipboard
-			.writeText(content)
-			.then(() => onCopy(id))
-			.catch(console.error);
-	};
-
-	const copyToClipboard = async () => {
-		// Firefox query permission does not work or is intentionally limited in
-		// functionality. Instead, just check for clipboard in navigator and
-		// log error if clipboard copy fails.
-		if ('clipboard' in navigator) {
-			doCopy(id, hex);
-		}
-	};
-
 	// based on D3 scale chromatic: https://github.com/d3/d3-scale-chromatic/blob/main/src/sequential-multi/viridis.js
-	const ramp = (range) => {
+	const ramp = (range: string[]) => {
 		var n = range.length;
-		return function (t) {
+		return function (t: number) {
 			return range[Math.max(0, Math.min(n - 1, Math.floor(t * n)))];
 		};
 	};
@@ -101,7 +86,7 @@
 				theme.tokenNameToValue('palette.' + colorLeft + '.' + paletteMid),
 				theme.tokenNameToValue('palette.' + colorLeft + '.' + paletteStart)
 			],
-			count: breaks,
+			count: breakCount,
 			even: true
 		})
 	);
@@ -114,7 +99,7 @@
 				theme.tokenNameToValue('palette.' + colorRight + '.' + paletteMid),
 				theme.tokenNameToValue('palette.' + colorRight + '.' + paletteEnd)
 			],
-			count: breaks,
+			count: breakCount,
 			even: true
 		})
 	);
@@ -128,7 +113,7 @@
 	// $inspect(paletteStart, paletteMid, paletteEnd);
 	// $inspect(hex);
 
-	const interpolator = (t) => {
+	const interpolator = (t: number) => {
 		return ramp(hex)(t);
 	};
 
@@ -171,7 +156,7 @@
 			<Select label="End" options={paletteStepOptions} name="EndStep" bind:value={paletteEnd} />
 		</div>
 		<div class="w-16">
-			<Input label="Breaks" name="Steps" type="number" bind:value={breaks} />
+			<Input label="Breaks" name="Steps" type="number" bind:value={breaksText} />
 		</div>
 	</div>
 

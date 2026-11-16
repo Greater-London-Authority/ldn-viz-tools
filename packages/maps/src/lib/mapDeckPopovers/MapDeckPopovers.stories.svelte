@@ -19,6 +19,7 @@
 </script>
 
 <script lang="ts">
+	import type { Feature } from 'geojson';
 	import type { Layer } from '@deck.gl/core';
 	import { MVTLayer } from '@deck.gl/geo-layers';
 	import { Checkbox, theme } from '@ldn-viz/ui';
@@ -144,8 +145,8 @@
 				<MapDeckPopovers
 					{layers}
 					spec={{
-						wardLayer: (feature) => feature.properties.wd22nm,
-						boroughLayer: (feature) => feature.properties.name
+						wardLayer: (feature: Feature) => feature.properties?.wd22nm,
+						boroughLayer: (feature: Feature) => feature.properties?.name
 					}}
 				/>
 			</Map>
@@ -202,7 +203,7 @@
 					{layers}
 					spec={{
 						wardLayer: 'This is one of the Wards',
-						boroughLayer: (feature) => feature.properties.name
+						boroughLayer: (feature: Feature) => feature.properties?.name
 					}}
 				/>
 			</Map>

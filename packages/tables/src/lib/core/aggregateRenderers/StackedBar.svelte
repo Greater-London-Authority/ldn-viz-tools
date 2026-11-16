@@ -25,7 +25,7 @@
 	let bars: { start: number; end: number; val: string }[] = $derived.by(() => {
 		// count the values: produces a list of [value, count] pairs
 
-		const counts: Record<number, number> = Object.create(null);
+		const counts: Record<string, number> = Object.create(null);
 		values.forEach((val) => {
 			counts[val] = counts[val] ? counts[val] + 1 : 1;
 		});

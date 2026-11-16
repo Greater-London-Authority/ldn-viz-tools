@@ -5,7 +5,7 @@ import { findActiveItem } from './utils';
 // The real callers pass SvelteKit's `page` object and `resolve` helper.
 // Here we use a minimal page stub and an identity resolver unless a test
 // needs to exercise resolution.
-const pageWith = (pathname: string) => ({ url: { pathname } });
+const pageWith = (pathname: string) => ({ url: new URL(pathname, 'https://example.com') });
 const identity = (url: string) => url;
 
 describe('findActiveItem', () => {

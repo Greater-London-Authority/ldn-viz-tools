@@ -2,7 +2,7 @@
 	import { Button, Overlay, Select } from '@ldn-viz/ui';
 
 	import type { TableState } from '$lib/core/lib/tableState.svelte';
-	import type { ColSpec } from '$lib/core/lib/types';
+	import type { ColSpec, Filter } from '$lib/core/lib/types';
 
 	interface Props {
 		col: ColSpec;
@@ -27,21 +27,30 @@
 		{ label: 'range', value: 'range' }
 	];
 
-	let selectedFilterType: string | undefined = $state();
+	let selectedFilterType: Filter['type'] | undefined = $state();
+
+	const buildFilter = (type: Filter['type'], field: string): Filter => {
+		switch (type) {
+			case 'isDefined':
+				return { type, field };
+			case 'contains':
+			case 'equals':
+				return { type, field, value: val1 ?? '' };
+			case 'isOneOf':
+				return { type, field, value: val1?.split(',') ?? [] };
+			case 'range':
+				return { type, field, value: Number(val1), val2: Number(val2) };
+			default:
+				return { type, field, value: Number(val1) };
+		}
+	};
 
 	const applyFilter = () => {
 		if (!table || !selectedFilterType) {
 			return;
 		}
 
-		table.filters = [
-			{
-				type: selectedFilterType,
-				field: col.short_label,
-				value: selectedFilterType === 'isOneOf' ? val1?.split(',') : val1,
-				value2: val2
-			}
-		];
+		table.filters = [buildFilter(selectedFilterType, col.short_label)];
 	};
 
 	const clearFilter = () => {

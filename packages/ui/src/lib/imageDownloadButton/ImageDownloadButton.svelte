@@ -220,7 +220,9 @@
 		const serializeObservablePlot = (svgNode: SVGElement) => {
 			return new Promise<string>(async (resolve, reject) => {
 				try {
-					const svgString = await toSVG(svgNode);
+					// `toSVG` returns the cloned node, not a string, when the chart has no `<figure>`.
+					// `encodeURIComponent` already converted it to a string, so `String()` keeps that behaviour.
+					const svgString = String(await toSVG(svgNode));
 					const dataUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgString)}`;
 					resolve(dataUrl);
 				} catch (error) {

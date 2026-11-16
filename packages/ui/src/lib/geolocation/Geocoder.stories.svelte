@@ -27,14 +27,15 @@
 	} from './types';
 
 	let suggestions: undefined | GeolocationNamed[] = $state();
-	let selected = $state({});
+	let selected: GeolocationNamed | null = $state(null);
 
-	const formatResult = (location: Geolocation): string => {
+	const formatResult = (location: Geolocation | Record<string, never>): string => {
 		return '\n' + JSON.stringify(location, null, 2);
 	};
 
 	const onLocationSelected: OnGeolocationSearchResult = (location: Geolocation) => {
-		selected = location;
+		// Geocoder only reports locations picked from its suggestions, which are named.
+		selected = location as GeolocationNamed;
 	};
 
 	const onSearchError: OnGeolocationSearchError = (err) => {

@@ -5,7 +5,7 @@
 	/*
 	const loadHandlerArgType = {
 		type: 'function',
-		control: 'none',
+		control: false,
 		table: {
 			type: {
 				summary: 'function',
@@ -39,7 +39,7 @@
 		argTypes: {
 			id: {
 				type: 'string',
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'string'
@@ -47,8 +47,8 @@
 				}
 			},
 			spec: {
-				type: 'object',
-				control: 'none',
+				type: { name: 'object', value: {} },
+				control: false,
 				table: {
 					type: {
 						summary: 'SourceSpecification'

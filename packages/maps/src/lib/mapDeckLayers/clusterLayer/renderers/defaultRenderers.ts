@@ -1,10 +1,17 @@
 import type { Color } from '@deck.gl/core';
 import { ScatterplotLayer, TextLayer } from '@deck.gl/layers';
-import { theme } from '@ldn-viz/ui';
 import { colorWithBestContrast } from '@ldn-viz/utils';
 import type { AnyProps, ClusterFeature, PointFeature } from 'supercluster';
 import { tokenColor } from '../../tokenColor';
 import type { ClusterRenderer, PointRenderer } from '../types';
+
+// colorparsley accepts RGB arrays as well as strings, and colorWithBestContrast returns one of
+// its text colour arguments, so it works with deck.gl colours although its types say strings.
+const colorWithBestContrastRGB = colorWithBestContrast as unknown as (
+	backgroundColor: Color,
+	textColorOne: Color,
+	textColorTwo: Color
+) => Color;
 
 /** Area scales with count, so radius scales with sqrt(count). */
 export const clusterRadiusRamp =
@@ -111,11 +118,7 @@ export function circleClusters<DataT extends AnyProps = AnyProps>(
 			getSize: (f) => Math.min(radiusOf(props.getPointCount(f)) * 0.9, maxTextSize),
 			getColor:
 				textColor ??
-				colorWithBestContrast(
-					getFillColor,
-					theme.colorTokenNameToRGBArray('inverse.text'),
-					theme.colorTokenNameToRGBArray('text')
-				),
+				colorWithBestContrastRGB(getFillColor, tokenColor('inverse.text'), tokenColor('text')),
 			getTextAnchor: 'middle' as const,
 			getAlignmentBaseline: 'center' as const,
 			fontWeight: 600,

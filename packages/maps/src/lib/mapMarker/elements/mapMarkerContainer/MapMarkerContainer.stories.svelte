@@ -11,7 +11,6 @@
 		title: 'Maps/Components/MapMarker/elements/MapMarkerContainer',
 		component: MapMarkerContainer,
 		tags: ['autodocs'],
-		render: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -20,19 +19,19 @@
 			placement: {
 				options: ['center', 'follow', 'none'],
 				type: 'string',
-				control: 'none'
+				control: false
 			},
 			noTip: {
 				type: 'boolean',
-				control: 'none'
+				control: false
 			},
 			noPad: {
 				type: 'boolean',
-				control: 'none'
+				control: false
 			},
 			flyToFeature: {
 				type: 'boolean',
-				control: 'none'
+				control: false
 			}
 		}
 	});
@@ -58,10 +57,6 @@
 	setContext('mapMarkerFeature', {});
 	setContext('mapStore', writable(null));
 </script>
-
-{#snippet defaultTemplate({ args })}
-	<MapMarkerContainer {...args} />
-{/snippet}
 
 <Story name="Interactive Example">
 	{#snippet template()}

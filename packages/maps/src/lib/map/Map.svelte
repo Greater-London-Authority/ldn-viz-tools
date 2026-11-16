@@ -128,8 +128,8 @@
 
 	const identifyStyle = (
 		currentThemeMode: SystemModeValue,
-		darkStyle,
-		lightStyle
+		darkStyle: null | MapLibreStyle | undefined,
+		lightStyle: null | MapLibreStyle | undefined
 	): MapLibreStyle => {
 		if (!lightStyle && !darkStyle) {
 			return theme_os_light_vts as MapLibreStyle;

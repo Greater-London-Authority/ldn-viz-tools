@@ -437,10 +437,10 @@
 		<div class="w-full py-8">
 			<ChartContainer
 				title="Two ObservablePlotInner plots in one ChartContainer..."
-				subTitle="...should be combined into one SVG"
+				subtitle="...should be combined into one SVG"
 				source="The source of this chart data"
 				byline="A byline for the chart"
-				chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+				description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 				alt="Simple description of type of chart"
 				imageDownloadButton={['SVG']}
 				dataDownloadButton={true}

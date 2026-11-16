@@ -10,7 +10,7 @@
 	import { mousedOverObject } from './stores';
 
 	import { arrow, createFloatingActions, createVirtualElement } from 'svelte-floating-ui';
-	import type { ClientRectObject } from 'svelte-floating-ui/core';
+	import type { ClientRectObject, MiddlewareData } from 'svelte-floating-ui/dom';
 	import { flip, offset, shift } from 'svelte-floating-ui/dom';
 	import { type Writable, writable } from 'svelte/store';
 	import MapMarkerStyledContainer from '../mapMarker/elements/mapMarkerStyledContainer/MapMarkerStyledContainer.svelte';
@@ -53,7 +53,13 @@
 
 	let dynamicOptions = {
 		middleware: [offset(10), flip(), shift(), arrow({ element: arrowRef })],
-		onComputed({ placement, middlewareData }: { placement: string; middlewareData }) {
+		onComputed({
+			placement,
+			middlewareData
+		}: {
+			placement: string;
+			middlewareData: MiddlewareData;
+		}) {
 			const { x, y } = middlewareData.arrow || {};
 			const staticSide = {
 				top: 'bottom',

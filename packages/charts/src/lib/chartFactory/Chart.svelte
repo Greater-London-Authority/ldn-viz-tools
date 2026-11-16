@@ -151,7 +151,7 @@
 
 	let colorScale = $derived(
 		options.chartType === 'choropleth'
-			? scaleThreshold()
+			? scaleThreshold<number | string, string | number>()
 					.domain(options.colorScale?.domain ?? [0])
 					.range(
 						theme.currentMode === 'light'
