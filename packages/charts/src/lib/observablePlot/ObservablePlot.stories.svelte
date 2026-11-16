@@ -362,7 +362,7 @@
 
 <Story name="No downloads">
 	{#snippet template(args)}
-		<ObservablePlot {...args} {spec} data={chartData} />
+		<ObservablePlot {...args} {spec} data={chartData} dataDownload={false} imageDownload={false} />
 	{/snippet}
 </Story>
 

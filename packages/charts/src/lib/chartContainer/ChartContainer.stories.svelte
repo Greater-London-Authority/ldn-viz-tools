@@ -367,12 +367,14 @@ It can also be used to add liks.
 </Story>
 
 <!--
-	The download button can be hidden by setting `` and ``.
+	The download button can be hidden by setting `dataDownload={false}` and `imageDownload={false}`.
 -->
 <Story name="No download buttons">
 	{#snippet template(args)}
 		<ChartContainer
 			{...args}
+			dataDownload={false}
+			imageDownload={false}
 			title="This is the Chart Title"
 			subtitle="Subtitle provides extra context"
 			source="GLA city intelligence"

@@ -457,6 +457,6 @@
 <!-- Restrict data downloads to CSV only, and hide the image download button entirely -->
 <Story name="Restricted download formats">
 	{#snippet template()}
-		<Table {data} {tableSpec} dataDownload={['CSV']} />
+		<Table {data} {tableSpec} dataDownload={['CSV']} imageDownload={false} />
 	{/snippet}
 </Story>
