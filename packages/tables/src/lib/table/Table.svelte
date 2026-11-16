@@ -1,6 +1,7 @@
 <script lang="ts">
 	import VirtualScroll from 'svelte-virtual-scroll-list';
 	import { TableState } from '../core/lib/tableState.svelte';
+	import type { TableSpec } from '../core/lib/types';
 	import TableContainer from './TableContainer.svelte';
 	import GroupRowsMenu from './menus/GroupRowsMenu.svelte';
 	import SortGroupsMenu from './menus/SortGroupsMenu.svelte';
@@ -178,7 +179,11 @@
 	// when data is updated, update the table object rather than creating a new one
 	// svelte-ignore state_referenced_locally
 	const tableObj = createTable(data, tableSpec);
-	$effect(() => tableObj && data && (tableObj.rawData = data));
+	$effect(() => {
+		if (tableObj && data) {
+			tableObj.rawData = data;
+		}
+	});
 
 	let visualRows: any[] = $derived.by(() => {
 		const vr = [];

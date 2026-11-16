@@ -17,6 +17,9 @@
 </script>
 
 <script lang="ts">
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
+	import type { Group } from '$lib/core/lib/types';
+
 	// GroupSizeBar only reads a handful of fields off `table` and `group`, so we
 	// build minimal plain objects rather than a full TableData:
 	//   table.widths.groupSizeBar  -> width of the outer container
@@ -26,9 +29,9 @@
 	const table = {
 		widths: { groupSizeBar: '160px' },
 		data: { length: 100 }
-	};
+	} as unknown as TableState;
 
-	const group = { order: { length: 40 } };
+	const group = { order: { length: 40 } } as unknown as Group;
 
 	// A table equipped with a colour scale for the "category" field.
 	const coloredTable = {
@@ -37,7 +40,7 @@
 		scales: {
 			category: (v: string) => (v === 'A' ? '#d13438' : '#0078d4')
 		}
-	};
+	} as unknown as TableState;
 </script>
 
 <!-- Width from group.order.length / table.data.length; no scale so fill is lightgrey. -->
