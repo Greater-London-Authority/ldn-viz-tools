@@ -35,15 +35,6 @@
 			layout: 'full'
 		},
 		argTypes: {
-			layerId: {
-				type: 'string',
-				control: false
-			},
-			noCursorStyle: {
-				type: 'boolean',
-				control: false
-			},
-			tooltip: componentType,
 			popup: componentType
 		}
 	});
