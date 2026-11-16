@@ -167,7 +167,7 @@ export const serializeSvg = (svgNode: SVGElement): Promise<string> => {
  * @returns A promise that resolves to a data URL string
  */
 export const serializeObservablePlot = async (node: HTMLElement): Promise<string> => {
-	const svgString = await toSVG(node);
+	const svgString = (await toSVG(node)) as string;
 	return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgString)}`;
 };
 
