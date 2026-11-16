@@ -1,8 +1,8 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
-	import { ChartContainer } from '@ldn-viz/charts';
 	import { Card, Metric, theme } from '@ldn-viz/ui';
+	import ChartContainer from '../../chartContainer/ChartContainer.svelte';
 	import Donut, { type DonutSize } from './Donut.svelte';
 
 	/**
@@ -16,7 +16,7 @@
 	};
 </script>
 
-<script lang="ts" generics="T extends Record<string, any>">
+<script lang="ts">
 	/**
 	 * The `Donut` is a D3 chart component that displays categorical data as slices (or arcs) within a ring, representing proportions of a total (100%).
 	 *
