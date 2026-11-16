@@ -145,7 +145,7 @@
 					</Dialog.Close>
 				</div>
 
-				<div class="overflow-y-auto">
+				<div class="scroll-area overflow-y-auto">
 					<div class="px-4 py-6">
 						{#if description}
 							<Dialog.Description>
