@@ -3,20 +3,8 @@
 
 	import { Card, Metric, theme } from '@ldn-viz/ui';
 	import ChartContainer from '../../chartContainer/ChartContainer.svelte';
-	import Donut, { type DonutSize } from './Donut.svelte';
+	import Donut from './Donut.svelte';
 
-	/**
-	 * Each size's ring diameter, and the narrowest container it is drawn in.
-	 * A container narrower than `minWidth` steps the donut down a size.
-	 */
-	export const donutSizes: Record<DonutSize, { diameter: number; minWidth: number }> = {
-		sm: { diameter: 80, minWidth: 0 },
-		md: { diameter: 160, minWidth: 200 },
-		lg: { diameter: 300, minWidth: 320 }
-	};
-</script>
-
-<script lang="ts">
 	/**
 	 * The `Donut` is a D3 chart component that displays categorical data as slices (or arcs) within a ring, representing proportions of a total (100%).
 	 *
@@ -33,7 +21,9 @@
 			}
 		}
 	});
+</script>
 
+<script lang="ts">
 	const fruitSales = [
 		{ label: 'Apples', value: 12000 },
 		{ label: 'Bananas', value: 8000 },
