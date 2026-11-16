@@ -13,7 +13,6 @@
 		title: 'Maps/Components/MapLayerSource/adaptations/GeoJSONMapLayerSource',
 		component: GeoJSONMapLayerSource,
 		tags: ['autodocs'],
-		render: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -21,7 +20,7 @@
 		argTypes: {
 			id: {
 				type: 'string',
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'string'
@@ -30,7 +29,7 @@
 			},
 			url: {
 				type: 'string',
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'URL'
@@ -38,8 +37,8 @@
 				}
 			},
 			initialData: {
-				type: 'object',
-				control: 'none',
+				type: { name: 'object', value: {} },
+				control: false,
 				table: {
 					type: {
 						summary: 'GeoJSON'
@@ -47,7 +46,7 @@
 				}
 			},
 			dataStore: {
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'Writable Svelte store',
@@ -57,7 +56,7 @@
 			},
 			transform: {
 				type: 'function',
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'function',
@@ -67,7 +66,7 @@
 			},
 			onLoad: {
 				type: 'function',
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'function',
@@ -78,7 +77,7 @@
 			},
 			onUnload: {
 				type: 'function',
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'function',
@@ -88,7 +87,7 @@
 			},
 			onError: {
 				type: 'function',
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'function',
@@ -114,7 +113,7 @@
 
 	let dataStore = writable(undefined);
 
-	const getTestGeoJSONByGeometryType = (type) => {
+	const getTestGeoJSONByGeometryType = (type: string) => {
 		const newData = structuredClone(testData);
 
 		newData.features = newData.features.filter((f) => {
@@ -130,10 +129,6 @@
 
 	let initialData = geojsonPoints;
 </script>
-
-{#snippet defaultTemplate({ args })}
-	<GeoJSONMapLayerSource {...args} />
-{/snippet}
 
 <Story name="Default">
 	{#snippet template()}

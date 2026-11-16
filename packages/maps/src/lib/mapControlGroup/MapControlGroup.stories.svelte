@@ -3,6 +3,9 @@
 	import MapControlGroup, { MapControlGroupPositions } from './MapControlGroup.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
+	const positions = Object.keys(
+		MapControlGroupPositions
+	) as (keyof typeof MapControlGroupPositions)[];
 
 	/**
 	 * The `<MapControlGroup>` component wraps map controls and other overlays
@@ -12,7 +15,6 @@
 		title: 'Maps/Components/MapControls/MapControlGroup',
 		component: MapControlGroup,
 		tags: ['autodocs'],
-		render: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -32,10 +34,6 @@
 	import MapControlZoom from '../mapControlZoom/MapControlZoom.svelte';
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<MapControlGroup {...args} />
-{/snippet}
-
 <!--
 Group and position map controls using `<MapControlGroup position="...">`.
 The named layout positions are shown around the edges of this map.
@@ -49,7 +47,7 @@ If using typescript you can import the `MapControlGroupPositions`enum.
 					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
 			>
-				{#each Object.keys(MapControlGroupPositions) as position (position)}
+				{#each positions as position (position)}
 					<MapControlGroup {position}>
 						<p
 							class="elevation-2 border border-color-border-muted bg-color-surface p-2 text-color-text"
@@ -72,7 +70,7 @@ If using typescript you can import the `MapControlGroupPositions`enum.
 					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
 			>
-				{#each Object.keys(MapControlGroupPositions) as position (position)}
+				{#each positions as position (position)}
 					{#if position != 'TopRightOffset'}
 						<MapControlGroup {position}>
 							<MapControlLocationSearch

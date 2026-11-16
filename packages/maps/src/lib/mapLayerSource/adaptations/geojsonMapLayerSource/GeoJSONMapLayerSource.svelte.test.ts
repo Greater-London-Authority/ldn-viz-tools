@@ -1,5 +1,6 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import type { FeatureCollection } from 'geojson';
 import { writable } from 'svelte/store';
 import GeoJSONMapLayerSource from './GeoJSONMapLayerSource.svelte';
 
@@ -61,7 +62,7 @@ describe('GeoJSONMapLayerSource', () => {
 		globalThis.fetch = vi.fn(() =>
 			Promise.resolve({ json: () => Promise.resolve(rawGeojson) } as Response)
 		);
-		const transform = vi.fn(() => transformedGeojson);
+		const transform = vi.fn(() => transformedGeojson as unknown as FeatureCollection);
 
 		const { context, mockMap } = makeContext();
 		const onLoad = vi.fn();

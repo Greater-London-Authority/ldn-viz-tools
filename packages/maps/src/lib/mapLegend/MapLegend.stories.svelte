@@ -3,6 +3,7 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import { scaleDiverging, scaleSequential } from 'd3-scale';
 	import { interpolatePiYG, interpolateViridis } from 'd3-scale-chromatic';
+	import type { ComponentProps } from 'svelte';
 	import { writable } from 'svelte/store';
 	import LayerControlGroupStory from '../../../../ui/src/lib/layerControl/LayerControlGroup.stories.svelte';
 	import Map from '../map/Map.svelte';
@@ -20,6 +21,12 @@
 		tags: ['autodocs'],
 		render: defaultTemplate
 	});
+
+	// The CSF compiler turns a stories file's default export into its meta, which has `args`.
+	// The import is typed as a Svelte component, so cast it to read them.
+	const layerControlGroupArgs = (
+		LayerControlGroupStory as unknown as { args: ComponentProps<typeof LayerControlGroup> }
+	).args;
 
 	const transformRequest = appendOSKeyToUrl('vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP');
 
@@ -286,7 +293,7 @@
 			>
 				<MapControlGroup position="BottomRight" classes="bottom-16 left-6 sm:bottom-11">
 					<MapLegend {...args} bind:width>
-						<LayerControlGroup {...LayerControlGroupStory.args} />
+						<LayerControlGroup {...layerControlGroupArgs} />
 					</MapLegend>
 				</MapControlGroup>
 			</Map>

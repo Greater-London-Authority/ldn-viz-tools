@@ -4,7 +4,7 @@
 
 	const handlerArgType = {
 		type: 'function',
-		control: 'none',
+		control: false,
 		table: {
 			type: {
 				summary: 'function',
@@ -12,11 +12,11 @@
 					'function(event: MouseEvent | TouchEvent, {\n  feature: GeoJSON.Feature,\n  features: GeoJSON.Feature[],\n  isTouchEvent: boolean\n}) => void'
 			}
 		}
-	};
+	} as const;
 
 	const clickMapHandlerArgType = {
 		type: 'function',
-		control: 'none',
+		control: false,
 		table: {
 			type: {
 				summary: 'function',
@@ -24,7 +24,7 @@
 					'function(event: MouseEvent | TouchEvent, {\n  feature: null,\n  features: GeoJSON.Feature[],\n  isTouchEvent: boolean\n}) => void'
 			}
 		}
-	};
+	} as const;
 
 	/**
 	 * The `<MapCursorEvent>` component exposes the map cursor capability, for a
@@ -73,23 +73,25 @@
 	});
 </script>
 
-<script>
+<script lang="ts">
 	import loadTestLayers from '../loadTestLayers';
 	import Map from '../map/Map.svelte';
+	import type { MapCursorFeatureHandler } from '../map/mapCursor/types';
+	import type { MapLibre } from '../map/types';
 	import { appendOSKeyToUrl } from '../map/util';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
 	let init = false;
 
-	const whenMapLoads = (map) => {
+	const whenMapLoads = (map: MapLibre) => {
 		loadTestLayers(map);
 		init = true;
 		map.getCanvas().style.cursor = 'pointer';
 	};
 
-	let eventLog = [];
-	const logEvent = (eventName, layerName, siteName = '') => {
+	let eventLog: { eventName: string; layerName: string; siteName: string }[] = [];
+	const logEvent = (eventName: string, layerName: string, siteName = '') => {
 		if (eventLog.length >= 8) {
 			eventLog.splice(0, 1);
 		}
@@ -101,9 +103,9 @@
 		eventLog = eventLog;
 	};
 
-	const newLogEvent = (eventName) => {
+	const newLogEvent = (eventName: string): MapCursorFeatureHandler => {
 		return (event, { feature }) => {
-			logEvent(eventName, feature.layer.id, feature.properties.site_name);
+			logEvent(eventName, feature!.layer.id, feature!.properties.site_name);
 		};
 	};
 </script>

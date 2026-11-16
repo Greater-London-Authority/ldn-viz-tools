@@ -3,14 +3,14 @@
 	import MapPopover from './MapPopover.svelte';
 
 	const componentType = {
-		type: 'object',
-		control: 'none',
+		type: { name: 'object', value: {} },
+		control: false,
 		table: {
 			type: {
 				summary: 'Svelte component'
 			}
 		}
-	};
+	} as const;
 
 	/**
 	 * The `MapPopover` component allows the creation of a popover using MapLibre, without creating a MapLibre marker.
@@ -37,11 +37,11 @@
 		argTypes: {
 			layerId: {
 				type: 'string',
-				control: 'none'
+				control: false
 			},
 			noCursorStyle: {
 				type: 'boolean',
-				control: 'none'
+				control: false
 			},
 			tooltip: componentType,
 			popup: componentType
