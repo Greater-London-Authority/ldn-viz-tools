@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { ColorLegend, NonIdealState, theme } from '@ldn-viz/ui';
+	import {
+		ColorLegend,
+		NonIdealState,
+		theme,
+		type DataDownloadOption,
+		type ImageDownloadOption
+	} from '@ldn-viz/ui';
 	import { scaleThreshold } from 'd3-scale';
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
 	import ObservablePlot from '../observablePlot/ObservablePlot.svelte';
@@ -59,24 +65,26 @@
 		controls?: Snippet;
 
 		/**
-		 * Data Download Button in the footer
+		 * The data formats offered by the download button in the footer.
 		 *
-		 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
-		 * Set to false to hide completely.
-		 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
-		 *
+		 * Defaults to `true`, which offers 'CSV' and 'JSON'. An array of formats offers only those formats.
+		 * `false` offers no data formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		dataDownloadButton?: true | false | ('CSV' | 'JSON')[];
+		dataDownload?: DataDownloadOption;
 
 		/**
-		 * Image Download Button in the footer
+		 * The image formats offered by the download button in the footer.
 		 *
-		 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
-		 * Set to false to hide completely.
-		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
-		 *
+		 * Defaults to `true`, which offers 'PNG' and 'SVG'. An array of formats offers only those formats.
+		 * `false` offers no image formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
+		imageDownload?: ImageDownloadOption;
+
+		/**
+		 * How the download button in the footer is shown: a text button with the text "Download"
+		 * (`standard`), an icon-only button (`compact`), or an outline button with the text "Download" (`outline`).
+		 */
+		downloadButtonVariant?: 'standard' | 'compact' | 'outline';
 	};
 
 	let {
@@ -90,8 +98,9 @@
 		note,
 		options,
 		controls,
-		dataDownloadButton,
-		imageDownloadButton
+		dataDownload,
+		imageDownload,
+		downloadButtonVariant
 	}: ChartProps = $props();
 
 	const sortByField = (data: ChartDataRow[], fieldName: string) => {
@@ -163,7 +172,7 @@
 </script>
 
 {#if chartFn && data.length > 0}
-	<div class="w-full chart" bind:clientWidth={width}>
+	<div class="chart w-full" bind:clientWidth={width}>
 		{#snippet plotControls()}
 			{@render controls?.()}
 			{#if options.chartType === 'choropleth'}
@@ -180,8 +189,9 @@
 			{subTitle}
 			{source}
 			{byline}
-			{dataDownloadButton}
-			{imageDownloadButton}
+			{dataDownload}
+			{imageDownload}
+			{downloadButtonVariant}
 			{note}
 			id={dataset}
 			{columnMapping}
@@ -197,8 +207,9 @@
 		subtitle={subTitle}
 		{source}
 		{byline}
-		{dataDownloadButton}
-		{imageDownloadButton}
+		{dataDownload}
+		{imageDownload}
+		{downloadButtonVariant}
 		{note}
 		id={dataset}
 		{columnMapping}

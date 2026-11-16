@@ -1,5 +1,6 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import DownloadButton from '../downloadButton/DownloadButton.svelte';
 	import Input from '../input/Input.svelte';
 	import Overlay from '../overlay/Overlay.svelte';
 	import Card from './Card.svelte';
@@ -140,6 +141,27 @@
 				{@render body()}
 				{#snippet actions()}
 					<span class="label-md text-color-text-muted">actions snippet</span>
+				{/snippet}
+			</Card>
+		</div>
+	{/snippet}
+</Story>
+
+<Story
+	name="With Download Button"
+	args={{
+		title: 'Card title',
+		subtitle: 'A supporting subtitle',
+		byline: 'GLA City Intelligence',
+		source: 'LDN Viz Tools Demo Data'
+	}}
+>
+	{#snippet template(args)}
+		<div class="max-w-xl">
+			<Card {...args}>
+				{@render body()}
+				{#snippet actions()}
+					<DownloadButton data={[{ test: 'yes' }]} dataFormats={['JSON']} imageFormats={['PNG']} />
 				{/snippet}
 			</Card>
 		</div>

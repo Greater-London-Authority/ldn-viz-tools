@@ -21,8 +21,8 @@
 		{title}
 		data={tokenData}
 		tableSpec={tokenTableSpec}
-		imageDownloadButton={false}
-		dataDownloadButton={false}
+		imageDownload={false}
+		dataDownload={false}
 		zebraStripe
 	/>
 </div>
