@@ -3,7 +3,13 @@
 	import ScrollArea from './ScrollArea.svelte';
 
 	/**
-	 * A block with a tinted fill and no border, for a short message that needs less attention than a `Callout`.
+	 * The `<ScrollArea>` component scrolls its content vertically and draws its own scrollbar over the
+	 * content, so the scrollbar takes no width. The scrollbar shows while the pointer is over the area.
+	 * It is built on the `bits-ui` `ScrollArea` primitive, and is internal to `@ldn-viz/ui`.
+	 *
+	 * Its styles match the `.scroll-area` class in `@ldn-viz/themes`. Use that class for a scrolling
+	 * element that doesn't need a component.
+	 *
 	 */
 
 	const { Story } = defineMeta({
