@@ -45,15 +45,6 @@
 					}
 				}
 			},
-			dataStore: {
-				control: false,
-				table: {
-					type: {
-						summary: 'Writable Svelte store',
-						detail: 'writable<GeoJSON>'
-					}
-				}
-			},
 			transform: {
 				type: 'function',
 				control: false,
@@ -204,7 +195,7 @@
 					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
 			>
-				<GeoJSONMapLayerSource id={sourceId} {initialData} bind:dataStore>
+				<GeoJSONMapLayerSource id={sourceId} {initialData}>
 					<MapLayerView
 						id={`${sourceId}/polygon`}
 						spec={{
