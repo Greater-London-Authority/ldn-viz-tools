@@ -6,7 +6,7 @@
 	 * @component
 	 */
 
-	import type { InputProps } from '$lib/input/types';
+	import type { InputProps } from '../input/types';
 	import InputWrapper from '../input/InputWrapper.svelte';
 	import { randomId } from '../utils/randomId';
 	import Checkbox from './Checkbox.svelte';
@@ -128,9 +128,17 @@
 	{disabled}
 	{optional}
 	{customOverlay}
+	isGroup
 >
 	<!-- <slot name="hint" slot="hint" /> -->
-	<div {id} role="group" aria-label={ariaLabel} class="flex flex-col space-y-1">
+	<div
+		{id}
+		role="group"
+		aria-label={ariaLabel}
+		aria-labelledby={label ? `${id}-label` : undefined}
+		aria-describedby={errorId ?? descriptionId}
+		class="flex flex-col space-y-1"
+	>
 		{#if !hideSelectAll}
 			<!--
 			form="" should prevent this checkbox from being included in form

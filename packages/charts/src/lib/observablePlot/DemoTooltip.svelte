@@ -5,7 +5,7 @@
 
 {#if $tooltipData}
 	<div class="flex flex-col">
-		<p class="text-xl">Custom</p>
+		<p class="label-lg">Custom</p>
 		<div>Value from Data: {$tooltipData.Value}</div>
 	</div>
 {/if}

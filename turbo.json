@@ -5,7 +5,7 @@
 		"build": {
 			"dependsOn": ["^build"],
 			"inputs": ["$TURBO_DEFAULT$", ".env*"],
-			"outputs": [".svelte-kit/**", "dist/**", "docs/**", "styles/**"]
+			"outputs": [".svelte-kit/**", "dist/**", "storybook-static/**", "styles/**"]
 		},
 		"lint": {
 			"dependsOn": ["^lint"]
@@ -23,6 +23,12 @@
 		"test": {
 			"dependsOn": ["transit", "@ldn-viz/config-vitest#build"],
 			"outputs": ["coverage.json"]
+		},
+		"test:unit": {
+			"dependsOn": ["transit", "@ldn-viz/config-vitest#build"]
+		},
+		"test:e2e": {
+			"dependsOn": ["transit", "@ldn-viz/config-vitest#build"]
 		},
 		"transit": {
 			"dependsOn": ["^transit"]

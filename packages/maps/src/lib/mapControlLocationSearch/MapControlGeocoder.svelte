@@ -1,14 +1,20 @@
 <script lang="ts">
 	/**
 	 * The `<MapControlGeocoder>` component wraps the UI package's `<Geocoder>`
-	 * component for use with MapLibre maps.
+	 * component for use with MapLibre maps. It sources location suggestions from
+	 * a `GeocoderAdapter`, and when a suggestion is selected it places a marker on
+	 * the map (via `setFeature`) and flies to it. Clearing the search box removes
+	 * the marker (via `clearFeature`).
+	 *
+	 * It reads the `mapStore` context, so it must be rendered inside a `<Map>`.
+	 * It is usually positioned using a `<MapControlGroup>`.
 	 * @component
 	 */
 
 	import { Geocoder, GeocoderSuggestionList } from '@ldn-viz/ui';
 	import { getContext } from 'svelte';
-	import { clearFeature, setFeature } from './map-layer';
 	import type { MapLibreStore } from '../map/types';
+	import { clearFeature, setFeature } from './map-layer';
 
 	import type {
 		GeocoderAdapter,
@@ -35,7 +41,7 @@
 		/**
 		 * Called when the user clears the search box.
 		 */
-		onSearchClear?: any;
+		onSearchClear?: () => void;
 		/**
 		 * Passed to the suggestions dropdown to limit the number of suggestions
 		 * shown at once.
@@ -93,7 +99,7 @@
 						onLocationSelected(updatedLocation);
 					}
 				})
-				.catch((error: any) => {
+				.catch((error: unknown) => {
 					console.error('Error retrieving location:', error);
 				});
 		}

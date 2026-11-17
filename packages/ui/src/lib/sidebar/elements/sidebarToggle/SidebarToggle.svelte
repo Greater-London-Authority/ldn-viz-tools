@@ -10,7 +10,9 @@
 	import { getSidebarState } from '../../../sidebar/sidebarState.svelte';
 
 	interface Props {
-		// `id` for sidebar container, to point to for screen readers
+		/**
+		 * `id` for sidebar container, to point to for screen readers
+		 */
 		sidebarId?: string; //FROM STATE
 		icon?: import('svelte').Snippet;
 		[key: string]: any;
@@ -30,7 +32,7 @@
 		title="Toggle sidebar"
 		variant="square"
 		emphasis="secondary"
-		class="cursor-pointer !bg-color-container-level-1 !text-color-text-primary hover:!text-color-action-text-secondary-hover"
+		class="cursor-pointer !bg-color-surface-muted !text-color-text hover:!text-color-interactive-secondary-hover"
 		onclick={toggleOpen}
 		aria-controls={sidebarId}
 		aria-expanded={sidebarState?.isOpen}

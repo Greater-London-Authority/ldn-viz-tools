@@ -1,14 +1,24 @@
 /**
+ * @typedef {import('./types').HandlerCollectionEntry} HandlerCollectionEntry
+ * @typedef {import('./types').MapCursorFeatureHandler} MapCursorFeatureHandler
+ * @typedef {import('./types').HandlerCollectionType} HandlerCollectionType
+ * @typedef {Record<string, HandlerCollectionEntry[]>} HandlerEntries
+ */
+
+/**
  * Stores the handlers used by MapCursor.
+ *
+ * @returns {HandlerCollectionType}
  */
 export default function HandlerCollection() {
-	const self = {};
+	const self = /** @type {HandlerCollectionType} */ ({});
 
 	// Event entry list item:
 	// {
 	//   layerId: "",
 	//   handler: (event, { feature, features, isTouchEvent }) => {}
 	// }
+	/** @type {Readonly<HandlerEntries>} */
 	const entriesMap = Object.freeze({
 		enterFeature: [],
 		leaveFeature: [],
@@ -53,12 +63,18 @@ export default function HandlerCollection() {
 		self.layerIds = [];
 	};
 
+	/**
+	 * @param {string} eventType
+	 * @param {string} layerId
+	 * @param {MapCursorFeatureHandler} handler
+	 */
 	const checkArguments = (eventType, layerId, handler) => {
 		checkLayerId(layerId);
 		checkEventType(eventType, layerId);
 		checkHandler(layerId, handler);
 	};
 
+	/** @param {string} layerId */
 	const checkLayerId = (layerId) => {
 		if (typeof layerId !== 'string' || layerId === '') {
 			throw new Error(
@@ -67,6 +83,10 @@ export default function HandlerCollection() {
 		}
 	};
 
+	/**
+	 * @param {string} eventType
+	 * @param {string} layerId
+	 */
 	const checkEventType = (eventType, layerId) => {
 		if (typeof eventType !== 'string' || eventType === '') {
 			throw new Error(
@@ -79,6 +99,10 @@ export default function HandlerCollection() {
 		}
 	};
 
+	/**
+	 * @param {string} layerId
+	 * @param {MapCursorFeatureHandler} handler
+	 */
 	const checkHandler = (layerId, handler) => {
 		if (!handler || typeof handler !== 'function') {
 			throw new Error(
@@ -87,6 +111,11 @@ export default function HandlerCollection() {
 		}
 	};
 
+	/**
+	 * @param {string} eventType
+	 * @param {string} layerId
+	 * @param {MapCursorFeatureHandler} handler
+	 */
 	const addHandler = (eventType, layerId, handler) => {
 		self.entries[eventType].push({
 			layerId,
@@ -94,6 +123,11 @@ export default function HandlerCollection() {
 		});
 	};
 
+	/**
+	 * @param {string} eventType
+	 * @param {string} layerId
+	 * @param {MapCursorFeatureHandler} handler
+	 */
 	const removeHandler = (eventType, layerId, handler) => {
 		const events = self.entries[eventType];
 

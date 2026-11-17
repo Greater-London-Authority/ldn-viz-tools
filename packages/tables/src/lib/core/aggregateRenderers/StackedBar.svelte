@@ -4,6 +4,7 @@
 	 */
 
 	import type { StackedBarProps } from '$lib/core/aggregateRenderers/StackedBarProps';
+	import { theme } from '@ldn-viz/ui';
 	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 	import { getVal } from '../../getVal';
 
@@ -24,7 +25,7 @@
 	let bars: { start: number; end: number; val: string }[] = $derived.by(() => {
 		// count the values: produces a list of [value, count] pairs
 
-		const counts: Record<number, number> = Object.create(null);
+		const counts: Record<string, number> = Object.create(null);
 		values.forEach((val) => {
 			counts[val] = counts[val] ? counts[val] + 1 : 1;
 		});
@@ -52,10 +53,15 @@
 			y={0}
 			{height}
 			fill={getVal(bar.val, color) as string}
-			stroke="black"
+			stroke={theme.tokenNameToValue('surface')}
 		/>
 
-		<text x={x(bar.start) + 6} y={height - 6} font-size="12px" fill="white">
+		<text
+			x={x(bar.start) + 6}
+			y={height - 6}
+			class="chart-tick-sm"
+			fill={theme.tokenNameToValue('text')}
+		>
 			{bar.val}
 		</text>
 	{/each}

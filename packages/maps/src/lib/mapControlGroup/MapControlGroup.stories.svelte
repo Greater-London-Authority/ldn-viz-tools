@@ -3,6 +3,9 @@
 	import MapControlGroup, { MapControlGroupPositions } from './MapControlGroup.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
+	const positions = Object.keys(
+		MapControlGroupPositions
+	) as (keyof typeof MapControlGroupPositions)[];
 
 	/**
 	 * The `<MapControlGroup>` component wraps map controls and other overlays
@@ -12,7 +15,6 @@
 		title: 'Maps/Components/MapControls/MapControlGroup',
 		component: MapControlGroup,
 		tags: ['autodocs'],
-		render: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -32,10 +34,6 @@
 	import MapControlZoom from '../mapControlZoom/MapControlZoom.svelte';
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<MapControlGroup {...args} />
-{/snippet}
-
 <!--
 Group and position map controls using `<MapControlGroup position="...">`.
 The named layout positions are shown around the edges of this map.
@@ -49,10 +47,10 @@ If using typescript you can import the `MapControlGroupPositions`enum.
 					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
 			>
-				{#each Object.keys(MapControlGroupPositions) as position (position)}
+				{#each positions as position (position)}
 					<MapControlGroup {position}>
 						<p
-							class="border border-color-ui-border-secondary bg-color-container-level-0 p-2 text-color-text-primary shadow"
+							class="elevation-2 border border-color-border-muted bg-color-surface p-2 text-color-text"
 						>
 							{position}
 						</p>
@@ -72,7 +70,7 @@ If using typescript you can import the `MapControlGroupPositions`enum.
 					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
 			>
-				{#each Object.keys(MapControlGroupPositions) as position (position)}
+				{#each positions as position (position)}
 					{#if position != 'TopRightOffset'}
 						<MapControlGroup {position}>
 							<MapControlLocationSearch
@@ -117,13 +115,37 @@ On small devices most controls will hide themselves.
 
 				<MapControlGroup position="TopRight">
 					<p
-						class="pointer-events-auto border border-color-ui-border-secondary bg-color-container-level-0 p-2 text-center text-color-text-primary shadow"
+						class="elevation-2 pointer-events-auto border border-color-border-muted bg-color-surface p-2 text-center text-color-text"
 					>
 						Bespoke controls<br />E.g. Drawing
 					</p>
 				</MapControlGroup>
 
 				<MapControlGroup position="BottomRight">
+					<MapControlPan />
+				</MapControlGroup>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+The `classes` prop is appended to the group's container element, allowing
+extra styling or layout utilities to be applied. Here a wider gap and a padded,
+bordered container are added.
+-->
+<Story name="Custom classes">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup
+					position="TopLeft"
+					classes="space-y-6 rounded-full border border-color-border-muted bg-color-surface p-3"
+				>
 					<MapControlPan />
 				</MapControlGroup>
 			</Map>

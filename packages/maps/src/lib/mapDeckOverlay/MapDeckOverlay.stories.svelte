@@ -71,6 +71,10 @@
 		}
 		return l;
 	});
+
+	// Stable layer set (no reactive dependencies) so the same Layer objects are
+	// used across renders, avoiding deck.gl "assertion failed" errors.
+	let initialLayers = $derived.by(() => [getBoroughLayer()]);
 </script>
 
 <!--
@@ -93,6 +97,24 @@
 				}}
 			>
 				<MapDeckOverlay {layers} />
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+ The layers are present from the moment the overlay mounts, and provided as the initial value of
+ the `layers` prop rather than being  toggled on later. 
+ -->
+<Story name="Initial layers on load">
+	{#snippet template()}
+		<div class="relative h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapDeckOverlay layers={initialLayers} />
 			</Map>
 		</div>
 	{/snippet}

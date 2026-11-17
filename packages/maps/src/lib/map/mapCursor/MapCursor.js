@@ -1,6 +1,14 @@
 import HandlerCollection from './HandlerCollection';
 
 /**
+ * @typedef {import('../types').MapLibre} MapLibre
+ * @typedef {import('../types').MapLibreMouseLikeEvent} MapLibreMouseLikeEvent
+ * @typedef {import('maplibre-gl').MapGeoJSONFeature} MapGeoJSONFeature
+ * @typedef {import('./types').MapCursorType} MapCursorType
+ * @typedef {import('./types').MapCursorFeatureHandler} MapCursorFeatureHandler
+ */
+
+/**
  * MapCursor provides map cursor event and style management.
  *
  * The way MapLibre uses JavaScript's event system makes it difficult and
@@ -20,10 +28,13 @@ import HandlerCollection from './HandlerCollection';
  * 1. onTouchDownMap
  * 2. onMouseMove
  * 3. onClickMap
+ *
+ * @param {MapLibre} map
+ * @returns {MapCursorType}
  */
 export default function MapCursor(map) {
-	const handlers = new HandlerCollection();
-	const self = {};
+	const handlers = HandlerCollection();
+	const self = /** @type {MapCursorType} */ ({});
 
 	let isTouchEvent = false;
 	let isHandlingMove = false;
@@ -31,16 +42,21 @@ export default function MapCursor(map) {
 
 	// Optimise UX by avoiding too much processing on mouse moves.
 	let mouseMoveTimeoutMs = 20;
+	/** @type {MapGeoJSONFeature[]} */
 	let activeFeatures = [];
 
 	self.activeFeatures = () => {
 		return activeFeatures;
 	};
 
-	self.topFeature = () => {
+	/** @returns {MapGeoJSONFeature | null} */
+	const topFeature = () => {
 		return activeFeatures.length > 0 ? activeFeatures[0] : null;
 	};
 
+	self.topFeature = topFeature;
+
+	/** @type {MapCursorType['on']} */
 	self.on = (eventType, layerId, handler) => {
 		const originalSize = handlers.size();
 		handlers.add(eventType, layerId, handler);
@@ -52,6 +68,7 @@ export default function MapCursor(map) {
 		}
 	};
 
+	/** @type {MapCursorType['off']} */
 	self.off = (eventType, layerId, handler) => {
 		handlers.remove(eventType, layerId, handler);
 
@@ -62,6 +79,7 @@ export default function MapCursor(map) {
 		}
 	};
 
+	/** @param {string} layerId */
 	self.offLayer = (layerId) => {
 		for (const eventType in handlers.entries) {
 			for (const entry of handlers.entries[eventType]) {
@@ -73,7 +91,7 @@ export default function MapCursor(map) {
 	};
 
 	self.destroy = () => {
-		map = null;
+		map = /** @type {MapLibre} */ (/** @type {unknown} */ (null));
 		handlers.clear();
 	};
 
@@ -83,6 +101,7 @@ export default function MapCursor(map) {
 		}
 	};
 
+	/** @param {MapLibreMouseLikeEvent} event */
 	const onMouseMove = async (event) => {
 		if (isHandlingMove || !map) {
 			return;
@@ -100,11 +119,15 @@ export default function MapCursor(map) {
 		}, mouseMoveTimeoutMs);
 	};
 
+	/**
+	 * @param {MapLibreMouseLikeEvent} event
+	 * @param {MapGeoJSONFeature[]} eventFeatures
+	 */
 	const handleFeatureChanges = (event, eventFeatures) => {
 		const eventFeatureMap = featureArrayToObject(eventFeatures);
 		const activeFeatureMap = featureArrayToObject(activeFeatures);
 		const newTopFeature = eventFeatures.length > 0 ? eventFeatures[0] : null;
-		const oldTopFeature = self.topFeature();
+		const oldTopFeature = topFeature();
 		const sameTopFeature = featuresEqual(oldTopFeature, newTopFeature);
 
 		for (const id in activeFeatureMap) {
@@ -128,6 +151,7 @@ export default function MapCursor(map) {
 		}
 	};
 
+	/** @param {MapLibreMouseLikeEvent} event */
 	const onClickMap = (event) => {
 		if (isHandlingClick) {
 			return;
@@ -136,8 +160,9 @@ export default function MapCursor(map) {
 		isHandlingClick = true;
 
 		clickedMap(event);
-		if (self.topFeature()) {
-			callHandlerForFeature(event, 'clickFeature', activeFeatures, self.topFeature());
+		const clickedFeature = topFeature();
+		if (clickedFeature) {
+			callHandlerForFeature(event, 'clickFeature', activeFeatures, clickedFeature);
 		}
 
 		if (!isHandlingMove) {
@@ -147,6 +172,7 @@ export default function MapCursor(map) {
 		isHandlingClick = false;
 	};
 
+	/** @param {MapLibreMouseLikeEvent} event */
 	const clickedMap = (event) => {
 		for (const entry of handlers.findAll('clickMap')) {
 			entry.handler(event, {
@@ -157,6 +183,12 @@ export default function MapCursor(map) {
 		}
 	};
 
+	/**
+	 * @param {MapLibreMouseLikeEvent} event
+	 * @param {string} eventType
+	 * @param {MapGeoJSONFeature[]} features
+	 * @param {MapGeoJSONFeature} feature
+	 */
 	const callHandlerForFeature = (event, eventType, features, feature) => {
 		const entries = handlers.findAll(eventType, feature.layer.id);
 
@@ -172,6 +204,10 @@ export default function MapCursor(map) {
 	return self;
 }
 
+/**
+ * @param {MapGeoJSONFeature[]} features
+ * @returns {Record<string, MapGeoJSONFeature>}
+ */
 const featureArrayToObject = (features) => {
 	return features.reduce((acc, f) => {
 		// For ESRI GeoJSON the layer ID and objectid provide enough uniqueness but
@@ -182,9 +218,13 @@ const featureArrayToObject = (features) => {
 		const id = f.layer.id + ':' + f.id + ':' + f.properties.objectid;
 		acc[id] = f;
 		return acc;
-	}, {});
+	}, /** @type {Record<string, MapGeoJSONFeature>} */ ({}));
 };
 
+/**
+ * @param {MapGeoJSONFeature | null} a
+ * @param {MapGeoJSONFeature | null} b
+ */
 const featuresEqual = (a, b) => {
 	if (!a && !b) {
 		return true;
@@ -205,7 +245,13 @@ const featuresEqual = (a, b) => {
 	return a.properties.objectid === b.properties.objectid;
 };
 
+/**
+ * @param {MapLibre} map
+ * @param {MapLibreMouseLikeEvent} event
+ * @param {string[]} layerIds
+ */
 const getFeaturesUnderEventPoint = (map, event, layerIds) => {
+	/** @type {[number, number]} */
 	const mousePoint = [event.point.x, event.point.y];
 	return map.queryRenderedFeatures(mousePoint, {
 		layers: layerIds

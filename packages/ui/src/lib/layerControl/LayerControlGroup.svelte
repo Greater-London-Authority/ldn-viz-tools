@@ -26,7 +26,7 @@
 		/**
 		 * The `id` of the `<input>` element: defaults to a randomly-generated value.
 		 */
-		id?: any;
+		id?: string;
 		/**
 		 * Text displayed above the `<input>` element.
 		 */
@@ -245,10 +245,18 @@
 	{error}
 	{disabled}
 	{optional}
+	isGroup
 >
 	<!-- TODO: hint -->
 
-	<div {id} role="group" aria-label={ariaLabel} class="flex flex-col space-y-1">
+	<div
+		{id}
+		role="group"
+		aria-label={ariaLabel}
+		aria-labelledby={label ? `${id}-label` : undefined}
+		aria-describedby={errorId ?? descriptionId}
+		class="flex flex-col space-y-1"
+	>
 		{#if mutuallyExclusive}
 			{#if allowClear}
 				<Button {disabled} variant="text" class="!justify-start  !px-0" onclick={clearRadioButtons}>

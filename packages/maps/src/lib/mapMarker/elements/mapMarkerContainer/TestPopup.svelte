@@ -7,16 +7,16 @@
 </script>
 
 <MapMarkerContainer flyToFeature>
-	<h1 class="text-center text-lg font-medium">
+	<h1 class="label-lg text-center">
 		{props.site_name}
 	</h1>
 	<div>
 		<p>
-			<span class="font-medium">Feature ID:</span>
+			<span class="text-strong">Feature ID:</span>
 			{feature.id}
 		</p>
 		<p>
-			<span class="font-medium">Object ID:</span>
+			<span class="text-strong">Object ID:</span>
 			{props.objectid}
 		</p>
 	</div>

@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { sum } from 'd3-array';
 
-	import type { TableData } from '$lib/core/lib/dataObj';
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
 	import type { LeafOrderCriterion } from '$lib/core/lib/types';
 	import Header from '../../../core/renderers/Header.svelte';
 	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
 	import Scaffolding from '../Scaffolding.svelte';
 
 	interface ColunnHeadingRowProps {
-		table: TableData;
+		table: TableState;
 		allowSorting?: boolean;
 		onChange: () => void;
 	}
@@ -26,7 +26,7 @@
 	{#snippet groupSizes()}
 		{#each table.groupingFields as colName (colName)}
 			<div
-				class="was-th flex font-bold"
+				class="was-th table-col-head flex"
 				role="columnheader"
 				style:width={sumWidths([
 					table.widths.groupLabel,
@@ -46,7 +46,7 @@
 	</div> -->
 
 	{#snippet dataColumns()}
-		{#each table.columnSpec as col, i (col)}
+		{#each table.resolvedColumnSpec as col, i (col)}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				{@const colIsSortable = allowSorting && col.sortable !== false}
 				{@const order = table.rowOrderSpec.find(

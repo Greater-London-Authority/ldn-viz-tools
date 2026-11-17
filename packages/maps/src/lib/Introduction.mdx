@@ -4,7 +4,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Welcome to Storybook for ldn-viz-tools maps
 
-The `maps` package several things:
+The `maps` package contains several things:
 
 - a set of useful constants (such as a bounding box for Greater London)
 - a set of maplibre style files for basemaps that we use frequently in our projects
@@ -15,10 +15,10 @@ The `maps` package several things:
 The `<Map>` component creates a MapLibre ([API docs](https://maplibre.org/maplibre-gl-js/docs/), [Style Specification](https://maplibre.org/maplibre-style-spec/) ) map object, and provides it to child components via a context.
 In our maps, this component almost always displays a basemap created by the Ordnance Survey.
 
-A `<MapControlGroup>` component is used a child of a `<Map>`, and positions its child components correctly relative to the map.
+A `<MapControlGroup>` component is used as a child of a `<Map>`, and positions its child components correctly relative to the map.
 
 Commonly data layers are rendered using [Deck.gl](https://deck.gl/), using the `<MapDeckOverlay>` component.
 
 Less commonly, data layers are rendered directly by MapLibre: this can be done by using `<MapLayerSource>` to create a MapLibre source (responsible for data loading), and `<MapLayerView>` to create a MapLibre layer (responsible for data display).
 
-The `MapDraw` component is a wrapper around teh [Terra Draw](https://terradraw.io/) library that allows users to draw custom areas on a map.
+The `MapDraw` component is a wrapper around the [Terra Draw](https://terradraw.io/) library that allows users to draw custom areas on a map.

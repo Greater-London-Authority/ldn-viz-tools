@@ -1,11 +1,19 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { subMenu } from '../navigationMenu/NavigationMenu.stories.svelte';
 	import NavigationMenu from '../navigationMenu/NavigationMenu.svelte';
 	import Header from './Header.svelte';
 	import HeaderItem from './HeaderItem.svelte';
 	import HeaderRight from './HeaderRight.svelte';
 	import HeaderTitle from './HeaderTitle.svelte';
+
+	let subMenu = [
+		{ title: 'Accessibility', id: 'accessibility', href: '/accessibility' },
+		{ title: 'Brand', id: 'brand', href: '/brand' },
+		{ title: 'Color', id: 'color', href: '/color' },
+		{ title: 'Typography', id: 'typography', href: '/typography' },
+		{ title: 'Spacing', id: 'spacing', href: '/spacing' },
+		{ title: 'Design Tokens', id: 'design-tokens', href: '/design-tokens' }
+	];
 
 	/**
 	 * The `<Header>` component appears at the top of a page.
@@ -21,6 +29,11 @@
 			layout: 'fullscreen'
 		}
 	});
+</script>
+
+<script lang="ts">
+	import { Home } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 </script>
 
 <Story name="Default">
@@ -62,11 +75,11 @@
 			<HeaderRight>
 				<!-- This would come from your auth menu Component in your app -->
 				<HeaderItem>
-					<span class="text-xs">Logged in as <b>Bob Smith</b></span>
+					<span class="caption-sm">Logged in as <b>Bob Smith</b></span>
 				</HeaderItem>
 
 				<HeaderItem>
-					<a class="text-xs" href="/#">Log Out</a>
+					<a class="label-sm" href="https://www.london.gov.uk/">Log Out</a>
 				</HeaderItem>
 			</HeaderRight>
 		</Header>
@@ -82,6 +95,74 @@
 					<NavigationMenu ariaLabel="Main menu" items={subMenu} orientation="horizontal" />
 				</HeaderItem>
 			</HeaderRight>
+		</Header>
+	{/snippet}
+</Story>
+
+<!-- A very long title alongside a horizontal navigation menu. -->
+<Story name="Long title overflow">
+	{#snippet template()}
+		<Header>
+			<HeaderTitle>
+				A very long application title that keeps going and going to demonstrate overflow behaviour
+			</HeaderTitle>
+			<HeaderRight>
+				<HeaderItem>
+					<NavigationMenu ariaLabel="Main menu" items={subMenu} orientation="horizontal" />
+				</HeaderItem>
+			</HeaderRight>
+		</Header>
+	{/snippet}
+</Story>
+
+<!-- Many navigation links inside `HeaderRight`, to show how the flex row behaves when it
+	runs out of horizontal space. -->
+<Story name="Overflowing nav items">
+	{#snippet template()}
+		<Header>
+			<HeaderTitle>App title</HeaderTitle>
+			<HeaderRight>
+				<HeaderItem><a class="label-sm" href="/#">Overview</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Analysis</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Datasets</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Reports</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Dashboards</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Documentation</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Settings</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Notifications</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Help &amp; support</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Account</a></HeaderItem>
+			</HeaderRight>
+		</Header>
+	{/snippet}
+</Story>
+
+<!-- HeaderTitle stories -->
+
+<!--
+The `base` prop is prepended to construct the homepage link.
+Normally it is imported from `$app/paths` to link the the root,
+but here it is set to  `/app`, so the title links to `/app` rather than the default `/`. 
+(If you do this in a real app, wrap the link in `resolve()`)
+-->
+<Story name="Custom base path">
+	{#snippet template()}
+		<Header>
+			<HeaderTitle base="/app">App title</HeaderTitle>
+		</Header>
+	{/snippet}
+</Story>
+
+<!-- The title can include an icon alongside the text. -->
+<Story name="Title with icon">
+	{#snippet template()}
+		<Header>
+			<HeaderTitle>
+				<span class="inline-flex items-center gap-2">
+					<Icon src={Home} theme="mini" class="h-5 w-5" aria-hidden="true" />
+					App title
+				</span>
+			</HeaderTitle>
 		</Header>
 	{/snippet}
 </Story>

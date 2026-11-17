@@ -5,7 +5,7 @@
 	import { getContext } from 'svelte';
 	import { ZOOM_ANIMATION_OPTIONS } from '../themes/animations';
 
-	import type { MapStore } from '../map/Map.svelte';
+	import type { MapStore } from '../map/types';
 
 	type Handler = () => void;
 	type ClickEvent = MouseEvent | TouchEvent;
@@ -35,7 +35,7 @@
 		variant="square"
 		emphasis="secondary"
 		title="Zoom in"
-		class="pointer-events-auto shadow dark:border dark:border-color-ui-border-primary"
+		class="elevation-2 pointer-events-auto dark:border dark:border-color-border"
 		onclick={newHandler(zoomIn)}
 	>
 		<Icon src={PlusSmall} class="h-8 w-8 p-0.5" />
@@ -44,7 +44,7 @@
 		variant="square"
 		emphasis="secondary"
 		title="Zoom out"
-		class="pointer-events-auto shadow dark:border dark:border-color-ui-border-primary"
+		class="elevation-2 pointer-events-auto dark:border dark:border-color-border"
 		onclick={newHandler(zoomOut)}
 	>
 		<Icon src={MinusSmall} class="h-8 w-8 p-0.5" />

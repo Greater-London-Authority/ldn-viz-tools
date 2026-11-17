@@ -10,7 +10,7 @@
 		/**
 		 * Defaults to a random twelve-character string for use to identify the title by the screen reader.
 		 */
-		id?: any;
+		id?: string;
 
 		/**
 		 * Required when `Callout` has no title, to ensure screen reader can identify it.
@@ -24,9 +24,18 @@
 		status?: 'notice' | 'positive' | 'caution' | 'negative';
 
 		/**
-		 * The size of the callout, affects font size and spacing.
+		 * The size of the callout. It sets the padding, the left border, the space between parts and the text roles:
+		 *
+		 * * `sm` - a 1px border, 8px padding, `label-md` title and `body-sm` body
+		 * * `md` - a 5px left border, 8px by 16px padding, `title-sm` title and `body-md` body
+		 * * `lg` - a 5px left border, 16px padding, `title-md` title and `body-lg` body
 		 */
 		size?: 'sm' | 'md' | 'lg';
+
+		/**
+		 * The heading level of the title, so that it fits the headings on the page.
+		 */
+		headingLevel?: 2 | 3 | 4 | 5 | 6;
 		title?: import('svelte').Snippet;
 		body?: import('svelte').Snippet;
 		more?: import('svelte').Snippet;
@@ -37,52 +46,54 @@
 		ariaTitle = '',
 		status = 'notice',
 		size = 'md',
+		headingLevel = 3,
 		title,
 		body,
 		more
 	}: Props = $props();
 
 	const statusClasses = {
-		notice: 'bg-color-ui-background-notice border-color-ui-border-notice',
-		positive: 'bg-color-ui-background-positive border-color-ui-border-positive',
-		caution: 'bg-color-ui-background-caution border-color-ui-border-caution',
-		negative: 'bg-color-ui-background-negative border-color-ui-border-negative'
+		notice: 'bg-color-surface-accent-muted border-color-surface-accent',
+		positive: 'bg-color-surface-positive-muted border-color-surface-positive',
+		caution: 'bg-color-surface-caution-muted border-color-surface-caution',
+		negative: 'bg-color-surface-negative-muted border-color-surface-negative'
 	};
 
+	// The flow context sets the space between the title, body and more
 	const sizeClasses = {
-		sm: 'border shadow-sm text-color-text-primary px-2 pt-2 ',
-		md: 'border-l-[5px] border shadow-sm text-color-text-primary px-2 pt-2 ',
-		lg: 'border-l-[5px] border shadow-sm text-color-text-primary px-4 pt-4'
+		sm: 'flow-compact border p-2',
+		md: 'flow-compact border border-l-[5px] px-4 py-2',
+		lg: 'flow-standard border border-l-[5px] p-4'
 	};
 
 	const titleClasses = {
-		sm: 'text-base mb-1',
-		md: 'text-lg mb-2',
-		lg: 'text-xl mb-4'
+		sm: 'label-md',
+		md: 'title-sm',
+		lg: 'title-md'
 	};
 
 	const bodyClasses = {
-		sm: 'text-sm mb-1',
-		md: 'text-base mb-2',
-		lg: 'text-base mb-4'
+		sm: 'body-sm',
+		md: 'body-md',
+		lg: 'body-lg'
 	};
 
-	const moreClasses = {
-		sm: 'pb-2',
-		md: 'pt-2 pb-4',
-		lg: 'pt-2 pb-4'
-	};
-
-	let calloutClasses: string = $derived(classNames(sizeClasses[size], statusClasses[status]));
+	let calloutClasses: string = $derived(
+		classNames(
+			'typeset-product elevation-1 text-color-text',
+			sizeClasses[size],
+			statusClasses[status]
+		)
+	);
 </script>
 
 <aside class={calloutClasses} aria-labelledby={id}>
 	{#if title}
-		<h3 {id} class={classNames('font-bold leading-tight', titleClasses[size])}>
+		<svelte:element this={`h${headingLevel}`} {id} class={titleClasses[size]}>
 			{@render title?.()}
-		</h3>
+		</svelte:element>
 	{:else}
-		<h3 {id} class="sr-only">{ariaTitle}</h3>
+		<svelte:element this={`h${headingLevel}`} {id} class="sr-only">{ariaTitle}</svelte:element>
 	{/if}
 
 	{#if body}
@@ -92,7 +103,7 @@
 	{/if}
 
 	{#if more}
-		<div class={moreClasses[size]}>
+		<div>
 			{@render more?.()}
 		</div>
 	{/if}

@@ -1,5 +1,6 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import type { ComponentProps } from 'svelte';
 	import MapMarkerStyledContainer from './MapMarkerStyledContainer.svelte';
 
 	/**
@@ -11,7 +12,6 @@
 		title: 'Maps/Components/MapMarker/elements/MapMarkerStyledContainer',
 		component: MapMarkerStyledContainer,
 		tags: ['autodocs'],
-		render: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -46,12 +46,11 @@
 	setContext('mapStore', writable(null));
 </script>
 
-{#snippet defaultTemplate({ args })}
+{#snippet defaultTemplate(args: ComponentProps<typeof MapMarkerStyledContainer>)}
 	<div class="mb-4 mt-32 flex items-center justify-center">
 		<MapMarkerStyledContainer {...args}>
 			<div class="w-auto max-w-44">
-				{#if args?.noPad}
-					<!-- TODO: args is undefined? -->
+				{#if args.noPad}
 					<p>Suitable for edge-to-edge images. Any padding will need to be applied manually.</p>
 				{:else}
 					<p>Content goes here. Content goes here. Content goes here. Content goes here.</p>
@@ -61,7 +60,7 @@
 	</div>
 {/snippet}
 
-<Story name="Default" source />
+<Story name="Default" template={defaultTemplate} />
 
 <Story name="Mapping Context">
 	{#snippet template()}
@@ -76,6 +75,36 @@
 				<MapMarker layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltip} />
 				<MapMarker layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltip} />
 			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!-- 
+When content is taller than the container's constrained height, the `overflow-y-auto` styling makes it scroll.
+The container's `preventZoom` handler stops scroll events from being interpreted as map zoom when the content itself can scroll.
+ -->
+<Story name="Overflowing content">
+	{#snippet template()}
+		<div class="mb-4 mt-32 flex items-center justify-center">
+			<MapMarkerStyledContainer class="max-h-48">
+				<div class="w-auto max-w-64">
+					<h1 class="label-lg mb-2">Scrollable content</h1>
+					{#each Array(15) as _, i (i)}
+						<p>Line {i + 1}: content goes here. Content goes here. Content goes here.</p>
+					{/each}
+				</div>
+			</MapMarkerStyledContainer>
+		</div>
+	{/snippet}
+</Story>
+
+<!-- Passing `noPad` removes the standard container padding, which is useful for edge-to-edge content such as images that should reach the container's borders. -->
+<Story name="No padding (edge-to-edge image)">
+	{#snippet template()}
+		<div class="mb-4 mt-32 flex items-center justify-center">
+			<MapMarkerStyledContainer noPad>
+				<div class="h-32 w-56 bg-color-data-categorical-blue"></div>
+			</MapMarkerStyledContainer>
 		</div>
 	{/snippet}
 </Story>

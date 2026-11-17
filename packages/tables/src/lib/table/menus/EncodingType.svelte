@@ -128,29 +128,44 @@
 </script>
 
 <Overlay overlayType="popover" hintLabel="Encoding">
-	<h2 class="text-large font-bold">Visual Encoding</h2>
+	<h2 class="label-lg">Visual Encoding</h2>
 
-	<h3 class="text-large font-bold">Rows</h3>
 	<RadioButtonGroup
+		label="Rows"
 		options={unaggregatedOptions}
 		name="cell-encoding"
-		bind:selectedId={selectedCellEncoding}
-		onChange={setCellEncoding}
+		bind:selectedId={
+			() => selectedCellEncoding,
+			(id) => {
+				selectedCellEncoding = id;
+				setCellEncoding();
+			}
+		}
 	/>
 
-	<h3 class="text-large font-bold">Groups</h3>
 	<RadioButtonGroup
+		label="Groups"
 		options={aggregatedOptions}
 		name="group-encoding"
-		bind:selectedId={selectedGroupEncoding}
-		onChange={setGroupEncoding}
+		bind:selectedId={
+			() => selectedGroupEncoding,
+			(id) => {
+				selectedGroupEncoding = id;
+				setGroupEncoding();
+			}
+		}
 	/>
 
-	<h3 class="text-large font-bold">Column Summary</h3>
 	<RadioButtonGroup
+		label="Column Summary"
 		options={aggregatedOptions}
 		name="column-encoding"
-		bind:selectedId={selectedColumnEncoding}
-		onChange={() => selectedColumnEncoding && setColumnEncoding()}
+		bind:selectedId={
+			() => selectedColumnEncoding,
+			(id) => {
+				selectedColumnEncoding = id;
+				setColumnEncoding();
+			}
+		}
 	/>
 </Overlay>

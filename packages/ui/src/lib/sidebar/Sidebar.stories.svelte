@@ -1,7 +1,7 @@
 <script module lang="ts">
 	import { AdjustmentsHorizontal, ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { SidebarLeftContext } from '../../../../../apps/docs/src/lib';
+	import { SidebarLeftContext } from '../../../../../apps/storybook/src/lib';
 	import LogoCIU from '../logos/LogoCIU.svelte';
 	import LogoMayor from '../logos/LogoMayor.svelte';
 	import Overlay from '../overlay/Overlay.svelte';
@@ -13,24 +13,33 @@
 	import SidebarSection from './elements/sidebarSection/SidebarSection.svelte';
 	import SidebarGroupTitle from './elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
 	import { First, Fourth, Second, Third } from './elements/sidebarTabs/demoSections';
+	import type { SidebarState } from './sidebarState.svelte';
 	import type { SidebarProps } from './types';
 
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import Button from '../button/Button.svelte';
-	import { subMenu } from '../navigationMenu/NavigationMenu.stories.svelte';
 	import NavigationMenu from '../navigationMenu/NavigationMenu.svelte';
 
-	export let tabs = [
+	let tabs = [
 		{ id: 'markers', label: 'Markers', icon: ChartBar, content: First },
 		{ id: 'filters', label: 'Filters', icon: Funnel, content: Second },
 		{ id: 'analysis', label: 'Analysis', icon: Map, content: Third },
 		{ id: 'layers', label: 'Layers', icon: MapPin, content: Fourth }
 	];
 
+	let subMenu = [
+		{ title: 'Accessibility', id: 'accessibility', href: '/accessibility' },
+		{ title: 'Brand', id: 'brand', href: '/brand' },
+		{ title: 'Color', id: 'color', href: '/color' },
+		{ title: 'Typography', id: 'typography', href: '/typography' },
+		{ title: 'Spacing', id: 'spacing', href: '/spacing' },
+		{ title: 'Design Tokens', id: 'design-tokens', href: '/design-tokens' }
+	];
+
 	/**
 	 * The `<Sidebar>` component renders a sidebar that is typically used to display controls and textual explanation.
 	 *
-	 * It should generally be used inside an [AppShell](.//?path=/docs/app-appshell--documentation).
+	 * It should generally be used inside an [AppShell](.//?path=/docs/ui-components-layout-and-themes-appshell--documentation).
 	 *
 	 * Note that when the sidebar is collapsed, it is removed by the `AppShell` (rather than merely being hidden).
 	 * Any state that should be restored when it is re-opened should be persisted in a Svelte Store.
@@ -40,7 +49,7 @@
 		title: 'Ui/Components - Layout And Themes/Sidebar',
 		component: Sidebar,
 		tags: ['autodocs'],
-		decorators: [() => SidebarLeftContext as any],
+		decorators: [() => ({ Component: SidebarLeftContext as any })],
 		render: defaultTemplate,
 		parameters: {
 			layout: 'fullscreen',
@@ -57,7 +66,7 @@
 		},
 		argTypes: {
 			width: {
-				options: ['standard', 'wide'],
+				options: ['slim', 'standard', 'wide'],
 				control: { type: 'radio' }
 			},
 			theme: {
@@ -82,7 +91,7 @@
 
 	let selectedTabId = $state('markers');
 
-	let sidebarState = $state();
+	let sidebarState: SidebarState | undefined = $state();
 
 	// Snippets for stories. Defaults defined as args, overridden per story as needed
 </script>
@@ -149,6 +158,8 @@
 
 <Story name="Default" />
 
+<Story name="Slim" args={{ width: 'slim' }} />
+
 <Story name="Wide" args={{ width: 'wide' }} />
 
 {#snippet longcontent()}
@@ -182,8 +193,16 @@
 <Story name="Externally Controlled">
 	{#snippet template(args: SidebarProps)}
 		<div class="w-96">
-			<Button onclick={() => (sidebarState.isOpen = true)}>Open</Button>
-			<Button onclick={() => (sidebarState.isOpen = false)}>Close</Button>
+			<Button
+				onclick={() => {
+					if (sidebarState) sidebarState.isOpen = true;
+				}}>Open</Button
+			>
+			<Button
+				onclick={() => {
+					if (sidebarState) sidebarState.isOpen = false;
+				}}>Close</Button
+			>
 		</div>
 
 		<Sidebar {...args} bind:state={sidebarState}></Sidebar>
@@ -224,8 +243,8 @@
 <Story name="Light Theme with Tabs" args={{ theme: 'light', tabs }} />
 
 {#snippet unstyledContent()}
-	<div class="bg-color-ui-background-notice p-4 text-color-text-primary">
-		<p class="text-bold mb-2 text-xl">Unstyled Content</p>
+	<div class="bg-color-surface-accent p-4 text-color-text">
+		<p class="label-lg mb-2">Unstyled Content</p>
 		<p class="mb-2">
 			This content does not inherit styles directly from the sidebar. Though it will be affected by
 			the .dark class modifier...
@@ -253,4 +272,16 @@
 
 <Story name="With custom trigger icon" args={{ icon }} />
 
-<Story name="With custom classes" args={{ class: '[&_*]:!bg-color-ui-primary !pb-0' }} />
+<Story name="With custom classes" args={{ class: '[&_*]:!bg-color-surface-accent !pb-0' }} />
+
+<!--
+The sidebar starts collapsed: only the toggle button (or tab strip) is shown until it is opened.
+This documents the primary collapsed appearance, which every other story opens out of.
+-->
+<Story name="Collapsed (closed) state" />
+
+<!--
+Combines `width='wide'`, `placement='right'` and `tabs`, exercising the
+right + wide + tabs entry of the width/height lookup matrix.
+-->
+<Story name="Right placement with wide tabs" args={{ placement: 'right', width: 'wide', tabs }} />

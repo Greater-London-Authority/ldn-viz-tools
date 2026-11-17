@@ -1,19 +1,19 @@
 <script lang="ts">
 	/**
-	 * The `<CheckboxGroupSolid>` component provides a way to create a set of `<CheckboxSolid>` components defined by an array of objects.
+	 * The `<CheckboxGroupSolid>` component provides a way to create a set of [CheckboxSolid](./?path=/docs/ui-components-checkboxes-checkboxsolid--documentation) components defined by an array of objects.
 	 *
 	 * **Alternatives**: if representing a set of options that are mutually exclusive, use the [RadioButtonSolid](./?path=/docs/ui-components-radiobuttons-radiobuttongroupsolid--documentation).
 	 * Consider using the [Checkbox](./?path=/docs/ui-components--checkboxes-checkbox--documentation)/[CheckboxGroup](./?path=/docs/ui-components-checkboxes-checkboxgroup--documentation).
 	 * @component
 	 */
 
-	import type { InputProps } from '$lib/input/types';
+	import type { InputProps } from '../input/types';
 	import type { Snippet } from 'svelte';
 	import Checkbox from '../checkBox/Checkbox.svelte';
 	import InputWrapper from '../input/InputWrapper.svelte';
 	import { randomId } from '../utils/randomId';
 	import CheckboxSolid from './CheckboxSolid.svelte';
-	import type { CheckboxSolidProps } from './types';
+	import type { CheckboxSolidOption } from './types';
 
 	interface CheckboxGroupSolidProps extends InputProps {
 		/**
@@ -27,7 +27,7 @@
 		 * * `hintLabel` (string, optional) - text to be displayed next to icon in tooltip trigger
 		 * * `customOverlay` (Snippet, optional) - a custom overlay component
 		 */
-		options: Omit<CheckboxSolidProps, 'checked'>[];
+		options: CheckboxSolidOption[];
 
 		/**
 		 * An array containing the `id` of each entry in the `options` array for which the corresponding checkbox is selected.
@@ -123,8 +123,16 @@
 	{disabled}
 	{optional}
 	{customOverlay}
+	isGroup
 >
-	<div {id} role="group" aria-label={ariaLabel} class="flex flex-col space-y-1">
+	<div
+		{id}
+		role="group"
+		aria-label={ariaLabel}
+		aria-labelledby={label ? `${id}-label` : undefined}
+		aria-describedby={errorId ?? descriptionId}
+		class="flex flex-col space-y-1"
+	>
 		{#if !hideSelectAll}
 			<!--
 			form="" should prevent this checkbox from being included in form
@@ -152,7 +160,7 @@
 						disabled={option.disabled || disabled}
 						checked={selectionState[option.id]}
 						icon={option.icon}
-						rawIcon={option.rawIcon}
+						RawIcon={option.rawIcon}
 						iconPlacement={option.iconPlacement}
 						onchange={() => updateSelectedOptions(option.id)}
 					/>

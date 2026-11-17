@@ -1,6 +1,8 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Map from './Map.svelte';
+	import type { MapCursorTypeStore } from './mapCursor/types';
+	import type { MapLibreStore } from './types';
 
 	import * as os_light_vts from '../themes/os_light_vts.json';
 
@@ -25,7 +27,6 @@
 		title: 'Maps/Components/Map',
 		component: Map,
 		tags: ['autodocs'],
-		render: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -41,7 +42,7 @@
 				}
 			},
 			options: {
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'object',
@@ -50,7 +51,7 @@
 				}
 			},
 			mapStore: {
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'Svelte store',
@@ -59,7 +60,7 @@
 				}
 			},
 			mapCursorStore: {
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'Svelte store',
@@ -68,7 +69,7 @@
 				}
 			},
 			whenMapLoads: {
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'function',
@@ -77,7 +78,7 @@
 				}
 			},
 			whenMapUnloads: {
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'function',
@@ -86,7 +87,7 @@
 				}
 			},
 			lightStyle: {
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'object',
@@ -95,7 +96,7 @@
 				}
 			},
 			darkStyle: {
-				control: 'none',
+				control: false,
 				table: {
 					type: {
 						summary: 'object',
@@ -111,7 +112,7 @@
 		}
 	});
 
-	let map = $state();
+	let map: MapLibreStore | undefined = $state();
 </script>
 
 <script lang="ts">
@@ -130,13 +131,11 @@
 	const castAsMapLibreStyle = (style: unknown): MapLibreStyle => {
 		return style as MapLibreStyle;
 	};
-</script>
 
-{#snippet defaultTemplate({ args })}
-	<div class="h-[100dvh] w-[100dvw]">
-		<Map {...args}>I'm a map!</Map>
-	</div>
-{/snippet}
+	let mapCursor: MapCursorTypeStore | undefined = $state();
+	let mapMounted = $state(true);
+	let unloadCount = $state(0);
+</script>
 
 <Story name="Responsive to theme">
 	{#snippet template(args)}
@@ -231,7 +230,7 @@ This demonstrates how you can bind to the maplibre `map` object.
 -->
 <Story name="Accessing map object">
 	{#snippet template()}
-		<Button onclick={() => $map.flyTo({ center: [-0.124, 51.5], zoom: 15 })}>Fly!</Button>
+		<Button onclick={() => $map?.flyTo({ center: [-0.124, 51.5], zoom: 15 })}>Fly!</Button>
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				whenMapLoads={loadTestLayers}
@@ -241,6 +240,123 @@ This demonstrates how you can bind to the maplibre `map` object.
 					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
 				bind:mapStore={map}
+			/>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+When `disabled` is set the map is not initialised at all: the underlying
+MapLibre instance is never created and no basemap is rendered. This is useful
+during development of non-map UI to avoid unnecessary map rendering.
+-->
+<Story name="Disabled">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw] border border-gray-500">
+			<Map
+				disabled
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				The map is disabled, so nothing is rendered here.
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+Passes MapLibre `MapOptions` beyond `transformRequest`. Here `center`, `zoom`
+and `maxBounds` are supplied, and the default `bounds` is cleared (set to
+`undefined`) so that the `center`/`zoom` view is used instead of the default
+Greater London bounds.
+-->
+<Story name="Custom MapOptions">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY),
+					bounds: undefined,
+					center: [-0.1276, 51.5072],
+					zoom: 13,
+					maxBounds: [
+						[-0.5103, 51.2868],
+						[0.334, 51.6919]
+					]
+				}}
+			/>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+With both `lightStyle` and `darkStyle` set to `null`, `identifyStyle` falls
+back to the default `theme_os_light_vts` basemap regardless of the current
+theme mode.
+-->
+<Story name="Both styles null (fallback)">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				lightStyle={null}
+				darkStyle={null}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			/>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+Demonstrates the `whenMapUnloads` callback. Toggling the button mounts and
+unmounts the `<Map>`; on unmount the component tears down the MapCursor store
+and invokes `whenMapUnloads`, which here increments a counter.
+
+TODO: whenMapUnloads doesn't seem to be called
+-->
+<Story name="Unload cleanup (whenMapUnloads)">
+	{#snippet template()}
+		<Button onclick={() => (mapMounted = !mapMounted)}>
+			{mapMounted ? 'Unmount map' : 'Mount map'}
+		</Button>
+		<p>whenMapUnloads called {unloadCount} time(s).</p>
+		<div class="h-[100dvh] w-[100dvw]">
+			{#if mapMounted}
+				<Map
+					whenMapLoads={loadTestLayers}
+					whenMapUnloads={() => {
+						console.log('UNMOUNTED!');
+						unloadCount += 1;
+					}}
+					options={{
+						transformRequest: appendOSKeyToUrl(OS_KEY)
+					}}
+				/>
+			{/if}
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+This demonstrates how you can bind to the `mapCursorStore`, giving access to
+the `MapCursor` instance (parallel to the `Accessing map object` story which
+binds `mapStore`).
+-->
+<Story name="Binding mapCursorStore">
+	{#snippet template()}
+		<Button onclick={() => console.log('MapCursor instance:', $mapCursor)}>Log MapCursor</Button>
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+				bind:mapCursorStore={mapCursor}
 			/>
 		</div>
 	{/snippet}

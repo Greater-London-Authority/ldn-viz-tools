@@ -32,12 +32,23 @@
 	}: Props = $props();
 
 	const colorClass: Record<FlagCondition, string> = {
-		alpha: 'bg-color-ui-alpha',
-		beta: 'bg-color-ui-beta',
-		alert: 'bg-color-ui-negative',
-		warning: 'bg-color-ui-caution',
-		positive: 'bg-color-ui-positive',
-		notice: 'bg-color-ui-notice'
+		alpha: 'bg-color-surface-alpha',
+		beta: 'bg-color-surface-beta',
+		alert: 'bg-color-surface-negative',
+		warning: 'bg-color-surface-caution',
+		positive: 'bg-color-surface-positive',
+		notice: 'bg-color-surface-accent'
+	};
+
+	// The status fills lighten in dark mode, so their text darkens with inverse-text.
+	// The alpha and beta fills stay dark enough for white in both modes.
+	const textClass: Record<FlagCondition, string> = {
+		alpha: 'text-color-static-white',
+		beta: 'text-color-static-white',
+		alert: 'text-color-inverse-text',
+		warning: 'text-color-inverse-text',
+		positive: 'text-color-inverse-text',
+		notice: 'text-color-inverse-text'
 	};
 
 	const defaultMessage = {
@@ -51,9 +62,12 @@
 </script>
 
 <div
-	class={classNames('flex h-fit min-h-[24px] w-full justify-between px-4', colorClass[condition])}
+	class={classNames(
+		'typeset-product flex h-fit min-h-[24px] w-full justify-between px-4',
+		colorClass[condition]
+	)}
 >
-	<div class="text-base uppercase text-color-static-white">
+	<div class={classNames('label-md uppercase', textClass[condition])}>
 		<!-- The message to be displayed in the flag. -->
 		{#if children}
 			{@render children()}
@@ -63,6 +77,6 @@
 	</div>
 
 	{#if link}
-		<a href={link} class="text-color-static-white underline">{linkText}</a>
+		<a href={link} class={classNames('underline', textClass[condition])}>{linkText}</a>
 	{/if}
 </div>

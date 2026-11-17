@@ -1,0 +1,52 @@
+[
+	{
+		"Year": "2015-01-01",
+		"Opinion": "Very Negative",
+		"Percent": 0.15
+	},
+	{
+		"Year": "2015-01-01",
+		"Opinion": "Quite Negative",
+		"Percent": 0.25
+	},
+	{
+		"Year": "2015-01-01",
+		"Opinion": "Don't Know",
+		"Percent": 0.15
+	},
+	{
+		"Year": "2015-01-01",
+		"Opinion": "Quite Positive",
+		"Percent": 0.15
+	},
+	{
+		"Year": "2015-01-01",
+		"Opinion": "Very Positive",
+		"Percent": 0.3
+	},
+	{
+		"Year": "2025-01-01",
+		"Opinion": "Very Negative",
+		"Percent": 0.4
+	},
+	{
+		"Year": "2025-01-01",
+		"Opinion": "Quite Negative",
+		"Percent": 0.1
+	},
+	{
+		"Year": "2025-01-01",
+		"Opinion": "Don't Know",
+		"Percent": 0.05
+	},
+	{
+		"Year": "2025-01-01",
+		"Opinion": "Quite Positive",
+		"Percent": 0.25
+	},
+	{
+		"Year": "2025-01-01",
+		"Opinion": "Very Positive",
+		"Percent": 0.2
+	}
+]

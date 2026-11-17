@@ -1,10 +1,9 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import { format } from 'd3-format';
 	import { monthlyData } from '../../../data/demoData';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
-	import { format } from 'd3-format';
-
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Line Charts'
 	});

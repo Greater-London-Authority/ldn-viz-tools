@@ -4,8 +4,12 @@
 	import NavigationMenu from './NavigationMenu.svelte';
 
 	/**
-	 * Primarily intended to be used in vertical orientation in a sidebar or horizontal in the header,
-	 * The `NavigationMenu` component is used to display navigation that can be one or more layers deep.
+	 * The `<NavigationMenu>` component renders a `<nav>` landmark holding a nested list of links, up to four levels deep.
+	 * An item with children has a chevron button that expands or collapses its list, unless `isAlwaysExpanded` is set.
+	 * Set `orientation` to `horizontal` to lay the top level out in a row, with each submenu floating below its item.
+	 *
+	 * **Alternatives**: use [Breadcrumbs](./?path=/docs/ui-components-breadcrumbs--documentation) to show where the current page sits in a hierarchy, or [Tabs](./?path=/docs/ui-components-tabs--documentation) to switch between views on one page.
+	 *
 	 */
 
 	const { Story } = defineMeta({
@@ -29,7 +33,7 @@
 	let activeMenuItemId = $state('layout');
 	let activeMenuItemId2 = $state('applications');
 
-	export let subMenu = [
+	let subMenu = [
 		{ title: 'Accessibility', id: 'accessibility', href: '/accessibility' },
 		{ title: 'Brand', id: 'brand', href: '/brand' },
 		{ title: 'Color', id: 'color', href: '/color' },
@@ -140,12 +144,6 @@
 	{/snippet}
 </Story>
 
-<Story name="Horizontal">
-	{#snippet template(args)}
-		<NavigationMenu {...args} {items} orientation="horizontal" />
-	{/snippet}
-</Story>
-
 <!-- The component takes a width prop that can accept Tailwind width classes -->
 <Story name="Width by class">
 	{#snippet template(args)}
@@ -214,7 +212,11 @@
 		<NavigationMenu
 			{...args}
 			ariaLabel="horizontally oriented menu"
-			items={[...items, { title: 'No child items', id: 'no-child', href: '/' }]}
+			items={[
+				{ title: 'No child items', id: 'no-child', href: '/' },
+				...items,
+				{ title: 'No child items', id: 'no-child', href: '/' }
+			]}
 			orientation="horizontal"
 		/>
 	{/snippet}
@@ -233,7 +235,7 @@
 
 <Story name="Programmatically change active item">
 	{#snippet template(args)}
-		<div class="flex flex-col gap-4">
+		<div class="flow-standard typeset-product">
 			<div class="flex flex-wrap gap-2">
 				<span>Select:</span>
 				<Button onclick={() => (activeMenuItemId = 'applications')} size="sm">
@@ -254,44 +256,46 @@
 				</Button>
 				<Button onclick={() => (activeMenuItemId = 'dv-maps')} size="sm">DV Maps (level 3)</Button>
 			</div>
-		</div>
 
-		<div class="text-sm text-color-text-secondary">
-			Current active ID: <strong>{activeMenuItemId}</strong>
-		</div>
+			<div class="body-sm text-color-text-muted">
+				Current active ID: <strong>{activeMenuItemId}</strong>
+			</div>
 
-		<div class="max-w-96">
-			<NavigationMenu
-				{...args}
-				ariaLabel="programmatic selection menu"
-				{items}
-				bind:activeMenuItemId
-			/>
+			<div class="mt-flow-section max-w-96">
+				<NavigationMenu
+					{...args}
+					ariaLabel="programmatic selection menu"
+					{items}
+					bind:activeMenuItemId
+				/>
+			</div>
 		</div>
 	{/snippet}
 </Story>
 
 <Story name="Two menus on page">
 	{#snippet template(args)}
-		<div class="flex w-full gap-6">
-			<div>
-				<div class="text-sm text-color-text-secondary">
-					Current active ID: <strong>{activeMenuItemId}</strong>
-				</div>
+		<div class="flow-standard typeset-product">
+			<div class="gap-flow grid grid-cols-2">
+				<div>
+					<div class="body-sm mb-4 text-color-text-muted">
+						Current active ID: <strong>{activeMenuItemId}</strong>
+					</div>
 
-				<NavigationMenu {...args} ariaLabel="example-menu" {items} bind:activeMenuItemId />
-			</div>
-			<div>
-				<div class="text-sm text-color-text-secondary">
-					Current active ID: <strong>{activeMenuItemId2}</strong>
+					<NavigationMenu {...args} ariaLabel="example-menu" {items} bind:activeMenuItemId />
 				</div>
+				<div>
+					<div class="body-sm mb-4 text-color-text-muted">
+						Current active ID: <strong>{activeMenuItemId2}</strong>
+					</div>
 
-				<NavigationMenu
-					{...args}
-					ariaLabel="example-menu"
-					{items}
-					bind:activeMenuItemId={activeMenuItemId2}
-				/>
+					<NavigationMenu
+						{...args}
+						ariaLabel="example-menu"
+						{items}
+						bind:activeMenuItemId={activeMenuItemId2}
+					/>
+				</div>
 			</div>
 		</div>
 	{/snippet}

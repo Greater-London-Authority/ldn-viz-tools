@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { computeWidths } from '../core/lib/computeWidths';
-
+	import type { DataDownloadOption, ImageDownloadOption } from '@ldn-viz/ui';
 	import VirtualScroll from 'svelte-virtual-scroll-list';
-	import { TableData } from '../core/lib/dataObj';
+	import { TableState } from '../core/lib/tableState.svelte';
+	import type { TableSpec } from '../core/lib/types';
 	import TableContainer from './TableContainer.svelte';
 	import GroupRowsMenu from './menus/GroupRowsMenu.svelte';
 	import SortGroupsMenu from './menus/SortGroupsMenu.svelte';
@@ -31,6 +31,15 @@
 		 */
 		subTitle?: string;
 		/**
+		 * Accessible name for the table. Defaults to `title`, without any HTML tags.
+		 */
+		ariaLabel?: string;
+		/**
+		 * The heading level of the title, passed to `TableContainer`. It changes the element, not the styling;
+		 * leave it unset for a title that isn't a heading.
+		 */
+		headingLevel?: 2 | 3 | 4 | 5 | 6;
+		/**
 		 * What appears in the footer:
 		 *
 		 * * `byline` (string) - statement of who created the visualization
@@ -41,23 +50,19 @@
 		byline?: string;
 		note?: string;
 		/**
-		 * Data Download Button in the footer
+		 * The data formats offered by the download button in the footer.
 		 *
-		 * Defaults to `true` which allows user to select download in either 'CSV' or 'JSON' format.
-		 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'.
-		 * If set to `false`, then the button is hidden.
-		 *
+		 * Defaults to `true`, which offers 'CSV' and 'JSON'. An array of formats offers only those formats.
+		 * `false` offers no data formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		dataDownloadButton?: true | false | ('CSV' | 'JSON')[];
+		dataDownload?: DataDownloadOption;
 		/**
-		 * Image Download Button in the footer
+		 * The image formats offered by the download button in the footer.
 		 *
-		 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
-		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'.
-		 * If set to `false`, then the button is hidden.
-		 *
+		 * Defaults to `['PNG']`. `true` offers 'PNG' and 'SVG'. An array of formats offers only those formats.
+		 * `false` offers no image formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
+		imageDownload?: ImageDownloadOption;
 		/**
 		 * The file name to be used for the downloaded data or image file.
 		 */
@@ -69,7 +74,7 @@
 		/**
 		 * Exposes the internal table object, so that it can be programmatically manipulated.
 		 */
-		// tableObj?: TableData | undefined;
+		// tableObj?: TableState | undefined;
 		/**
 		 * If `true`, then rows of the table will alternate in color, making it easier to see which cells are on the same row.
 		 */
@@ -122,11 +127,13 @@
 		tableSpec,
 		title = '',
 		subTitle = '',
+		ariaLabel = undefined,
+		headingLevel = undefined,
 		source = '',
 		byline = '',
 		note = '',
-		dataDownloadButton = true,
-		imageDownloadButton = ['PNG'],
+		dataDownload = true,
+		imageDownload = ['PNG'],
 		filename = '',
 		height = 1000,
 		// tableObj = $bindable(undefined),
@@ -144,51 +151,38 @@
 		beforeTable
 	}: Props = $props();
 
-	let colWidths = $state([]);
+	// The title can hold HTML, so take its text for the name
+	let tableName = $derived(ariaLabel ?? title.replace(/<[^>]*>/g, '').trim());
 
-	// this is a hack to trigger updates after the tableObj object ha changes in a way that Svelte isn't keeping track of
-	let updateTrigger = $state(0);
+	const createTable = (data: any[], tableSpec: TableSpec) => {
+		const to = new TableState(tableSpec);
 
-	const createTable = (data: any[]) => {
-		const to = new TableData(tableSpec);
-
-		// to.setOnRowsChange(() => tableObj = tableObj));
-
-		to.setData(data);
-		to.setColumnSpec(tableSpec.columns);
-		to.setRowOrder([
+		to.rawData = data;
+		to.columnSpec = tableSpec.columns;
+		to.rowOrderSpec = [
 			{
 				field: 'a',
 				direction: 'ascending'
 			}
-		]);
+		];
 
 		if (fixedTableWidth) {
-			computeWidths(to, fixedTableWidth);
-			// TODO: should set tableWidth to match
+			to.tableWidth = fixedTableWidth;
 		}
 
 		return to;
 	};
 
-	const setColSpec = (tableObj: TableData, tableSpec: { columns: any }) => {
-		if (tableObj) {
-			tableObj.setColumnSpec(tableSpec.columns);
+	// when data is updated, update the table object rather than creating a new one
+	// svelte-ignore state_referenced_locally
+	const tableObj = createTable(data, tableSpec);
+	$effect(() => {
+		if (tableObj && data) {
+			tableObj.rawData = data;
 		}
-	};
-
-	let tableObj = $derived.by(() => {
-		const to = createTable(data);
-
-		setColSpec(to, tableSpec);
-
-		return to;
 	});
 
 	let visualRows: any[] = $derived.by(() => {
-		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-		updateTrigger; // run when grouping or ordering changes
-
 		const vr = [];
 
 		for (let group of tableObj!.groups) {
@@ -212,127 +206,116 @@
 
 	let tableWidth: number | undefined = $state();
 
-	const updateTableWidths = (tableObj: any, newWidth: number) => {
-		if (tableObj && !fixedTableWidth) {
-			computeWidths(tableObj, newWidth);
-			colWidths = tableObj.columnSpec.map((col: { computedWidth: any }) => col.computedWidth);
-		}
-	};
-
+	// Update table width when container width changes
 	$effect(() => {
-		if (tableWidth) updateTableWidths(tableObj, tableWidth);
+		if (tableObj && tableWidth && !fixedTableWidth) {
+			tableObj.tableWidth = tableWidth;
+		}
 	});
 
 	const beforeTable_render = $derived(beforeTable);
 </script>
 
-{#key [colWidths, updateTrigger]}
-	{#if tableObj && tableObj.extents}
-		<div style:width={fixedTableWidth ? fixedTableWidth + 'px' : '100%'}>
-			<div class="ml-4 flex w-[430px] gap-2">
-				{#if allowRowGrouping}
-					<GroupRowsMenu table={tableObj} onChange={() => updateTrigger++} />
-					<SortGroupsMenu table={tableObj} onChange={() => updateTrigger++} />
-				{/if}
+{#if tableObj && tableObj.extents}
+	<div style:width={fixedTableWidth ? fixedTableWidth + 'px' : '100%'}>
+		<div class="ml-4 flex w-[430px] gap-2">
+			{#if allowRowGrouping}
+				<GroupRowsMenu table={tableObj} />
+				<SortGroupsMenu table={tableObj} />
+			{/if}
 
-				{#if allowColumnHiding}
-					<ToggleColumnsMenu table={tableObj} onChange={() => updateTrigger++} />
-				{/if}
-			</div>
-
-			<TableContainer
-				{data}
-				{title}
-				{subTitle}
-				{source}
-				{byline}
-				{note}
-				{dataDownloadButton}
-				{imageDownloadButton}
-				{filename}
-				{columnMapping}
-			>
-				{#snippet beforeTable()}
-					{#if beforeTable}
-						<!-- Content to be inserted below the title and subtitle, but above the table itself. -->
-						{@render beforeTable_render?.()}
-					{/if}
-				{/snippet}
-
-				{#snippet table()}
-					<div
-						class="w-full table-auto text-sm text-color-text-primary"
-						bind:clientWidth={tableWidth}
-						role="table"
-					>
-						{#if tableSpec.showTableHeader !== false}
-							<TableHeader
-								{tableSpec}
-								table={tableObj}
-								{data}
-								{allowSorting}
-								{tableWidth}
-								onChange={() => updateTrigger++}
-							/>
-						{/if}
-
-						{#if paginate}
-							<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
-								{#each visualRows as visualRow, i (visualRow)}
-									{#if i >= (page - 1) * pageSize && i <= page * pageSize - 1}
-										<RowRenderer spec={visualRow} table={tableObj} />
-									{/if}
-								{/each}
-							</div>
-						{:else if virtualise}
-							<div
-								style:height={`${height - 100}px`}
-								style:width={tableWidth}
-								class:stripedVirtual={zebraStripe}
-								role="rowgroup"
-							>
-								<VirtualScroll data={visualRows} key="uniqueKey">
-									{#snippet children({ data }: any)}
-										<RowRenderer spec={data} table={tableObj} />
-									{/snippet}
-								</VirtualScroll>
-							</div>
-						{:else}
-							<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
-								{#each visualRows as visualRow (visualRow)}
-									<RowRenderer spec={visualRow} table={tableObj} />
-								{/each}
-							</div>
-						{/if}
-					</div>
-				{/snippet}
-
-				{#snippet paginationControls()}
-					<div>
-						{#if paginate}
-							<PaginationControls {pageSize} numRows={data.length} bind:page />
-						{/if}
-					</div>
-				{/snippet}
-
-				{#snippet numRowsControlSlot()}
-					<div>
-						{#if paginate && allowPageSizeChanges}
-							<NumRowsControls bind:pageSize bind:page />
-						{/if}
-					</div>
-				{/snippet}
-			</TableContainer>
+			{#if allowColumnHiding}
+				<ToggleColumnsMenu table={tableObj} />
+			{/if}
 		</div>
-	{/if}
-{/key}
+
+		<TableContainer
+			{data}
+			{title}
+			{headingLevel}
+			subtitle={subTitle}
+			{source}
+			{byline}
+			{note}
+			{dataDownload}
+			{imageDownload}
+			{filename}
+			{columnMapping}
+		>
+			{#snippet beforeTable()}
+				{#if beforeTable}
+					<!-- Content to be inserted below the title and subtitle, but above the table itself. -->
+					{@render beforeTable_render?.()}
+				{/if}
+			{/snippet}
+
+			{#snippet table()}
+				<div
+					class="table-body w-full table-auto text-color-text"
+					bind:clientWidth={tableWidth}
+					role="table"
+					aria-label={tableName || undefined}
+				>
+					{#if tableSpec.showTableHeader !== false}
+						<TableHeader {tableSpec} table={tableObj} {data} {allowSorting} {tableWidth} />
+					{/if}
+
+					{#if paginate}
+						<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
+							{#each visualRows as visualRow, i (visualRow)}
+								{#if i >= (page - 1) * pageSize && i <= page * pageSize - 1}
+									<RowRenderer spec={visualRow} table={tableObj} />
+								{/if}
+							{/each}
+						</div>
+					{:else if virtualise}
+						<div
+							style:height={`${height - 100}px`}
+							style:width={tableWidth}
+							class:stripedVirtual={zebraStripe}
+							role="rowgroup"
+						>
+							<VirtualScroll data={visualRows} key="uniqueKey">
+								{#snippet children({ data }: any)}
+									<RowRenderer spec={data} table={tableObj} />
+								{/snippet}
+							</VirtualScroll>
+						</div>
+					{:else}
+						<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
+							{#each visualRows as visualRow (visualRow)}
+								<RowRenderer spec={visualRow} table={tableObj} />
+							{/each}
+						</div>
+					{/if}
+				</div>
+			{/snippet}
+
+			{#snippet paginationControls()}
+				<div>
+					{#if paginate}
+						<PaginationControls {pageSize} numRows={data.length} bind:page />
+					{/if}
+				</div>
+			{/snippet}
+
+			{#snippet numRowsControlSlot()}
+				<div>
+					{#if paginate && allowPageSizeChanges}
+						<NumRowsControls bind:pageSize bind:page />
+					{/if}
+				</div>
+			{/snippet}
+		</TableContainer>
+	</div>
+{/if}
 
 <style lang="postcss">
 	:global(.striped > div:nth-child(odd)) {
-		@apply bg-color-ui-background-secondary;
+		@apply bg-color-surface-muted;
 	}
 
 	:global(.stripedVirtual > div:first-child > div:first-child > div:nth-child(odd)) {
-		@apply bg-color-ui-background-secondary;
+		@apply bg-color-surface-muted;
 	}
 </style>

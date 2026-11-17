@@ -4,6 +4,7 @@
 	 * @component
 	 */
 	import type { CategoricalTickProps } from '$lib/core/renderers/CategoricalTickProps';
+	import { theme } from '@ldn-viz/ui';
 	import { format } from 'd3-format';
 	import { getVal } from '../../getVal';
 
@@ -11,7 +12,7 @@
 
 	let {
 		value,
-		color = 'black',
+		color = theme.tokenNameToValue('chart.label'),
 		posScale,
 		showValues = true,
 		..._rest

@@ -62,3 +62,34 @@
 		</div>
 	{/snippet}
 </Story>
+
+<!-- With `iconOnly` set, only the icon is rendered (no message text). -->
+<Story name="Icon only">
+	{#snippet template()}
+		<div class="flex flex-col">
+			<GoodOrBad value={2} benchmarkValue={5} goodIs="high" iconOnly={true} />
+			<GoodOrBad value={7} benchmarkValue={5} goodIs="high" iconOnly={true} />
+		</div>
+	{/snippet}
+</Story>
+
+<!-- `benchmarkLabel` is interpolated into the comparison message. -->
+<Story name="With benchmarkLabel">
+	{#snippet template()}
+		<GoodOrBad value={2} benchmarkValue={5} goodIs="high" benchmarkLabel="the London average of" />
+	{/snippet}
+</Story>
+
+<!-- A non-numeric value skips the `typeof value === 'number'` comparison, so no icon/message is shown. -->
+<Story name="Non-numeric value">
+	{#snippet template()}
+		<GoodOrBad value="N/A" benchmarkValue={5} goodIs="high" />
+	{/snippet}
+</Story>
+
+<!-- When the value equals the benchmark (diff === 0) the neutral Minus icon is shown. -->
+<Story name="Equal value">
+	{#snippet template()}
+		<GoodOrBad value={5} benchmarkValue={5} goodIs="high" />
+	{/snippet}
+</Story>

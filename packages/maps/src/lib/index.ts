@@ -2,6 +2,7 @@
 export * from './map/Map.svelte';
 export { default as Map } from './map/Map.svelte';
 export * from './map/types';
+export * from './map/mapCursor/types';
 export * from './map/util';
 
 // Controls
@@ -11,6 +12,7 @@ export { default as MapControlPan } from './mapControlPan/MapControlPan.svelte';
 export { default as MapControlRefresh } from './mapControlRefresh/MapControlRefresh.svelte';
 export { default as MapControlZoom } from './mapControlZoom/MapControlZoom.svelte';
 export { default as MapLegend } from './mapLegend/MapLegend.svelte';
+export { default as MapPointSearch } from './mapPointSearch/MapPointSearch.svelte';
 
 // Location Search
 export { default as MapControlGeocoder } from './mapControlLocationSearch/MapControlGeocoder.svelte';
@@ -49,6 +51,11 @@ export { default as BoroughsContextLayer } from './mapContextLayers/boroughsCont
 // Deck.gl
 export { default as MapDeckOverlay } from './mapDeckOverlay/MapDeckOverlay.svelte';
 
+export * from './mapDeckLayers/canvasIconLayer/canvasIconLayer';
+export * from './mapDeckLayers/clusterLayer/index';
+export * from './mapDeckLayers/multiClusterLayer/multiClusterLayer';
+export * from './mapDeckLayers/nonOverlappingLayer/nonOverlappingGlyphLayer';
+
 // Drawing
 export { default as MapDraw } from './mapDraw/MapDraw.svelte';
 export * from './mapDraw/utils';
@@ -57,7 +64,13 @@ export * from './mapDraw/utils';
 export * from './themes/animations';
 export * from './themes/bounds';
 
-export * as theme_os_dark from './themes/os_dark.json';
-export * as theme_os_dark_grey_muted_buildings from './themes/os_dark_grey_muted_buildings.json';
-export * as theme_os_greyscale from './themes/os_greyscale.json';
-export * as theme_os_light_vts from './themes/os_light_vts.json';
+import * as theme_os_dark from './themes/os_dark.json';
+import * as theme_os_dark_grey_muted_buildings from './themes/os_dark_grey_muted_buildings.json';
+import * as theme_os_greyscale from './themes/os_greyscale.json';
+import * as theme_os_light_vts from './themes/os_light_vts.json';
+export {
+	theme_os_dark,
+	theme_os_dark_grey_muted_buildings,
+	theme_os_greyscale,
+	theme_os_light_vts
+};

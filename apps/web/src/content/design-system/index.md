@@ -1,52 +1,40 @@
 ---
-title: Overview
+title: Design System
 description: A unified approach to UI design, data presentation and mapping.
-section: Overview
+heroImage: header-design-system.svg
+thumbnail: cta-design-system.svg
 ---
 
 <script>
-	import { Button, PlaceholderImage } from '@ldn-viz/ui'
+    import ImageLink from '$lib/components/ImageLink.svelte';
 </script>
 
-The London City Data team have developed this design system to coordinate the design of web applications, product templates and documentation.
+<p class="subtitle-lg">The London City Data team have developed this design system to coordinate the design of web applications, product templates and documentation.</p>
 
-<div class="space-y-4 text-center mb-8">
-    <a href="/design-system/introduction" class="h-60 block">
-        <PlaceholderImage />
-    </a>
-    <Button href="/design-system/foundations">Get started</Button>
-</div>
+<div class="not-typeset mt-flow-section grid sm:grid-cols-3 grid-rows-[auto] gap-flow">
 
-<div class="grid grid-cols-3 grid-rows-[auto] gap-4 product">
-    <div>
-        <a href="/design-system/foundations">
-    <div class="h-60">
-        <PlaceholderImage />
-    </div>
-        </a>
-        <h3 class="title-sm mt-2">Foundations</h3>
-        <p>A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
-        <Button href="/design-system/foundations" variant="outline">Read more</Button>
-    </div>
-    <div>
-        <a href="/design-system/application-design" >
-    <div class="h-60">
-        <PlaceholderImage />
-    </div>
-        </a>
-        <h3 class="title-sm mt-2">Application Design</h3>
-        <p>A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
-        <Button href="/design-system/application-design" variant="outline">Read more</Button>
-    </div>
-    <div>
-        <a href="/design-system/data-visualisation">
-    <div class="h-60">
-        <PlaceholderImage />
-    </div>
-        </a>
-        <h3 class="title-sm mt-2">Data Visualisation</h3>
-        <p>A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
-        <Button href="/design-system/data-visualisation" variant="outline">Read more</Button>
-    </div>
+<ImageLink
+    url="/design-system/foundations"
+    image="cta-foundations.svg"
+    title="Foundations">
+
+<p>Type, colour, spacing and other essentials. The rules every product built with the system follows, from a single chart to a full application.</p>
+</ImageLink>
+
+<ImageLink
+    url="/design-system/application-design"
+    image="cta-application-design.svg"
+    title="Application Design">
+
+<p>Guiding principles for consistent presentation. Regular patterns and structures applied to our applications and products.</p>
+</ImageLink>
+
+<ImageLink
+    url="/design-system/data-visualisation"
+    image="cta-dataviz.svg"
+    title="Data Visualisation">
+
+<p>Good data visualisation isn’t just for internal decision making, it’s crucial for helping Londoners to better understand their city.</p>
+</ImageLink>
 
 </div>

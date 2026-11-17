@@ -1,5 +1,38 @@
 # @ldn-viz/utils
 
+## 4.1.0
+
+### Minor Changes
+
+- fda1ca6: ADDED: the build generates TypeScript declarations in `dist/types`, and `package.json` points `types` at them
+
+### Patch Changes
+
+- Updated dependencies [949e833]
+  - @ldn-viz/themes@10.1.0
+
+## 4.0.0
+
+### Major Changes
+
+- e1e3928: CHANGED: update typography to use new approach from design system 3.1
+
+### Patch Changes
+
+- Updated dependencies [e1e3928]
+  - @ldn-viz/themes@9.0.0
+
+## 3.0.0
+
+### Major Changes
+
+- 9269ac2: CHANGED: Update tokens to new design system
+
+### Patch Changes
+
+- Updated dependencies [9269ac2]
+  - @ldn-viz/themes@8.0.0
+
 ## 2.0.0
 
 ### Major Changes

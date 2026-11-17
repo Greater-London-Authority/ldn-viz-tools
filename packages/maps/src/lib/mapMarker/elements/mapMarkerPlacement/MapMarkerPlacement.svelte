@@ -13,15 +13,11 @@
 		/**
 		 * Method used to position the popup. Options are 'center', 'follow', or 'none'.
 		 */
-		placement?: string;
+		placement?: 'center' | 'follow' | 'none';
 		children?: import('svelte').Snippet;
 	}
 
 	let { placement = 'center', children }: Props = $props();
-
-	if (placement !== 'center' && placement !== 'follow' && placement !== 'none') {
-		console.error(`[MapMarkerPlacement] Unknown placement type '${placement}'`);
-	}
 </script>
 
 {#if placement === 'center'}

@@ -1,11 +1,11 @@
-import { dataVizGuide, docs, index, type Doc, type Guide } from '$content/index';
+import { docs, index, type Doc } from '$content/index';
 import { error } from '@sveltejs/kit';
 import type { Component } from 'svelte';
-import type { Attachment } from 'svelte/attachments';
+import type { Action } from 'svelte/action';
 
-const allContent = [...dataVizGuide, ...docs, index];
+const allContent = [...docs, index];
 
-export type ContentResolver = () => Promise<{ default: Component; metadata: Doc | Guide }>;
+export type ContentResolver = () => Promise<{ default: Component; metadata: Doc }>;
 
 export const generateMetadata = (slug: string = 'index') => {
 	return allContent.find((data) => data.slug === slug);
@@ -14,6 +14,16 @@ export const generateMetadata = (slug: string = 'index') => {
 export const getAllDocs = () => {
 	return docs;
 };
+
+export const resolveNavItems = <T extends { href?: string; children?: T[] }>(
+	items: T[],
+	resolve: (path: string) => string
+): T[] =>
+	items.map((item) => ({
+		...item,
+		href: item.href ? resolve(item.href) : item.href,
+		children: item.children ? resolveNavItems(item.children, resolve) : item.children
+	}));
 
 function slugFromPath(path: string) {
 	return path.replaceAll(/\/src\/content\/|\/index|\.md$/g, '');
@@ -38,18 +48,22 @@ export const getContent = async (slug: string = 'index') => {
 		error(404, 'Could not find the document.');
 	}
 
+	// A folder's index.md is its landing page. Front matter `layout` overrides this.
+	const layout = metadata.layout ?? (match.path?.endsWith('/index.md') ? 'index' : 'page');
+
 	return {
 		component: content.default,
-		metadata
+		metadata,
+		layout
 	};
 };
 
 /** Utility Functions */
 
 // Action that copies details to clipboard
-export const clickToCopy: Attachment = (node: HTMLElement, target: any) => {
+export const clickToCopy: Action<HTMLElement, string | undefined> = (node, target) => {
 	async function copyText() {
-		let text = target ? document.querySelector(target).innerText : node.innerText;
+		let text = target ? document.querySelector<HTMLElement>(target)!.innerText : node.innerText;
 
 		try {
 			await navigator.clipboard.writeText(text);

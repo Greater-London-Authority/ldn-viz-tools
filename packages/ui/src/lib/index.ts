@@ -9,18 +9,36 @@ export { default as AuthMenu } from './auth/AuthMenu.svelte';
 export { default as HandleRedirectFromAuth } from './auth/HandleRedirectFromAuth.svelte';
 export { default as LoginForm } from './auth/LoginForm.svelte';
 export { default as LoginLink } from './auth/LoginLink.svelte';
+export { default as Breadcrumbs } from './breadcrumbs/Breadcrumbs.svelte';
 export { default as AsyncButton } from './button/AsyncButton.svelte';
 export { default as Button } from './button/Button.svelte';
 export { default as Callout } from './callout/Callout.svelte';
+export { default as Card } from './card/Card.svelte';
 export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
 export { default as CheckboxGroupSolid } from './checkboxSolid/CheckboxGroupSolid.svelte';
 export { default as CheckboxSolid } from './checkboxSolid/CheckboxSolid.svelte';
+export { default as ChromeFooter } from './chrome/ChromeFooter.svelte';
+export { default as ChromeHeader } from './chrome/ChromeHeader.svelte';
+export { default as TitleGroup } from './chrome/TitleGroup.svelte';
 export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';
 export { default as ColorLegendOrdinalChips } from './colorLegends/ColorLegendOrdinalChips.svelte';
 export { default as ColorLegendOrdinalHorizontalAlt } from './colorLegends/ColorLegendOrdinalHorizontalAlt.svelte';
 export { default as CopyButton } from './copyButton/CopyButton.svelte';
-export { default as DataDownloadButton } from './dataDownloadButton/DataDownloadButton.svelte';
+export { default as DownloadButton } from './downloadButton/DownloadButton.svelte';
+export { downloadCSV, downloadJSON } from './downloadButton/utils/dataDownloadUtils';
+export { downloadImage } from './downloadButton/utils/imageDownloadUtils';
+export {
+	allDataFormats,
+	allImageFormats,
+	resolveDownloadFormats
+} from './downloadButton/utils/resolveDownloadFormats';
+export type {
+	DataDownloadOption,
+	DataFormat,
+	ImageDownloadOption,
+	ImageFormat
+} from './downloadButton/utils/resolveDownloadFormats';
 export { default as Flag } from './flag/Flag.svelte';
 export { default as Footer } from './footer/Footer.svelte';
 export { default as Geocoder } from './geolocation/Geocoder.svelte';
@@ -33,7 +51,6 @@ export { default as Header } from './header/Header.svelte';
 export { default as HeaderItem } from './header/HeaderItem.svelte';
 export { default as HeaderRight } from './header/HeaderRight.svelte';
 export { default as HeaderTitle } from './header/HeaderTitle.svelte';
-export { default as ImageDownloadButton } from './imageDownloadButton/ImageDownloadButton.svelte';
 export { default as Input } from './input/Input.svelte';
 export { default as InputWrapper } from './input/InputWrapper.svelte';
 export { default as LayerControl } from './layerControl/LayerControl.svelte';
@@ -43,7 +60,14 @@ export { default as LogoByCIU } from './logos/LogoByCIU.svelte';
 export { default as LogoCIU } from './logos/LogoCIU.svelte';
 export { default as LogoLOTI } from './logos/LogoLOTI.svelte';
 export { default as LogoMayor } from './logos/LogoMayor.svelte';
+export { default as EnhancedImage } from './markdown/EnhancedImage.svelte';
+export * from './markdown/imageContext';
+export * from './markdown/linkResolver';
+export { default as MarkdownLink } from './markdown/MarkdownLink.svelte';
+export { default as MarkdownPre } from './markdown/MarkdownPre.svelte';
+export { default as MarkdownTable } from './markdown/MarkdownTable.svelte';
 export { default as MergeValuesControl } from './mergeValuesControl/MergeValuesControl.svelte';
+export { default as Metric } from './metric/Metric.svelte';
 export { default as Modal } from './modal/Modal.svelte';
 export { default as MultipleActionButton } from './multipleActionButton/MultipleActionButton.svelte';
 export { default as NavigationMenu } from './navigationMenu/NavigationMenu.svelte';
@@ -52,6 +76,7 @@ export { default as NonIdealState } from './nonIdealState/NonIdealState.svelte';
 export { default as Overlay } from './overlay/Overlay.svelte';
 export { default as Trigger } from './overlay/Trigger.svelte';
 export { default as PageMetadata } from './pageMetadata/PageMetadata.svelte';
+export { default as PageNav, type PageNavItem } from './pageNav/PageNav.svelte';
 export { default as PlacardButton } from './placardButton/PlacardButton.svelte';
 export { default as PlaceholderImage } from './placeholderImage/PlaceholderImage.svelte';
 export { default as Popover } from './popover/Popover.svelte';
@@ -79,10 +104,17 @@ export { default as Tabs } from './tabs/Tabs.svelte';
 export { default as Theme } from './theme/Theme.svelte';
 export { theme } from './theme/themeState.svelte.js';
 export { default as ThemeSwitcher } from './theme/ThemeSwitcher.svelte';
+export { default as DashboardSectionTitle } from './titleGroup/dashboardSectionTitle/DashboardSectionTitle.svelte';
+export { default as DashboardTitle } from './titleGroup/dashboardTitle/DashboardTitle.svelte';
+export { default as PageSectionBreak } from './titleGroup/pageSectionBreak/PageSectionBreak.svelte';
+export { default as PageTitle } from './titleGroup/pageTitle/PageTitle.svelte';
 export * from './toaster/toaster';
 export { default as Toaster } from './toaster/Toaster.svelte';
 export * from './toaster/types';
+export { default as Toc, type TocMenuItem } from './toc/Toc.svelte';
+export { default as TocItem } from './toc/TocItem.svelte';
 export { default as Tooltip } from './tooltip/Tooltip.svelte';
 export { prefersDarkMode, prefersReducedMotion } from './userPreference/userPreference.js';
 export { classNames } from './utils/classNames.js';
 export { randomId } from './utils/randomId.js';
+export { default as Well } from './well/Well.svelte';

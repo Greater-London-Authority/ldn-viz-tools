@@ -3,14 +3,14 @@
 	import MapMarker from './MapMarker.svelte';
 
 	const componentType = {
-		type: 'object',
-		control: 'none',
+		type: { name: 'object', value: {} },
+		control: false,
 		table: {
 			type: {
 				summary: 'Svelte component'
 			}
 		}
-	};
+	} as const;
 
 	/**
 	 * The `<MapMarker>` component allows tooltips and popups to easily be added
@@ -41,11 +41,11 @@
 		argTypes: {
 			layerId: {
 				type: 'string',
-				control: 'none'
+				control: false
 			},
 			noCursorStyle: {
 				type: 'boolean',
-				control: 'none'
+				control: false
 			},
 			tooltip: componentType,
 			popup: componentType
@@ -86,6 +86,75 @@
 					layerId="gla/ldn-viz-tools/test-data/point"
 					tooltip={TestTooltip}
 					popup={TestPopup}
+				/>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!-- Setting only `tooltip` (and no `popup`) shows content on hover without requiring a click. The cursor shows the default OS icon (rather than a pointer) because there is nothing to click. -->
+<Story name="Tooltip only">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltip} />
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltip} />
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltip} />
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!-- Setting only `popup` (and no `tooltip`) shows content when a feature is clicked. The cursor becomes a pointer on hover to signal that the feature is clickable. -->
+<Story name="Popup only">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" popup={TestPopup} />
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/line" popup={TestPopup} />
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/point" popup={TestPopup} />
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!-- Passing `noCursorStyle` suppresses all cursor changes on feature hover, so the map keeps its default grab cursor even over interactive features. -->
+<Story name="No cursor style">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapMarker
+					layerId="gla/ldn-viz-tools/test-data/polygon"
+					tooltip={TestTooltip}
+					popup={TestPopup}
+					noCursorStyle
+				/>
+				<MapMarker
+					layerId="gla/ldn-viz-tools/test-data/line"
+					tooltip={TestTooltip}
+					popup={TestPopup}
+					noCursorStyle
+				/>
+				<MapMarker
+					layerId="gla/ldn-viz-tools/test-data/point"
+					tooltip={TestTooltip}
+					popup={TestPopup}
+					noCursorStyle
 				/>
 			</Map>
 		</div>

@@ -18,9 +18,9 @@
 			legend: true,
 			type: 'ordinal',
 			range: [
-				theme.currentTheme.color.data.primary,
-				theme.currentTheme.color.data.secondary,
-				theme.currentTheme.color.data.tertiary
+				theme.tokenNameToValue('data.primary'),
+				theme.tokenNameToValue('data.secondary'),
+				theme.tokenNameToValue('data.tertiary')
 			]
 		},
 		marks: [
@@ -37,7 +37,7 @@
 
 			Plot.ruleX(
 				chartData,
-				Plot.pointerX({ x: 'Month', stroke: theme.currentTheme.color.chart.label })
+				Plot.pointerX({ x: 'Month', stroke: theme.tokenNameToValue('chart.label') })
 			),
 			Plot.point(
 				chartData,

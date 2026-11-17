@@ -1,8 +1,8 @@
 export interface StackedBarProps {
 	/**
-	 * Array of values to be displayed.
+	 * Array of (categorical) values to be displayed.
 	 */
-	values: number[];
+	values: (string | number)[];
 	/**
 	 * A D3 color scale used to determine bar color.
 	 */

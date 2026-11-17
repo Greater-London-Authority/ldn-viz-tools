@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { TableData } from '$lib/core/lib/dataObj';
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
 	import type { DataRow } from '$lib/core/lib/types';
 	import Mean from '../../../core/aggregateRenderers/Mean.svelte';
 	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
 	import Scaffolding from '../Scaffolding.svelte';
 
 	interface ColumnSummariesRowProps {
-		table: TableData;
+		table: TableState;
 		data: DataRow[];
 	}
 
@@ -15,7 +15,7 @@
 
 <Scaffolding {table}>
 	{#snippet dataColumns()}
-		{#each table.columnSpec as col, i (col)}
+		{#each table.resolvedColumnSpec as col, i (col)}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<div role="columnheader" class="was-th flex" style:width={col.computedWidth + 'px'}>
 					<!-- or 100 width -->

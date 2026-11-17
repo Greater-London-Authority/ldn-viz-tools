@@ -1,0 +1,184 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_4379_30755)">
+<rect width="160" height="160" fill="#151B1E"/>
+<path d="M160 0H0V160H160V0Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="160" height="160" transform="translate(160)" fill="#151B1E"/>
+<path d="M320 0H160V160H320V0Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="160" height="160" transform="translate(320)" fill="#151B1E"/>
+<path d="M480 0H320V160H480V0Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="160" height="160" transform="translate(480)" fill="#151B1E"/>
+<path d="M640 0H480V160H640V0Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="160" height="160" transform="translate(0 160)" fill="#151B1E"/>
+<path d="M160 160H0V320H160V160Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="160" height="160" transform="translate(160 160)" fill="#151B1E"/>
+<path d="M320 160H160V320H320V160Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="160" height="160" transform="translate(320 160)" fill="#151B1E"/>
+<path d="M480 160H320V320H480V160Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="160" height="160" transform="translate(480 160)" fill="#151B1E"/>
+<path d="M640 160H480V320H640V160Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="160" height="160" transform="translate(0 320)" fill="#151B1E"/>
+<path d="M160 320H0V480H160V320Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="160" height="160" transform="translate(160 320)" fill="#151B1E"/>
+<path d="M320 320H160V480H320V320Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="160" height="160" transform="translate(320 320)" fill="#151B1E"/>
+<path d="M480 320H320V480H480V320Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="160" height="160" transform="translate(480 320)" fill="#151B1E"/>
+<path d="M640 320H480V480H640V320Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="160" height="160" transform="translate(0 480)" fill="#151B1E"/>
+<path d="M160 480H0V640H160V480Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="160" height="160" transform="translate(160 480)" fill="#151B1E"/>
+<path d="M320 480H160V640H320V480Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="160" height="160" transform="translate(320 480)" fill="#151B1E"/>
+<path d="M480 480H320V640H480V480Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="160" height="160" transform="translate(480 480)" fill="#151B1E"/>
+<path d="M640 480H480V640H640V480Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(640)" fill="#151B1E"/>
+<path d="M720 0H640V80H720V0Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(720)" fill="#151B1E"/>
+<path d="M800 0H720V80H800V0Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(800)" fill="#151B1E"/>
+<path d="M880 0H800V80H880V0Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(880)" fill="#151B1E"/>
+<path d="M960 0H880V80H960V0Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(960)" fill="#151B1E"/>
+<path d="M1040 0H960V80H1040V0Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1040)" fill="#151B1E"/>
+<path d="M1120 0H1040V80H1120V0Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1120)" fill="#151B1E"/>
+<path d="M1200 0H1120V80H1200V0Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1200)" fill="#151B1E"/>
+<path d="M1280 0H1200V80H1280V0Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(640 80)" fill="#151B1E"/>
+<path d="M720 80H640V160H720V80Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(720 80)" fill="#151B1E"/>
+<path d="M800 80H720V160H800V80Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(800 80)" fill="#151B1E"/>
+<path d="M880 80H800V160H880V80Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(880 80)" fill="#151B1E"/>
+<path d="M960 80H880V160H960V80Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(960 80)" fill="#151B1E"/>
+<path d="M1040 80H960V160H1040V80Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1040 80)" fill="#151B1E"/>
+<path d="M1120 80H1040V160H1120V80Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1120 80)" fill="#151B1E"/>
+<path d="M1200 80H1120V160H1200V80Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1200 80)" fill="#151B1E"/>
+<path d="M1280 80H1200V160H1280V80Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(640 160)" fill="#151B1E"/>
+<path d="M720 160H640V240H720V160Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(720 160)" fill="#151B1E"/>
+<path d="M800 160H720V240H800V160Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(800 160)" fill="#151B1E"/>
+<path d="M880 160H800V240H880V160Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(880 160)" fill="#151B1E"/>
+<path d="M960 160H880V240H960V160Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(960 160)" fill="#151B1E"/>
+<path d="M1040 160H960V240H1040V160Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1040 160)" fill="#151B1E"/>
+<path d="M1120 160H1040V240H1120V160Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1120 160)" fill="#151B1E"/>
+<path d="M1200 160H1120V240H1200V160Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1200 160)" fill="#151B1E"/>
+<path d="M1280 160H1200V240H1280V160Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(640 240)" fill="#151B1E"/>
+<path d="M720 240H640V320H720V240Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(720 240)" fill="#151B1E"/>
+<path d="M800 240H720V320H800V240Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(800 240)" fill="#151B1E"/>
+<path d="M880 240H800V320H880V240Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(880 240)" fill="#151B1E"/>
+<path d="M960 240H880V320H960V240Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(960 240)" fill="#151B1E"/>
+<path d="M1040 240H960V320H1040V240Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1040 240)" fill="#151B1E"/>
+<path d="M1120 240H1040V320H1120V240Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1120 240)" fill="#151B1E"/>
+<path d="M1200 240H1120V320H1200V240Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1200 240)" fill="#151B1E"/>
+<path d="M1280 240H1200V320H1280V240Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(640 320)" fill="#151B1E"/>
+<path d="M720 320H640V400H720V320Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(720 320)" fill="#151B1E"/>
+<path d="M800 320H720V400H800V320Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(800 320)" fill="#151B1E"/>
+<path d="M880 320H800V400H880V320Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(880 320)" fill="#151B1E"/>
+<path d="M960 320H880V400H960V320Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(960 320)" fill="#151B1E"/>
+<path d="M1040 320H960V400H1040V320Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1040 320)" fill="#151B1E"/>
+<path d="M1120 320H1040V400H1120V320Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1120 320)" fill="#151B1E"/>
+<path d="M1200 320H1120V400H1200V320Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1200 320)" fill="#151B1E"/>
+<path d="M1280 320H1200V400H1280V320Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(640 400)" fill="#151B1E"/>
+<path d="M720 400H640V480H720V400Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(720 400)" fill="#151B1E"/>
+<path d="M800 400H720V480H800V400Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(800 400)" fill="#151B1E"/>
+<path d="M880 400H800V480H880V400Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(880 400)" fill="#151B1E"/>
+<path d="M960 400H880V480H960V400Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(960 400)" fill="#151B1E"/>
+<path d="M1040 400H960V480H1040V400Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1040 400)" fill="#151B1E"/>
+<path d="M1120 400H1040V480H1120V400Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1120 400)" fill="#151B1E"/>
+<path d="M1200 400H1120V480H1200V400Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1200 400)" fill="#151B1E"/>
+<path d="M1280 400H1200V480H1280V400Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(640 480)" fill="#151B1E"/>
+<path d="M720 480H640V560H720V480Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(720 480)" fill="#151B1E"/>
+<path d="M800 480H720V560H800V480Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(800 480)" fill="#151B1E"/>
+<path d="M880 480H800V560H880V480Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(880 480)" fill="#151B1E"/>
+<path d="M960 480H880V560H960V480Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(960 480)" fill="#151B1E"/>
+<path d="M1040 480H960V560H1040V480Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1040 480)" fill="#151B1E"/>
+<path d="M1120 480H1040V560H1120V480Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1120 480)" fill="#151B1E"/>
+<path d="M1200 480H1120V560H1200V480Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1200 480)" fill="#151B1E"/>
+<path d="M1280 480H1200V560H1280V480Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(640 560)" fill="#151B1E"/>
+<path d="M720 560H640V640H720V560Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(720 560)" fill="#151B1E"/>
+<path d="M800 560H720V640H800V560Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(800 560)" fill="#151B1E"/>
+<path d="M880 560H800V640H880V560Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(880 560)" fill="#151B1E"/>
+<path d="M960 560H880V640H960V560Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(960 560)" fill="#151B1E"/>
+<path d="M1040 560H960V640H1040V560Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1040 560)" fill="#151B1E"/>
+<path d="M1120 560H1040V640H1120V560Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1120 560)" fill="#151B1E"/>
+<path d="M1200 560H1120V640H1200V560Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<rect width="80" height="80" transform="translate(1200 560)" fill="#151B1E"/>
+<path d="M1280 560H1200V640H1280V560Z" stroke="#C5C8CA" stroke-width="0.5" stroke-miterlimit="10"/>
+<circle cx="1080" cy="520" r="40" fill="#AE4AC6"/>
+<circle cx="1160" cy="360" r="40" fill="#3D454B"/>
+<circle cx="1240" cy="600" r="40" fill="#3D454B"/>
+<circle cx="1240" cy="40" r="40" fill="#AE4AC6"/>
+<circle cx="1240" cy="200" r="40" fill="#3D454B"/>
+<circle cx="880" cy="240" r="80" fill="#AE4AC6"/>
+<circle cx="1000" cy="120" r="40" fill="#AE4AC6"/>
+<circle cx="80" cy="80" r="80" fill="#3D454B"/>
+<circle cx="80" cy="560" r="80" fill="#AE4AC6"/>
+<circle cx="320" cy="320" r="160" fill="#AE4AC6"/>
+<circle cx="720" cy="400" r="80" fill="#3D454B"/>
+<circle cx="720" cy="80" r="80" fill="#AE4AC6"/>
+<circle cx="880" cy="560" r="80" fill="#AE4AC6"/>
+<circle cx="560" cy="400" r="80" fill="#AE4AC6"/>
+<circle cx="560" cy="240" r="80" fill="#3D454B"/>
+</g>
+<defs>
+<clipPath id="clip0_4379_30755">
+<rect width="1280" height="640" fill="white"/>
+</clipPath>
+</defs>
+</svg>

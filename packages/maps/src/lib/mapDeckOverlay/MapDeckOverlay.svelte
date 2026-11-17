@@ -4,17 +4,19 @@
 	 * It must be used inside a `Map` component, so that it can access the MapLibre map object from the `mapStore` context.
 	 * @component
 	 */
+	import type { Layer, MapViewState, ViewStateChangeParameters } from '@deck.gl/core';
 	import { MapboxOverlay as DeckOverlay } from '@deck.gl/mapbox';
 	import { getContext } from 'svelte';
+	import type { MapStore } from '../map/types';
 
-	const mapStore = getContext('mapStore');
+	const mapStore: MapStore = getContext('mapStore');
 
 	interface Props {
 		/**
 		 * Array of Deck.gl layer objects.
 		 * See the Deck.gl [Layer Catalog](https://deck.gl/docs/api-reference/layers) for details
 		 */
-		layers?: any;
+		layers?: Layer[];
 		/**
 		 * Any additional options to be passed through to the Deck.gl [MapboxOverlay](https://deck.gl/docs/api-reference/mapbox/mapbox-overlay)
 		 * constructor.
@@ -25,11 +27,11 @@
 	let { layers = [], options = {} }: Props = $props();
 
 	let loaded = $state(false);
-	let deckOverlay;
+	let deckOverlay: DeckOverlay | undefined;
 
 	const removeOverlay = () => {
 		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-		deckOverlay && $mapStore.removeControl(deckOverlay);
+		deckOverlay && $mapStore?.removeControl(deckOverlay);
 	};
 
 	const doLoad = () => {
@@ -39,10 +41,17 @@
 		deckOverlay = new DeckOverlay({
 			layers,
 			interleaved: false,
-			...options
+			...options,
+			// The MapLibre map controls the view, so apply view state changes requested by
+			// layers (e.g. ClusterLayer's `clickToZoom`) to the map.
+			onViewStateChange: (params: ViewStateChangeParameters<MapViewState>) => {
+				const { longitude, latitude, zoom } = params.viewState;
+				$mapStore?.easeTo({ center: [longitude, latitude], zoom });
+				return options.onViewStateChange?.(params);
+			}
 		});
 
-		$mapStore.addControl(deckOverlay, 'top-left');
+		$mapStore!.addControl(deckOverlay, 'top-left');
 
 		loaded = true;
 	};
@@ -52,7 +61,7 @@
 		loaded = false;
 	};
 
-	const updateLayers = (newLayers) => {
+	const updateLayers = (newLayers: Layer[]) => {
 		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		deckOverlay && deckOverlay.setProps({ layers: newLayers });
 	};

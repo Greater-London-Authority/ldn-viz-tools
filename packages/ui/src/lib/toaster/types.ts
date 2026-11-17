@@ -4,7 +4,7 @@ export const ToastType = {
 	Success: 'Success',
 	Warning: 'Warning',
 	Error: 'Error'
-};
+} as const;
 
 // ToasterPosition is an enumeration of valid positions that can be passed to
 // the Toaster component via the 'position' property.
@@ -34,7 +34,7 @@ export interface ToastMessage {
 	// instance of the ToastMessage, i.e. calling ToastMessage.post twice will
 	// result in new postId being generated (if timeToLive is greater than zero)
 	// while id always remains the same.
-	postId?: any;
+	postId?: ReturnType<typeof setTimeout>;
 
 	// type is the ToastType that controls styling and indicates urgency of the
 	// message to the end user. By default this will be ToastType.Notice.

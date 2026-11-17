@@ -1,0 +1,73 @@
+{
+	"source": ["./tokens/lcd-ds.tokens.json"],
+	"parsers": ["json-parser"],
+	"platforms": {
+		"css": {
+			"transforms": [
+				"attribute/cti",
+				"name/grammar",
+				"dimension/grammar",
+				"font-family/stack",
+				"color/css",
+				"fontFamily/css",
+				"shadow/css/shorthand"
+			],
+			"buildPath": "./styles/",
+			"files": [
+				{
+					"destination": "reset.css",
+					"format": "css/reset"
+				},
+				{
+					"destination": "tokens.css",
+					"format": "css/tokens"
+				},
+				{
+					"destination": "tokens.json",
+					"format": "json/tooling"
+				},
+				{
+					"destination": "system.css",
+					"format": "css/system"
+				},
+				{
+					"destination": "index.css",
+					"format": "css/index"
+				},
+				{
+					"destination": "tokens.scss",
+					"format": "scss/values"
+				},
+				{
+					"destination": "tailwind.cjs",
+					"format": "tw/preset"
+				}
+			]
+		},
+		"ts": {
+			"transformGroup": "js",
+			"buildPath": "./styles/",
+			"files": [
+				{
+					"destination": "colors.js",
+					"format": "custom/js",
+					"filter": "jsFilter",
+					"options": {
+						"minify": true
+					}
+				}
+			],
+			"transforms": ["name/grammar"]
+		},
+		"docs": {
+			"transforms": ["attribute/cti", "name/grammar", "dimension/grammar", "color/css"],
+			"buildPath": "./docs/tokens/",
+			"files": [
+				{
+					"destination": "tokens.js",
+					"format": "custom/docs"
+				}
+			]
+		}
+	}
+}

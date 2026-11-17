@@ -3,13 +3,17 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import { scaleDiverging, scaleSequential } from 'd3-scale';
 	import { interpolatePiYG, interpolateViridis } from 'd3-scale-chromatic';
+	import type { ComponentProps } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { LayerControlGroupStory } from '../../../../ui/src/lib/layerControl/LayerControlGroup.stories.svelte';
+	import LayerControlGroupStory from '../../../../ui/src/lib/layerControl/LayerControlGroup.stories.svelte';
 	import Map from '../map/Map.svelte';
 	import type { MapLibreStore } from '../map/types';
 	import { appendOSKeyToUrl } from '../map/util';
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 	import MapLegend from './MapLegend.svelte';
+	/**
+	 * The `<MapLegend>` component provides a container inside which a `Legend` can be inserted for display on maps.
+	 */
 
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapLegend',
@@ -17,6 +21,12 @@
 		tags: ['autodocs'],
 		render: defaultTemplate
 	});
+
+	// The CSF compiler turns a stories file's default export into its meta, which has `args`.
+	// The import is typed as a Svelte component, so cast it to read them.
+	const layerControlGroupArgs = (
+		LayerControlGroupStory as unknown as { args: ComponentProps<typeof LayerControlGroup> }
+	).args;
 
 	const transformRequest = appendOSKeyToUrl('vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP');
 
@@ -96,7 +106,7 @@
 						{#key width}
 							{#if layers[0].visible}
 								<div class="flex flex-col gap-1">
-									<p class="text-sm font-semibold text-color-text-primary">{layers[0].label}</p>
+									<p class="label-md text-color-text">{layers[0].label}</p>
 									<ColorLegend
 										color={layers[0][currentThemeMode!]}
 										title={layers[0].title}
@@ -157,7 +167,7 @@
 						{#key width}
 							{#if layers[0].visible}
 								<div class="flex flex-col gap-1">
-									<p class="text-sm font-semibold text-color-text-primary">{layers[0].label}</p>
+									<p class="label-md text-color-text">{layers[0].label}</p>
 									<ColorLegend
 										color={layers[0][currentThemeMode!]}
 										title={layers[0].title}
@@ -166,7 +176,7 @@
 								</div>
 							{/if}
 						{/key}
-						<div class="border-t border-color-ui-border-primary pt-3 text-sm">
+						<div class="border-t border-color-border pt-3">
 							<Input type="range" label="Opacity" name="opacity" />
 						</div>
 					</MapLegend>
@@ -191,7 +201,7 @@
 							{#each layers as layer (layer.id)}
 								{#if layer.visible}
 									<div class="flex flex-col gap-1">
-										<p class="text-sm font-semibold text-color-text-primary">{layer.label}</p>
+										<p class="label-md text-color-text">{layer.label}</p>
 										<ColorLegend color={layer[currentThemeMode!]} title={layer.title} {width} />
 									</div>
 								{/if}
@@ -232,7 +242,7 @@
 <Story name="Toggle layer visibility">
 	{#snippet template({ args })}
 		<div class="mb-4 flex flex-col space-y-2">
-			<p class="font-bold">Layers</p>
+			<p class="label-lg">Layers</p>
 			<LayerControlGroup
 				bind:layersState={layerState}
 				{options}
@@ -256,13 +266,13 @@
 								{#each layers as layer (layer.id)}
 									{#if layer.visible}
 										<div class="flex flex-col gap-1">
-											<p class="text-sm font-semibold text-color-text-primary">{layer.label}</p>
+											<p class="label-md text-color-text">{layer.label}</p>
 											<ColorLegend color={layer[currentThemeMode!]} title={layer.title} {width} />
 										</div>
 									{/if}
 								{/each}
 							{:else}
-								<p class="text-sm text-color-text-primary">Please choose a layer.</p>
+								<p class="text-color-text">Please choose a layer.</p>
 							{/if}
 						{/key}
 					</MapLegend>
@@ -283,7 +293,40 @@
 			>
 				<MapControlGroup position="BottomRight" classes="bottom-16 left-6 sm:bottom-11">
 					<MapLegend {...args} bind:width>
-						<LayerControlGroup {...LayerControlGroupStory.args} />
+						<LayerControlGroup {...layerControlGroupArgs} />
+					</MapLegend>
+				</MapControlGroup>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+Passing `isOpen={false}` causes the legend to be initially closed, and render as a button labelled "Legend"
+-->
+<Story name="Closed by default" args={{ isOpen: false }}>
+	{#snippet template({ args })}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest
+				}}
+				bind:mapStore
+			>
+				<MapControlGroup position="BottomRight" classes="bottom-16 left-6 sm:bottom-11">
+					<MapLegend {...args} bind:width isOpen={false}>
+						{#key width}
+							{#if layers[0].visible}
+								<div class="flex flex-col gap-1">
+									<p class="label-md text-color-text">{layers[0].label}</p>
+									<ColorLegend
+										color={layers[0][currentThemeMode!]}
+										title={layers[0].title}
+										{width}
+									/>
+								</div>
+							{/if}
+						{/key}
 					</MapLegend>
 				</MapControlGroup>
 			</Map>

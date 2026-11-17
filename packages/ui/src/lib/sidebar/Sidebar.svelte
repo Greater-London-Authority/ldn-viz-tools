@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
+	import ScrollArea from '../scrollArea/ScrollArea.svelte';
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
 	import TabPanel from './../tabs/TabPanel.svelte';
@@ -24,7 +25,7 @@
 		width = 'standard',
 		position = 'absolute',
 		theme = 'dark',
-		placement = 'right',
+		placement = undefined,
 		tabs = [],
 		selectedTabId = $bindable(undefined),
 		state = $bindable(),
@@ -40,18 +41,29 @@
 	}: SidebarProps = $props();
 
 	const wrapperClasses = $derived(`${position} z-30 ${theme}`);
-	const sidebarClasses = $derived(`flex flex-col grow bg-color-container-level-1 pb-6 ${classes}`); // p-6 pad on container or elements (overflow position)
+	const sidebarClasses = $derived(`flex flex-col grow bg-color-surface-muted pb-6 ${classes}`); // p-6 pad on container or elements (overflow position)
 
 	// expose internal state to parent component
 	state = sidebarState;
 
-	// If a context provides a reactive placement use that
-	// svelte-ignore state_referenced_locally
-	sidebarState.placement = placement;
+	// An explicit `placement` prop overrides the AppShell's breakpoint resolution;
+	// if it is not provided the AppShell's value will not be overridden.
+	sidebarState.overridePlacement(() => placement);
 
 	// set a store containing the width of the sidebar (for use in app shell and elsewhere up the tree)
 	// svelte-ignore state_referenced_locally
 	sidebarState.width = width;
+
+	$effect.pre(() => {
+		sidebarState.hasTabs = tabs.length > 0;
+	});
+
+	// Show the first tab unless a tab that exists is selected, as `<Tabs>` does.
+	$effect.pre(() => {
+		if (tabs.length && !tabs.some((tab) => tab.id === selectedTabId)) {
+			selectedTabId = tabs[0].id;
+		}
+	});
 
 	let component = $derived(tabs.find((tab) => tab.id === selectedTabId)?.content);
 	let placementClasses = $derived(placementLookup[sidebarState.placement]);
@@ -77,7 +89,7 @@
 		let classes = keylineLookup[placement];
 		if (tabs) {
 			if (placement === 'left') {
-				classes = `border-r border-color-ui-border-secondary`;
+				classes = `border-r border-color-border-wash`;
 			} else {
 				classes = `!border-0`;
 			}
@@ -91,7 +103,7 @@
 	{#if tabs.length}
 		<div
 			class={classNames(
-				'absolute bg-color-container-level-0',
+				'absolute bg-color-surface',
 				tabPlacementClasses,
 				tabKeylineClasses(sidebarState.placement, sidebarState.isOpen)
 			)}
@@ -137,39 +149,41 @@
 					<!-- usually contains a `<SidebarFooter>` -->
 					{@render footer?.()}
 				{:else}
-					<div class="flex h-full flex-col overflow-y-auto px-6 pt-6 text-color-text-primary">
-						{#if header}
-							<div class="pb-4">
-								<!-- typically contains a `<SidebarHeader>` -->
-								{@render header()}
-							</div>
-						{/if}
+					<ScrollArea class="h-full">
+						<div class="flex min-h-full flex-col px-6 pt-6 text-color-text">
+							{#if header}
+								<div class="pb-4">
+									<!-- typically contains a `<SidebarHeader>` -->
+									{@render header()}
+								</div>
+							{/if}
 
-						{#if tabs.length}
-							{#each tabs as tab}
-								{#if component && selectedTabId === tab.id}
-									<TabPanel
-										tabPanelId={`${tab.id}-panel`}
-										tabId={tab.id}
-										class="space-y-4 bg-color-container-level-1"
-									>
-										{@const SvelteComponent = component}
-										<SvelteComponent />
-									</TabPanel>
-								{/if}
-							{/each}
-						{/if}
+							{#if tabs.length}
+								{#each tabs as tab}
+									{#if component && selectedTabId === tab.id}
+										<TabPanel
+											tabPanelId={`${tab.id}-panel`}
+											tabId={tab.id}
+											class="space-y-4 bg-color-surface-muted"
+										>
+											{@const SvelteComponent = component}
+											<SvelteComponent />
+										</TabPanel>
+									{/if}
+								{/each}
+							{/if}
 
-						{#if sections || header}
-							<div class="space-y-4">
-								<!-- contains main sidebar content - typically a sequence of `<SidebarSection>`s -->
-								{@render sections?.()}
-							</div>
-						{/if}
+							{#if sections || header}
+								<div class="space-y-4">
+									<!-- contains main sidebar content - typically a sequence of `<SidebarSection>`s -->
+									{@render sections?.()}
+								</div>
+							{/if}
 
-						<!-- typically contains a `<SidebarFooter>` -->
-						{@render footer?.()}
-					</div>
+							<!-- typically contains a `<SidebarFooter>` -->
+							{@render footer?.()}
+						</div>
+					</ScrollArea>
 				{/if}
 			</div>
 		</aside>

@@ -53,11 +53,15 @@
 	});
 </script>
 
+<script lang="ts">
+	let onChangeLog: string[] = $state([]);
+</script>
+
 <Story name="Default">
 	{#snippet template(args)}
 		<CheckboxGroup {...args} bind:selectedOptions />
 
-		<p class="mt-4 text-color-text-secondary">
+		<p class="mt-4 text-color-text-muted">
 			selectedOptions: {JSON.stringify(selectedOptions)}
 		</p>
 	{/snippet}
@@ -66,7 +70,7 @@
 <Story name="With title">
 	{#snippet template(args)}
 		<CheckboxGroup {...args} bind:selectedOptions label="Transport method" />
-		<p class="mt-4 text-color-text-secondary">
+		<p class="mt-4 text-color-text-muted">
 			selectedOptions: {JSON.stringify(selectedOptions)}
 		</p>
 	{/snippet}
@@ -80,7 +84,7 @@
 			label="Transport method"
 			hint="contextual hint text"
 		/>
-		<p class="mt-4 text-color-text-secondary">
+		<p class="mt-4 text-color-text-muted">
 			selectedOptions: {JSON.stringify(selectedOptions)}
 		</p>
 	{/snippet}
@@ -95,7 +99,7 @@
 			hint="contextual hint text"
 			description="Pick your preferred method of transport - taxis are currently not available"
 		/>
-		<p class="mt-4 text-color-text-secondary">
+		<p class="mt-4 text-color-text-muted">
 			selectedOptions: {JSON.stringify(selectedOptions)}
 		</p>
 	{/snippet}
@@ -104,7 +108,7 @@
 <Story name="Hide Select all">
 	{#snippet template(args)}
 		<CheckboxGroup {...args} bind:selectedOptions hideSelectAll />
-		<p class="mt-4 text-color-text-secondary">
+		<p class="mt-4 text-color-text-muted">
 			selectedOptions: {JSON.stringify(selectedOptions)}
 		</p>
 	{/snippet}
@@ -115,7 +119,7 @@
 		<Button onclick={() => (selectedOptions = ['bus', 'train'])}>Select bus and train!</Button>
 
 		<CheckboxGroup {...args} bind:selectedOptions />
-		<p class="mt-4 text-color-text-secondary">
+		<p class="mt-4 text-color-text-muted">
 			selectedOptions: {JSON.stringify(selectedOptions)}
 		</p>
 	{/snippet}
@@ -124,7 +128,7 @@
 <Story name="Disabled (global)">
 	{#snippet template(args)}
 		<CheckboxGroup {...args} bind:selectedOptions disabled />
-		<p class="mt-4 text-color-text-secondary">
+		<p class="mt-4 text-color-text-muted">
 			selectedOptions: {JSON.stringify(selectedOptions)}
 		</p>
 	{/snippet}
@@ -137,7 +141,7 @@
 			bind:selectedOptions
 			error={!selectedOptions.length ? 'You must select an option' : undefined}
 		/>
-		<p class="mt-4 text-color-text-secondary">
+		<p class="mt-4 text-color-text-muted">
 			selectedOptions: {JSON.stringify(selectedOptions)}
 		</p>
 	{/snippet}
@@ -146,7 +150,7 @@
 <Story name="Options with color">
 	{#snippet template(args)}
 		<CheckboxGroup {...args} options={optionsWithColor} bind:selectedOptions />
-		<p class="mt-4 text-color-text-secondary">
+		<p class="mt-4 text-color-text-muted">
 			selectedOptions: {JSON.stringify(selectedOptions)}
 		</p>
 	{/snippet}
@@ -155,5 +159,29 @@
 <Story name="With custom overlay">
 	{#snippet template()}
 		<CheckBoxGroupDemo />
+	{/snippet}
+</Story>
+
+<Story name="Optional">
+	{#snippet template(args)}
+		<CheckboxGroup {...args} bind:selectedOptions label="Transport method" optional />
+		<p class="mt-4 text-color-text-muted">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
+</Story>
+
+<Story name="onChange callback">
+	{#snippet template(args)}
+		<CheckboxGroup
+			{...args}
+			bind:selectedOptions
+			label="Transport method"
+			onChange={(selected) => {
+				onChangeLog = [...onChangeLog, JSON.stringify(selected)];
+			}}
+		/>
+		<p class="mt-4 text-color-text-muted">onChange calls:</p>
+		<pre class="mt-1 text-color-text-muted">{onChangeLog.join('\n')}</pre>
 	{/snippet}
 </Story>

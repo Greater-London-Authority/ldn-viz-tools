@@ -1,0 +1,53 @@
+import { describe, expect, it } from 'vitest';
+import { render } from 'vitest-browser-svelte';
+import { page } from 'vitest/browser';
+import PageSectionBreak from './PageSectionBreak.svelte';
+
+describe('PageSectionBreak', () => {
+	it('renders the title as an h2 with the title-lg role by default', async () => {
+		const { container } = render(PageSectionBreak, { title: 'Population' });
+
+		const heading = page.getByRole('heading', { level: 2 });
+		await expect.element(heading).toHaveTextContent('Population');
+		expect(container.querySelector('h2')).toHaveClass('title-lg');
+	});
+
+	it('does not render an eyebrow or subtitle by default', async () => {
+		const { container } = render(PageSectionBreak, { title: 'Population' });
+
+		expect(container.querySelectorAll('p')).toHaveLength(0);
+	});
+
+	it('renders the subtitle when provided', async () => {
+		render(PageSectionBreak, {
+			title: 'Population',
+			subtitle: 'How the city has grown over the last decade'
+		});
+
+		await expect
+			.element(page.getByText('How the city has grown over the last decade'))
+			.toBeInTheDocument();
+	});
+
+	it('renders the eyebrow when provided', async () => {
+		render(PageSectionBreak, { title: 'Population', eyebrow: 'Demographics' });
+
+		await expect.element(page.getByText('Demographics')).toBeInTheDocument();
+	});
+
+	it('applies additional classes passed via the `class` prop', async () => {
+		const { container } = render(PageSectionBreak, { title: 'Population', class: 'my-class' });
+
+		expect(container.querySelector('div')).toHaveClass('my-class');
+	});
+
+	it('sets the title and subtitle roles from size', async () => {
+		const { container } = render(PageSectionBreak, {
+			title: 'Population',
+			subtitle: 'Growth',
+			size: 'sm'
+		});
+		expect(container.querySelector('h2')).toHaveClass('title-sm');
+		expect(container.querySelector('p')).toHaveClass('subtitle-sm');
+	});
+});

@@ -5,6 +5,7 @@
 	 */
 
 	import type { BarChartProps } from '$lib/core/aggregateRenderers/BarChartProps';
+	import { theme } from '@ldn-viz/ui';
 	import { max } from 'd3-array';
 	import { scaleBand, scaleLinear } from 'd3-scale';
 	import { getVal } from '../../getVal';
@@ -79,11 +80,11 @@
 
 			{#if sortedData.length <= 3}
 				<text
-					fill="black"
+					fill={theme.tokenNameToValue('chart.label')}
 					x={(x(String(d[0])) ?? 0) + x.bandwidth() / 2}
 					text-anchor="middle"
 					y={height - marginBottom + 10}
-					font-size="12px"
+					class="chart-tick-sm"
 				>
 					{truncateLabel(String(d[0]), 7)}
 				</text>

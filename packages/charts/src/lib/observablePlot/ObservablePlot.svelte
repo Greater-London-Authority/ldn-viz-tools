@@ -7,8 +7,8 @@
 
 	import type { Position } from './types.ts';
 
-	import { randomId } from '@ldn-viz/ui';
-	import { writable } from 'svelte/store';
+	import { randomId, type DataDownloadOption, type ImageDownloadOption } from '@ldn-viz/ui';
+	import { writable, type Writable } from 'svelte/store';
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
 	import ObservablePlotInner from './ObservablePlotInner.svelte';
 
@@ -48,23 +48,24 @@
 		byline?: string;
 		note?: string;
 		/**
-		 * Data Download Button in the footer
+		 * The data formats offered by the download button in the footer.
 		 *
-		 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
-		 * Set to false to hide completely.
-		 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
-		 *
+		 * Defaults to `true`, which offers 'CSV' and 'JSON'. An array of formats offers only those formats.
+		 * `false` offers no data formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		dataDownloadButton?: true | false | ('CSV' | 'JSON')[];
+		dataDownload?: DataDownloadOption;
 		/**
-		 * Image Download Button in the footer
+		 * The image formats offered by the download button in the footer.
 		 *
-		 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
-		 * Set to false to hide completely.
-		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
-		 *
+		 * Defaults to `true`, which offers 'PNG' and 'SVG'. An array of formats offers only those formats.
+		 * `false` offers no image formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
+		imageDownload?: ImageDownloadOption;
+		/**
+		 * How the download button in the footer is shown: a text button with the text "Download"
+		 * (`standard`), an icon-only button (`compact`), or an outline button with the text "Download" (`outline`).
+		 */
+		downloadButtonVariant?: 'standard' | 'compact' | 'outline';
 		/**
 		 * The file name to be used for the downloaded data or image file.
 		 */
@@ -72,14 +73,14 @@
 		/**
 		 * Provides a way to access the DOM node into which the visualization is rendered.
 		 */
-		domNode?: any;
+		domNode?: HTMLDivElement;
 		/**
 		 * A store that stores details of the moused-over point.
 		 * Used for custom tooltips.
 		 */
-		tooltipStore?: any;
+		tooltipStore?: Writable<Position | undefined>;
 		/** A y-offset between data points and tooltips (pixels). */
-		tooltipOffset?: any;
+		tooltipOffset?: number;
 		/**
 		 * If `false`, then use the `Plot.plot` function provided by Observable Plot (rather than the wrapper provided by `@ldn-viz`),
 		 * so that default chart-level styling is not applied.
@@ -88,7 +89,7 @@
 		/**
 		 * Value set as the `id` attribute of the chart, for use in description (defaults to randomly generated value).
 		 */
-		id?: any;
+		id?: string;
 		/**
 		 * Detailed description of the chart for use by screen readers and in a modal for sighted users.
 		 */
@@ -101,6 +102,12 @@
 		ariaHidden?: boolean;
 		controls?: import('svelte').Snippet;
 		tooltip?: import('svelte').Snippet;
+
+		/**
+		 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the downloaded file.
+		 */
+		columnMapping?: undefined | { [oldName: string]: string };
+
 		[key: string]: any;
 	}
 
@@ -114,8 +121,8 @@
 		source = '',
 		byline = '',
 		note = '',
-		dataDownloadButton = true,
-		imageDownloadButton = true,
+		dataDownload = true,
+		imageDownload = true,
 		filename = '',
 		domNode = undefined,
 		tooltipStore = writable<Position>(),
@@ -126,58 +133,70 @@
 		ariaHidden = true,
 		controls,
 		tooltip,
+		columnMapping = undefined,
 		...rest
 	}: Props = $props();
 
 	const tooltip_render = $derived(tooltip);
 </script>
 
-{#key spec}
-	<ChartContainer
-		{data}
-		{title}
-		{subTitle}
-		{alt}
-		{source}
-		{note}
-		{byline}
-		{dataDownloadButton}
-		{imageDownloadButton}
-		{filename}
-		{...rest}
-		chartHeight="h-fit"
-		{chartWidth}
-		{chartDescription}
-	>
-		<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
-		{@render controls?.()}
+<ChartContainer
+	{data}
+	{title}
+	subtitle={subTitle}
+	{alt}
+	{source}
+	{note}
+	{byline}
+	{dataDownload}
+	{imageDownload}
+	{filename}
+	{...rest}
+	chartHeight="h-fit"
+	{chartWidth}
+	description={chartDescription}
+	{columnMapping}
+	{id}
+>
+	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
+	{@render controls?.()}
 
-		<ObservablePlotInner
-			{data}
-			{domNode}
-			{tooltipStore}
-			{tooltipOffset}
-			{spec}
-			{applyDefaults}
-			{ariaHidden}
-			ariaDescribedBy="{id}-description"
-			{id}
-		>
-			{#snippet tooltip()}
-				{@render tooltip_render?.()}
-			{/snippet}
-		</ObservablePlotInner>
-
-		{#snippet description()}
-			<p class="sr-only" id="{id}-description">
-				{chartDescription}
-			</p>
-		{/snippet}
-	</ChartContainer>
-{/key}
+	{#key spec}
+		{#if spec}
+			<ObservablePlotInner
+				{data}
+				{domNode}
+				{tooltipStore}
+				{tooltipOffset}
+				{spec}
+				{applyDefaults}
+				{ariaHidden}
+				ariaDescribedBy="{id}-description"
+				{id}
+			>
+				{#snippet tooltip()}
+					{@render tooltip_render?.()}
+				{/snippet}
+			</ObservablePlotInner>
+		{/if}
+	{/key}
+</ChartContainer>
 
 <style>
-	:global(.defaultColorLegendLabel-swatch) {
-		font-size: 1rem;
+	:global(.defaultColorLegendLabel-swatch),
+	:global(.defaultColorLegendLabel-ramp) {
+		font-family: var(--label-md-font-family);
+		font-size: var(--label-md-font-size);
+		font-weight: var(--label-md-font-weight);
+		letter-spacing: var(--label-md-letter-spacing);
+		line-height: var(--label-md-line-height);
+	}
+	:global(.defaultColorLegendLabel-ramp .tick) {
+		font-family: var(--caption-sm-font-family);
+		font-size: var(--caption-sm-font-size);
+		font-weight: var(--caption-sm-font-weight);
+		letter-spacing: var(--caption-sm-letter-spacing);
+		font-variant-numeric: tabular-nums;
+		fill: var(--color-text-muted);
 	}
 </style>

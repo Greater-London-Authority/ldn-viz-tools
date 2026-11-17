@@ -10,10 +10,11 @@
 	import { mousedOverObject } from './stores';
 
 	import { arrow, createFloatingActions, createVirtualElement } from 'svelte-floating-ui';
-	import type { ClientRectObject } from 'svelte-floating-ui/core';
+	import type { ClientRectObject, MiddlewareData } from 'svelte-floating-ui/dom';
 	import { flip, offset, shift } from 'svelte-floating-ui/dom';
 	import { type Writable, writable } from 'svelte/store';
 	import MapMarkerStyledContainer from '../mapMarker/elements/mapMarkerStyledContainer/MapMarkerStyledContainer.svelte';
+	import { isConstructor } from '../utils/isConstructor';
 
 	const [floatingRef, floatingContent] = createFloatingActions({
 		strategy: 'fixed', //or absolute
@@ -52,7 +53,13 @@
 
 	let dynamicOptions = {
 		middleware: [offset(10), flip(), shift(), arrow({ element: arrowRef })],
-		onComputed({ placement, middlewareData }: { placement: string; middlewareData }) {
+		onComputed({
+			placement,
+			middlewareData
+		}: {
+			placement: string;
+			middlewareData: MiddlewareData;
+		}) {
 			const { x, y } = middlewareData.arrow || {};
 			const staticSide = {
 				top: 'bottom',
@@ -94,10 +101,6 @@
 			? layers.find((l) => l.id === $mousedOverObject?.layer?.id)
 			: undefined
 	);
-
-	function isConstructor(obj: any) {
-		return !!obj.prototype && !!obj.prototype.constructor.name;
-	}
 </script>
 
 <svelte:window onmousemove={mousemove} />

@@ -4,7 +4,7 @@
 	 * @component
 	 */
 	import type { TextCellProps } from '$lib/core/renderers/TextCellProps';
-	import { classNames } from '@ldn-viz/ui';
+	import { classNames, theme } from '@ldn-viz/ui';
 	import { format } from 'd3-format';
 	import { getVal } from '../../getVal';
 
@@ -14,6 +14,7 @@
 		fontWeight = 'normal',
 		visibility = 'visible',
 		formatString = undefined,
+		color = theme.tokenNameToValue('text'),
 		..._rest
 	}: TextCellProps = $props();
 	let f = $derived(format(formatString ?? ''));
@@ -31,6 +32,7 @@
 	class={classNames(`flex h-full items-center py-2`, alignmentClass)}
 	style:font-weight={getVal(value, fontWeight)}
 	style:visibility={getVal(value, visibility)}
+	style:color
 >
 	{formatString ? f(+value) : value}
 </span>

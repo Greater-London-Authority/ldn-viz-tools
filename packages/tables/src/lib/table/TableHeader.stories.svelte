@@ -23,8 +23,7 @@
 </script>
 
 <script lang="ts">
-	import { computeWidths } from '../core/lib/computeWidths';
-	import { TableData } from '../core/lib/dataObj';
+	import { TableState } from '../core/lib/tableState.svelte';
 	import type { TableSpec } from '../core/lib/types';
 
 	const FIXED_WIDTH = 600;
@@ -111,10 +110,10 @@
 		]
 	};
 
-	const tableBasic = new TableData(tableSpecBasic);
-	tableBasic.setData(data);
-	tableBasic.setColumnSpec(tableSpecBasic.columns);
-	computeWidths(tableBasic, FIXED_WIDTH);
+	const tableBasic = new TableState(tableSpecBasic);
+	tableBasic.rawData = data;
+	tableBasic.columnSpec = tableSpecBasic.columns;
+	tableBasic.tableWidth = FIXED_WIDTH;
 
 	/********************/
 	const tableSpecAlignment: TableSpec = {
@@ -157,10 +156,10 @@
 		]
 	};
 
-	const tableAlignment = new TableData(tableSpecAlignment);
-	tableAlignment.setData(data);
-	tableAlignment.setColumnSpec(tableSpecAlignment.columns);
-	computeWidths(tableAlignment, FIXED_WIDTH);
+	const tableAlignment = new TableState(tableSpecAlignment);
+	tableAlignment.rawData = data;
+	tableAlignment.columnSpec = tableSpecAlignment.columns;
+	tableAlignment.tableWidth = FIXED_WIDTH;
 
 	/*************/
 	const tableSpec = {
@@ -218,7 +217,7 @@
 
 			{
 				short_label: 'current',
-				label: 'Actual',
+				label: 'Current',
 
 				cell: {
 					renderer: 'PairArrow',
@@ -229,30 +228,14 @@
 
 					axisRenderer: 'PairArrowAxis'
 				}
-			},
-
-			{
-				short_label: 'percentage_change',
-				label: '% Change',
-				domainType: 'MinToMax',
-
-				cell: {
-					renderer: 'BarDivergingCell',
-					formatString: ',.0f',
-					alignText: 'right',
-					extent: [-140, +140],
-
-					axisRenderer: 'BarDivergingAxis',
-					numTicks: 5
-				}
 			}
 		]
 	};
 
-	const table = new TableData(tableSpec);
-	table.setData(data);
-	table.setColumnSpec(tableSpec.columns);
-	computeWidths(table, FIXED_WIDTH);
+	const table = new TableState(tableSpec);
+	table.rawData = data;
+	table.columnSpec = tableSpec.columns;
+	table.tableWidth = FIXED_WIDTH;
 
 	/*************************/
 
@@ -355,10 +338,10 @@
 		]
 	};
 
-	const tableColSummaries = new TableData(tableSpecColSummaries);
-	tableColSummaries.setData(data);
-	tableColSummaries.setColumnSpec(tableSpecColSummaries.columns);
-	computeWidths(tableColSummaries, FIXED_WIDTH);
+	const tableColSummaries = new TableState(tableSpecColSummaries);
+	tableColSummaries.rawData = data;
+	tableColSummaries.columnSpec = tableSpecColSummaries.columns;
+	tableColSummaries.tableWidth = FIXED_WIDTH;
 
 	/**************/
 
@@ -461,10 +444,10 @@
 		]
 	};
 
-	const tableColSummariesGroupHeadings = new TableData(tableSpecColSummariesGroupHeadings);
-	tableColSummariesGroupHeadings.setData(data);
-	tableColSummariesGroupHeadings.setColumnSpec(tableSpecColSummariesGroupHeadings.columns);
-	computeWidths(tableColSummariesGroupHeadings, FIXED_WIDTH);
+	const tableColSummariesGroupHeadings = new TableState(tableSpecColSummariesGroupHeadings);
+	tableColSummariesGroupHeadings.rawData = data;
+	tableColSummariesGroupHeadings.columnSpec = tableSpecColSummariesGroupHeadings.columns;
+	tableColSummariesGroupHeadings.tableWidth = FIXED_WIDTH;
 
 	/*********************************/
 	const tableSpecControls = {
@@ -534,10 +517,56 @@
 		]
 	};
 
-	const tableControls = new TableData(tableSpecControls);
-	tableControls.setData(data);
-	tableControls.setColumnSpec(tableSpecControls.columns);
-	computeWidths(tableControls, FIXED_WIDTH);
+	const tableControls = new TableState(tableSpecControls);
+	tableControls.rawData = data;
+	tableControls.columnSpec = tableSpecControls.columns;
+	tableControls.tableWidth = FIXED_WIDTH;
+
+	/*********************************/
+	// Leaves `showHeaderTopRule` at its default (true) and explicitly enables
+	// `showHeaderBottomRule`, so both the `border-t` and `border-b` branches render.
+	const tableSpecRules = {
+		showHeaderTopRule: true,
+		showHeaderBottomRule: true,
+
+		columns: [
+			{
+				short_label: 'metric',
+				label: 'Metric',
+
+				cell: {
+					renderer: 'TextCell'
+				}
+			},
+
+			{
+				short_label: 'previous',
+				label: 'Previous',
+
+				cell: {
+					renderer: 'TextCell',
+					formatString: ',.0f',
+					alignText: 'right'
+				}
+			},
+
+			{
+				short_label: 'current',
+				label: 'Current',
+
+				cell: {
+					renderer: 'TextCell',
+					formatString: ',.0f',
+					alignText: 'right'
+				}
+			}
+		]
+	};
+
+	const tableRules = new TableState(tableSpecRules);
+	tableRules.rawData = data;
+	tableRules.columnSpec = tableSpecRules.columns;
+	tableRules.tableWidth = FIXED_WIDTH;
 </script>
 
 <Story name="Default">
@@ -629,5 +658,12 @@
 			tableWidth={FIXED_WIDTH}
 			allowSorting={true}
 		/>
+	{/snippet}
+</Story>
+
+<!-- Renders both the top rule (`border-t`) and bottom rule (`border-b`) around the header -->
+<Story name="With top and bottom rules">
+	{#snippet template()}
+		<TableHeader {data} tableSpec={tableSpecRules} table={tableRules} tableWidth={FIXED_WIDTH} />
 	{/snippet}
 </Story>

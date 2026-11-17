@@ -36,6 +36,8 @@ export const getSettingByScreenWidth =
 		);
 	};
 
-// Returns a partially applied function with the default screens settings.
-// Can be overridden per project using a custom screens object: getSettingByScreenWidth(customScreens)
+/**
+ * Returns a partially applied function with the default screens settings.
+ * Can be overridden per project using a custom screens object: getSettingByScreenWidth(customScreens)
+ */
 export const getSetting = getSettingByScreenWidth(screens);

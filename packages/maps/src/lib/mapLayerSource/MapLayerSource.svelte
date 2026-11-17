@@ -13,17 +13,18 @@
 	 * @component
 	 */
 
-	import { onDestroy, getContext, setContext } from 'svelte';
+	import { onDestroy, getContext, setContext, untrack } from 'svelte';
 	import { writable } from 'svelte/store';
+	import type { MapLibreStore } from '../map/types';
 
-	const mapStore = getContext('mapStore');
+	const mapStore: MapLibreStore = getContext('mapStore');
 
 	interface Props {
 		/**
 		 * A unique ID to reference the source in the map. Provided to slotted
 		 * component as context via the key `mapLayerSourceId`.
 		 */
-		id: any;
+		id: string;
 		/**
 		 * A MapLibre source specification [MapLibre docs](https://maplibre.org/maplibre-style-spec/sources/).
 		 * Provided to slotted component as context via the key `mapLayerSourceSpec`.
@@ -53,7 +54,11 @@
 	spec.generateId = true;
 	Object.freeze(safeSpec);
 
-	setContext('mapLayerSourceId', id);
+	// The source is added once, so context holds the initial id.
+	setContext(
+		'mapLayerSourceId',
+		untrack(() => id)
+	);
 	setContext('mapLayerSourceSpec', safeSpec);
 	setContext('mapLayerSourceLoaded', loaded);
 
@@ -61,7 +66,7 @@
 		loaded.set(false);
 		removeSource();
 
-		$mapStore.addSource(id, safeSpec);
+		$mapStore!.addSource(id, safeSpec);
 		loaded.set(true);
 
 		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
@@ -84,9 +89,9 @@
 	};
 
 	const removeLayers = () => {
-		for (const layer of $mapStore.getStyle().layers) {
+		for (const layer of $mapStore!.getStyle().layers) {
 			if (layer.id.startsWith(id + '/')) {
-				$mapStore.removeLayer(layer.id);
+				$mapStore!.removeLayer(layer.id);
 			}
 		}
 	};

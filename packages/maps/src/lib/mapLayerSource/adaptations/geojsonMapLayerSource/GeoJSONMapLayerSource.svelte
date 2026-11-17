@@ -8,18 +8,23 @@
 	 * @component
 	 */
 
-	import { getContext } from 'svelte';
+	import { getContext, untrack } from 'svelte';
 	import { writable } from 'svelte/store';
+	import type { FeatureCollection, GeoJSON } from 'geojson';
+	import type { GeoJSONSource, GeoJSONSourceSpecification } from 'maplibre-gl';
 	import MapLayerSource from '../../MapLayerSource.svelte';
+	import type { MapLibreStore } from '../../../map/types';
 
-	const mapStore = getContext('mapStore');
+	type SourceContext = { id: string; spec: GeoJSONSourceSpecification };
+
+	const mapStore: MapLibreStore = getContext('mapStore');
 
 	interface Props {
 		/**
 		 * A unique ID to reference the source in the map. Provided to slotted
 		 * component as context via the key `mapLayerSourceId`.
 		 */
-		id: any;
+		id: string;
 		/**
 		 * URL to fetch the GeoJSON from.
 		 */
@@ -33,7 +38,7 @@
 		/**
 		 * Applies any transformations to the GeoJSON before it's added to the map.
 		 */
-		transform?: any;
+		transform?: (geojson: FeatureCollection) => FeatureCollection;
 		/**
 		 * Called when the source is added to the map. The raw geojson can be
 		 * accessed within this callback.  The function accepts an object with the
@@ -75,7 +80,8 @@
 		children
 	}: Props = $props();
 
-	const dataStore = writable(initialData);
+	// The effect below keeps the store in sync with later initialData changes.
+	const dataStore = writable(untrack(() => initialData));
 	let loaded = false;
 
 	/*
@@ -90,7 +96,7 @@
 		$dataStore = initialData;
 	});
 
-	const internalLoad = (ctx) => {
+	const internalLoad = (ctx: SourceContext) => {
 		loaded = true;
 
 		if (!url) {
@@ -128,7 +134,7 @@
 			});
 	};
 
-	const internalUnload = (ctx) => {
+	const internalUnload = (ctx: SourceContext) => {
 		loaded = false;
 		dataStore.set(null);
 
@@ -137,12 +143,12 @@
 		}
 	};
 
-	const updateData = (geojson) => {
+	const updateData = (geojson: GeoJSON) => {
 		if (!loaded) {
 			return;
 		}
 
-		$mapStore.getSource(id).setData(geojson);
+		($mapStore!.getSource(id) as GeoJSONSource).setData(geojson);
 	};
 
 	$effect(() => {

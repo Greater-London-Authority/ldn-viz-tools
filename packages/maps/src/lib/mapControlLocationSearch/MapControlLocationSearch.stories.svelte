@@ -56,7 +56,7 @@
 				}}
 			>
 				<MapControlGroup position="TopLeft">
-					<MapControlLocationSearch adapter={adapterMapBox} {onSearchError} {...args} />
+					<MapControlLocationSearch {...args} adapter={adapterMapBox} {onSearchError} />
 				</MapControlGroup>
 			</Map>
 		</div>
@@ -77,7 +77,7 @@ Note that this API allows searches for "specific address accurately using a full
 				}}
 			>
 				<MapControlGroup position="TopLeft">
-					<MapControlLocationSearch adapter={adapterOSPlaces} {onSearchError} {...args} />
+					<MapControlLocationSearch {...args} adapter={adapterOSPlaces} {onSearchError} />
 				</MapControlGroup>
 			</Map>
 		</div>
@@ -114,6 +114,25 @@ Note that this API allows searches for "specific address accurately using a full
 			>
 				<MapControlGroup position="TopLeft">
 					<MapControlLocationSearch adapter={adapterMapBox} {onSearchError} hideGeolocator />
+				</MapControlGroup>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+This story caps the number of suggestions shown in the dropdown using the `maxSuggestions` prop (default 5).
+-->
+<Story name="Location Search - limited suggestions">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapControlLocationSearch adapter={adapterMapBox} {onSearchError} maxSuggestions={2} />
 				</MapControlGroup>
 			</Map>
 		</div>

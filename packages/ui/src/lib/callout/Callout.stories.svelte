@@ -122,7 +122,7 @@
 			{#snippet body()}
 				<p>
 					You can find out more about
-					<a href="www.example.com" class="underline hover:no-underline">
+					<a href="https://www.example.com" class="underline hover:no-underline">
 						the chart methodology
 					</a>.
 				</p>

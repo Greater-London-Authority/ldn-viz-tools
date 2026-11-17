@@ -2,10 +2,10 @@
 	import { theme } from '@ldn-viz/ui';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import * as d3 from 'd3';
+	import { SvelteSet } from 'svelte/reactivity';
 	import { yearlyData } from '../../../data/demoData';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
-	import { SvelteSet } from 'svelte/reactivity';
 
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Slope Charts'
@@ -15,32 +15,32 @@
 
 	// OcclusionY adds an initializer that shifts nodes vertically with a tiny force simulation.
 	const occlusionY = ({ radius = 6.5, ...options }: { [key: string]: any } = {}) =>
-		Plot.initializer(
-			options,
-			(data, facets, { y: { value: Y }, text: { value: T } }, { y: sy }) => {
-				for (const index of facets) {
-					const unique = new SvelteSet();
-					const nodes = Array.from(index, (i) => ({
-						fx: 0,
-						y: sy!(Y[i]),
-						visible: unique.has(T[i]) // remove duplicate labels
-							? false
-							: !!unique.add(T[i]),
-						i
-					}));
-					d3.forceSimulation(nodes.filter((d) => d.visible))
-						.force(
-							'y',
-							d3.forceY(({ y }) => y)
-						) // gravitate towards the original y
-						.force('collide', d3.forceCollide().radius(radius)) // collide
-						.stop()
-						.tick(20);
-					for (const { y, i, visible } of nodes) Y[i] = !visible ? NaN : y;
-				}
-				return { data, facets, channels: { y: { value: Y } } };
+		Plot.initializer(options, (data, facets, channels, { y: sy }) => {
+			// By the time an initializer runs, Plot has materialised each channel into an array.
+			const Y = channels.y!.value as number[];
+			const T = channels.text!.value as string[];
+			for (const index of facets) {
+				const unique = new SvelteSet();
+				const nodes = Array.from(index, (i) => ({
+					fx: 0,
+					y: sy!(Y[i]),
+					visible: unique.has(T[i]) // remove duplicate labels
+						? false
+						: !!unique.add(T[i]),
+					i
+				}));
+				d3.forceSimulation(nodes.filter((d) => d.visible))
+					.force(
+						'y',
+						d3.forceY(({ y }) => y)
+					) // gravitate towards the original y
+					.force('collide', d3.forceCollide().radius(radius)) // collide
+					.stop()
+					.tick(20);
+				for (const { y, i, visible } of nodes) Y[i] = !visible ? NaN : y;
 			}
-		);
+			return { data, facets, channels: { y: { value: Y } } };
+		});
 
 	// Spec and data for slope example (default)
 	let spec = $derived({
@@ -51,9 +51,9 @@
 		color: {
 			legend: true,
 			range: [
-				theme.currentTheme.color.data.primary,
-				theme.currentTheme.color.data.secondary,
-				theme.currentTheme.color.data.tertiary
+				theme.tokenNameToValue('data.primary'),
+				theme.tokenNameToValue('data.secondary'),
+				theme.tokenNameToValue('data.tertiary')
 			]
 		},
 		marks: [
@@ -66,7 +66,7 @@
 			}),
 			Plot.tickX(chartData, {
 				x: 'Year',
-				stroke: theme.currentTheme.color.chart.grid
+				stroke: theme.tokenNameToValue('chart.grid')
 			}),
 			Plot.textX(
 				chartData.filter((d) => d.Variable === 'Variable A'),
@@ -81,7 +81,7 @@
 				y: 'Average',
 				stroke: 'Variable',
 				strokeWidth: 2,
-				fill: theme.currentTheme.color.chart.background,
+				fill: theme.tokenNameToValue('chart.surface'),
 				fillOpacity: 1
 			}),
 			d3

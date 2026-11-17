@@ -11,6 +11,9 @@ export interface BarDivergingAxisProps {
 	 */
 	width?: number;
 	numTicks?: number;
+	/**
+	 * Text size of labels, in pixels. Unset, the labels use the `chart-tick-sm` usage alias.
+	 */
 	textSize?: number;
 
 	[key: string]: any;

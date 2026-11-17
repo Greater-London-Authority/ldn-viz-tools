@@ -21,3 +21,5 @@ yarn.lock
 
 .turbo/
 storybook-static/
+
+**/test-results/.last-run.json

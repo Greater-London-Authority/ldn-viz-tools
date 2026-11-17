@@ -19,12 +19,16 @@
 	 * @component
 	 */
 
-	import { getAllContexts, mount, unmount } from 'svelte';
-	import maplibre_gl from 'maplibre-gl';
+	import { getAllContexts, mount, unmount, type Component } from 'svelte';
+	import maplibre_gl, { type MapGeoJSONFeature } from 'maplibre-gl';
 	import MapCursorEvent from '../mapCursorEvent/MapCursorEvent.svelte';
+	import type { MapCursorFeatureHandler } from '../map/mapCursor/types';
+	import type { MapLibreMouseLikeEvent, MapLibreStore } from '../map/types';
+
+	type MountedInstance = ReturnType<typeof mount>;
 
 	const contexts = getAllContexts();
-	const mapStore = contexts.get('mapStore');
+	const mapStore: MapLibreStore = contexts.get('mapStore');
 
 	interface Props {
 		/**
@@ -59,14 +63,14 @@
 		children
 	}: Props = $props();
 
-	let tooltipMaplibrePopup = null;
-	let tooltipInstance = null;
+	let tooltipMaplibrePopup: maplibre_gl.Popup | null = null;
+	let tooltipInstance: MountedInstance | null = null;
 
-	let popupMaplibrePopup = null;
-	let popupFeature = null;
-	let popupInstance = null;
+	let popupMaplibrePopup: maplibre_gl.Popup | null = null;
+	let popupFeature: MapGeoJSONFeature | null = null;
+	let popupInstance: MountedInstance | null = null;
 
-	const enterTopFeature = (event, { feature }) => {
+	const enterTopFeature: MapCursorFeatureHandler = (event, { feature }) => {
 		if (popup) {
 			setCursorStyle('pointer');
 		} else if (tooltip) {
@@ -78,7 +82,7 @@
 		}
 
 		if (!tooltipMaplibrePopup && tooltip) {
-			const [maplibrePopup, instance] = renderComponent(event, feature, tooltip);
+			const [maplibrePopup, instance] = renderComponent(event, feature!, tooltip);
 			tooltipMaplibrePopup = maplibrePopup;
 			tooltipInstance = instance;
 		}
@@ -89,13 +93,13 @@
 		removeTooltip();
 	};
 
-	const setCursorStyle = (cursorStyle) => {
+	const setCursorStyle = (cursorStyle: string) => {
 		if (!noCursorStyle) {
-			$mapStore.getCanvas().style.cursor = cursorStyle;
+			$mapStore!.getCanvas().style.cursor = cursorStyle;
 		}
 	};
 
-	const clickFeature = (event, { feature }) => {
+	const clickFeature: MapCursorFeatureHandler = (event, { feature }) => {
 		if (!popup) {
 			return;
 		}
@@ -106,19 +110,22 @@
 
 		removeTooltip();
 
-		const [maplibrePopup, instance] = renderComponent(event, feature, popup);
+		const [maplibrePopup, instance] = renderComponent(event, feature!, popup);
 		popupMaplibrePopup = maplibrePopup;
 		popupInstance = instance;
 		popupFeature = feature;
 	};
 
-	const clickMap = (event, { features }) => {
+	const clickMap: MapCursorFeatureHandler = (event, { features }) => {
 		if (!featuresEqual(features[0], popupFeature)) {
 			removePopup();
 		}
 	};
 
-	const featuresEqual = (a, b) => {
+	const featuresEqual = (
+		a: MapGeoJSONFeature | null | undefined,
+		b: MapGeoJSONFeature | null | undefined
+	) => {
 		if (!a || !b) {
 			return false;
 		}
@@ -162,7 +169,11 @@
 		popupFeature = null;
 	};
 
-	const renderComponent = (event, feature, component) => {
+	const renderComponent = (
+		event: MapLibreMouseLikeEvent,
+		feature: MapGeoJSONFeature,
+		component: Component<any>
+	): [maplibre_gl.Popup, MountedInstance] => {
 		const maplibrePopup = new maplibre_gl.Popup({
 			closeButton: false,
 			closeOnClick: false
@@ -189,7 +200,7 @@
 			])
 		});
 
-		maplibrePopup.addTo($mapStore);
+		maplibrePopup.addTo($mapStore!);
 
 		return [maplibrePopup, instance];
 	};

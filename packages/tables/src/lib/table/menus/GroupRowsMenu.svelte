@@ -1,13 +1,13 @@
 <script lang="ts">
-	import type { TableData } from '$lib/core/lib/dataObj';
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
 	import { Overlay, Select } from '@ldn-viz/ui';
 
 	interface Props {
-		table: TableData;
-		onChange: () => void;
+		table: TableState;
+		onChange?: () => void;
 	}
 
-	let { table = $bindable(), onChange }: Props = $props();
+	let { table = $bindable(), onChange = () => undefined }: Props = $props();
 
 	type Options = { label: string; id: string; value: string }[];
 
@@ -25,7 +25,7 @@
 		return new_fields;
 	});
 
-	let groupingSelection: string[] = $state(table.groupingFields);
+	let groupingSelection: string[] = $state([...table.groupingFields]);
 	const applyGrouping = (groupingSelection: any[]) => {
 		if (table) {
 			// re-order cols
@@ -38,13 +38,12 @@
 				...sortingCols.filter((d) => !!d),
 				...table.columnSpec.filter((f) => !table.groupingFields.includes(f.short_label))
 			];
-			table.setColumnSpec(table.columnSpec);
 			//   */
 
 			const cols = (groupingSelection || []).map((o) => o.id);
 
 			if (JSON.stringify(table.groupingFields) !== JSON.stringify(cols)) {
-				table.setGrouping(cols);
+				table.groupingFields = cols;
 				onChange();
 			}
 		}

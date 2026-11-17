@@ -6,8 +6,8 @@
 
 <div class="flex justify-between">
 	<ul class="flex space-x-2">
-		<li><CookieControlSettings size="sm" /></li>
-		<li><PrivacyPolicyLink size="sm" /></li>
+		<li><CookieControlSettings size="xs" /></li>
+		<li><PrivacyPolicyLink size="xs" /></li>
 	</ul>
 	<ThemeSwitcher size="xs" />
 </div>

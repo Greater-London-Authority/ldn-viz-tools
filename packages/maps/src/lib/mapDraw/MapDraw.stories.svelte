@@ -9,12 +9,13 @@
 	import { Button } from '@ldn-viz/ui';
 
 	import type { Feature } from 'geojson';
+	import type { GeoJSONStoreFeatures } from 'terra-draw';
 	import MapDraw from './MapDraw.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
 	const { Story } = defineMeta({
-		title: 'Maps/Components/MapDraw',
+		title: 'Maps/Components/MapDraw/MapDraw',
 		component: MapDraw,
 		tags: ['autodocs']
 	});
@@ -22,9 +23,12 @@
 	let features1: Feature[] = $state([]);
 	let features2: Feature[] = $state([]);
 	let features3: Feature[] = $state([]);
-	let features4: Feature[] = $state([]);
+	let features4: GeoJSONStoreFeatures[] = $state([]);
+	let features5: Feature[] = $state([]);
+	let features6: Feature[] = $state([]);
+	let features7: Feature[] = $state([]);
 
-	const newFeatures = [
+	const newFeatures: GeoJSONStoreFeatures[] = [
 		{
 			id: 'cdb20d21-a866-4e4e-819a-4397da10f988',
 			type: 'Feature',
@@ -46,6 +50,7 @@
 	];
 
 	let isEditing = $state(false);
+	let mapDrawRef: { clickEdit: () => void } | undefined = $state(undefined);
 </script>
 
 <Story name="Default">
@@ -148,5 +153,72 @@
 				</MapControlGroup>
 			</Map>
 		</div>
+	{/snippet}
+</Story>
+
+<Story name="Externally trigger edit mode">
+	{#snippet template()}
+		<Button onclick={() => mapDrawRef?.clickEdit()}>Start editing</Button>
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapDraw
+						bind:this={mapDrawRef}
+						onDone={(features) => (features5 = features)}
+						uploadDownload={[false, false]}
+					/>
+				</MapControlGroup>
+			</Map>
+		</div>
+
+		<pre>{JSON.stringify(features5, null, 4)}</pre>
+	{/snippet}
+</Story>
+
+<!--
+The `uploadDownload` prop's second element enables downloading the drawn shape as
+a GeoJSON file. Here `[false, true]` enables download only (upload is disabled).
+-->
+<Story name="Allow download but not upload">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapDraw uploadDownload={[false, true]} onDone={(features) => (features6 = features)} />
+				</MapControlGroup>
+			</Map>
+		</div>
+
+		<pre>{JSON.stringify(features6, null, 4)}</pre>
+	{/snippet}
+</Story>
+
+<!--
+A single, non-polygon drawing mode can be enabled by passing a one-element `modes`
+array, e.g. `['point']`. The 'select' and 'render' modes are always added internally.
+-->
+<Story name="Single non-polygon mode">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapDraw modes={['point']} onDone={(features) => (features7 = features)} />
+				</MapControlGroup>
+			</Map>
+		</div>
+
+		<pre>{JSON.stringify(features7, null, 4)}</pre>
 	{/snippet}
 </Story>

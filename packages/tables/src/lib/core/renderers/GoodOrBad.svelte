@@ -29,9 +29,9 @@
 	};
 
 	const benchmarkComparisonClass = {
-		good: 'text-color-ui-positive',
-		bad: 'text-color-ui-negative',
-		equal: 'text-color-ui-neutral'
+		good: 'text-color-surface-positive',
+		bad: 'text-color-surface-negative',
+		equal: 'text-color-surface-neutral'
 	};
 
 	//
@@ -68,7 +68,7 @@
 
 	let ragClasses = $derived(
 		classNames(
-			'text-sm inline-flex items-center',
+			'table-body inline-flex items-center',
 			benchmarkComparisonClass[compared?.good as 'good']
 		)
 	);

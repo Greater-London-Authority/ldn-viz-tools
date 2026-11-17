@@ -1,14 +1,39 @@
 <script lang="ts">
 	/**
-	 * The `TableContainer` is a wrapper around a table that adds additional information such as a title, subtitle, and description.
-	 * It also provides controls such as data/image download buttons.
+	 * `TableContainer` wraps a table with the shared chrome primitives: a `ChromeHeader`
+	 * (title / subtitle / optional hint) above the table, and a `ChromeFooter` row
+	 * (source / byline / note + data/image download buttons) below it — the same pieces
+	 * used by `Card` and `ChartContainer`, so the three read and construct identically.
 	 *
-	 * **Note** Similar in structure and functionality to the ChartContainer in @ldn-viz/charts.
+	 * It has **no surface of its own** — no border, padding or shadow. When a surface is
+	 * wanted, compose it inside a `Card`, which supplies those. This is what lets several
+	 * tables share one `Card`: the Card title takes `emphasis="secondary"` (an eyebrow
+	 * labelling the group) while each `TableContainer` keeps its own dominant title.
+	 *
+	 * **Accessibility**: always provide `alt` (a short text alternative). `description`
+	 * (a longer account) is optional but recommended and, when given, is exposed to both
+	 * screen readers (`aria-describedby`) and sighted users (a "View description" Modal).
+	 *
+	 * The table is supplied via the `table` snippet; `beforeTable`, `numRowsControlSlot`
+	 * and `paginationControls` snippets remain for content and pagination controls.
+	 *
+	 * **Note** Mirrors [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation)
+	 * in @ldn-viz/charts.
 	 * 	@component
 	 */
 
-	import { ExportBtns, Footer, SubTitle, Title } from '@ldn-viz/charts';
-	import { classNames } from '@ldn-viz/ui';
+	import {
+		Button,
+		ChromeFooter,
+		ChromeHeader,
+		DownloadButton,
+		Modal,
+		classNames,
+		randomId,
+		resolveDownloadFormats,
+		type DataDownloadOption,
+		type ImageDownloadOption
+	} from '@ldn-viz/ui';
 	import type { Snippet } from 'svelte';
 
 	// export let title: string | null = null;
@@ -25,11 +50,41 @@
 		/**
 		 * Subtitle that is displayed below the title, but above the table.
 		 */
-		subTitle?: string;
+		subtitle?: string;
 		/**
-		 * Alt-text for the plot.
+		 * Optional eyebrow (kicker label) shown above the title.
+		 */
+		eyebrow?: string;
+		/**
+		 * Title emphasis: `primary` renders the dominant title; `secondary`
+		 * yields the primary slot and renders the title as an eyebrow — e.g. when this table sits
+		 * inside a `Card` that owns the primary title.
+		 */
+		emphasis?: 'primary' | 'secondary';
+		/**
+		 * The heading level of the title, passed to `TitleGroup`. It changes the element, not the styling;
+		 * leave it unset for a title that isn't a heading.
+		 */
+		headingLevel?: 2 | 3 | 4 | 5 | 6;
+		/**
+		 * Optional help affordance shown beside the title. A string opens an `Overlay`
+		 * (`hintType` selects tooltip / popover / modal).
+		 */
+		hint?: string;
+		/** Overlay form used when `hint` is a string. */
+		hintType?: 'tooltip' | 'popover' | 'modal';
+		/** Modal heading when `hintType="modal"`. */
+		hintTitle?: string;
+		/**
+		 * Short text alternative naming what the table shows. Required for accessibility.
 		 */
 		alt?: string;
+		/**
+		 * A longer description of the table. Optional but recommended. When provided it is exposed to
+		 * screen readers (visually hidden, `aria-describedby`) and to sighted users via a
+		 * "View description" Modal in the footer. Accepts a string or a snippet.
+		 */
+		description?: string | Snippet;
 		/**
 		 * What appears in the footer:
 		 *
@@ -41,27 +96,28 @@
 		byline?: string;
 		note?: string;
 		/**
-		 * Data Download Button in the footer
+		 * The data formats offered by the download button in the footer.
 		 *
-		 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
-		 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'.
-		 * If set to `false`, then the button is hidden.
-		 *
+		 * Defaults to `true`, which offers 'CSV' and 'JSON'. An array of formats offers only those formats.
+		 * `false` offers no data formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		dataDownloadButton?: true | false | ('CSV' | 'JSON')[];
+		dataDownload?: DataDownloadOption;
 		/**
 		 * The Data passed to the data Download Button(s) in the footer
 		 */
 		data?: { [key: string]: any }[] | undefined;
 		/**
-		 * Image Download Button in the footer
+		 * The image formats offered by the download button in the footer.
 		 *
-		 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
-		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'.
-		 * If set to `false`, then the button is hidden.
-		 *
+		 * Defaults to `['PNG']`. `true` offers 'PNG' and 'SVG'. An array of formats offers only those formats.
+		 * `false` offers no image formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
+		imageDownload?: ImageDownloadOption;
+		/**
+		 * How the download button in the footer is shown: a text button with the text "Download"
+		 * (`standard`), an icon-only button (`compact`), or an outline button with the text "Download" (`outline`).
+		 */
+		downloadButtonVariant?: 'standard' | 'compact' | 'outline';
 		filename?: string;
 		/**
 		 * Tailwind class to set table area height
@@ -84,14 +140,22 @@
 
 	let {
 		title = '',
-		subTitle = '',
+		subtitle = '',
+		eyebrow = '',
+		emphasis = 'primary',
+		headingLevel = undefined,
+		hint = undefined,
+		hintType = 'tooltip',
+		hintTitle = undefined,
 		alt = '',
+		description = undefined,
 		source = '',
 		byline = '',
 		note = '',
-		dataDownloadButton = true,
+		dataDownload = true,
 		data = undefined,
-		imageDownloadButton = ['PNG'],
+		imageDownload = ['PNG'],
+		downloadButtonVariant = 'standard',
 		filename = '',
 		tableHeight = 'h-auto',
 		overrideClass = '',
@@ -105,26 +169,49 @@
 
 	let tableClass = $derived(classNames('relative', tableHeight, overrideClass));
 
+	// Long description, exposed to both audiences from one source.
+	let descriptionOpen = $state(false);
+	let descId = randomId();
+	let hasDescription = $derived(!!description);
+	let descriptionIsString = $derived(typeof description === 'string');
+
 	// For save as image
 	let tableToCapture: HTMLDivElement | undefined = $state();
+
+	let downloads = $derived(
+		resolveDownloadFormats({
+			dataDownload,
+			imageDownload,
+			hasData: !!data,
+			hasImage: !!tableToCapture
+		})
+	);
 </script>
 
 {@render numRowsControlSlot?.()}
 
-<div class={`table-container ${tableWidth}`} bind:this={tableToCapture} id="captureElement">
-	{#if title || subTitle}
-		<div class="mb-4">
-			{#if title}
-				<Title>{title}</Title>
-			{/if}
-			{#if subTitle}
-				<SubTitle>{subTitle}</SubTitle>
-			{/if}
+<div
+	class={`table-container typeset-product break-inside-avoid ${tableWidth}`}
+	bind:this={tableToCapture}
+	id="captureElement"
+>
+	{#if title || subtitle || eyebrow || hint}
+		<div class="mb-2">
+			<ChromeHeader
+				{title}
+				{subtitle}
+				{eyebrow}
+				{emphasis}
+				{headingLevel}
+				{hint}
+				{hintType}
+				{hintTitle}
+			/>
 		</div>
 	{/if}
 
 	{#if alt}
-		<h5 class="sr-only">{alt}</h5>
+		<p class="sr-only">{alt}</p>
 	{/if}
 
 	{#if beforeTable}
@@ -133,29 +220,76 @@
 	{/if}
 
 	<!-- Viz element goes here -->
-	<div class={tableClass}>
+	<div class={tableClass} aria-describedby={hasDescription ? descId : undefined}>
 		{@render table?.({ data })}
 	</div>
 
+	<!-- long description, visually hidden — the screen-reader copy referenced by aria-describedby -->
+	{#if hasDescription}
+		<div id={descId} class="sr-only">
+			{@render descriptionBody()}
+		</div>
+	{/if}
+
 	{@render paginationControls?.()}
 
-	{#if source || byline || note || dataDownloadButton || imageDownloadButton}
-		<Footer {source} {byline} {note}>
-			{#snippet exportBtns()}
-				{#if tableToCapture}
-					<ExportBtns
-						chartToCapture={tableToCapture}
-						{columnMapping}
-						dataForDownload={data}
-						{dataDownloadButton}
-						{imageDownloadButton}
-						{filename}
-					/>
-				{/if}
-			{/snippet}
-		</Footer>
+	{#if source || byline || note || hasDescription || downloads.hasDownload}
+		<div class="mt-2">
+			<ChromeFooter
+				{source}
+				{byline}
+				{note}
+				footnoteExtra={hasDescription ? descriptionTrigger : undefined}
+				actions={downloads.hasDownload ? downloadBtn : undefined}
+			/>
+		</div>
 	{/if}
 </div>
+
+{#snippet descriptionBody()}
+	{#if descriptionIsString}
+		{description}
+	{:else if description}
+		{@render (description as Snippet)()}
+	{/if}
+{/snippet}
+
+{#snippet descriptionTrigger()}
+	<Modal bind:open={descriptionOpen}>
+		{#snippet trigger()}
+			<li data-capture-ignore>
+				<Button
+					variant="text"
+					size="xs"
+					emphasis="secondary"
+					class="!p-0"
+					onclick={() => (descriptionOpen = true)}>View description</Button
+				>
+			</li>
+		{/snippet}
+
+		{#snippet title()}
+			Description
+		{/snippet}
+
+		{#snippet description()}
+			{@render descriptionBody()}
+		{/snippet}
+	</Modal>
+{/snippet}
+
+{#snippet downloadBtn()}
+	<DownloadButton
+		htmlNode={tableToCapture}
+		{filename}
+		{data}
+		dataFormats={downloads.dataFormats}
+		imageFormats={downloads.imageFormats}
+		{columnMapping}
+		compact={downloadButtonVariant === 'compact'}
+		outline={downloadButtonVariant === 'outline'}
+	/>
+{/snippet}
 
 <style lang="postcss">
 	.table-container {

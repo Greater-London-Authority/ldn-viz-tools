@@ -1,19 +1,31 @@
 <script lang="ts">
 	/**
-	 * The `ChartContainer` is a wrapper around a plot that adds additional information such as a title, subtitle, and description.
-	 * It also provides controls such as data/image download buttons.
+	 * The `ChartContainer` is a wrapper around a plot that adds a title, subtitle, footnotes and
+	 * export controls.
 	 *
-	 * **Note**: You must provide a `chartDescription` for accessibility.
+	 * **Accessibility**: always provide `alt` — a short text alternative naming what the chart shows.
+	 * `description` (a longer account of the data/trends) is optional but recommended; when given it
+	 * is exposed to **both** audiences from one source — screen readers (a visually-hidden copy wired
+	 * via `aria-describedby`) and sighted users (a "View description" Modal in the footer).
 	 *
 	 * **Alternatives**: normally the [ObservablePlot](./?path=/docs/charts-components-observableplot--documentation) or other plot component would be used rather than using `ChartContainer` directly.
 	 * 	@component
 	 */
 
-	import { classNames } from '@ldn-viz/ui';
-	import ExportBtns from './ExportBtns.svelte';
-	import Footer from './Footer.svelte';
-	import SubTitle from './SubTitle.svelte';
-	import Title from './Title.svelte';
+	import {
+		Button,
+		ChromeFooter,
+		ChromeHeader,
+		DownloadButton,
+		Modal,
+		classNames,
+		resolveDownloadFormats,
+		type DataDownloadOption,
+		type ImageDownloadOption
+	} from '@ldn-viz/ui';
+
+	/** Controls whether the chart-description Modal is open. */
+	let descriptionOpen = $state(false);
 
 	// For save as image
 	let chartToCapture: HTMLDivElement = $state() as HTMLDivElement;
@@ -21,12 +33,42 @@
 	interface Props {
 		/**
 		 * Title that is displayed in large text above the plot.
+		 *
+		 * **Warning**: this is rendered as raw HTML and is not sanitized, so it must never be set
+		 * from unsanitized user input, as doing so would create an XSS vulnerability.
 		 */
 		title?: string;
 		/**
 		 * Subtitle that is displayed below the title, but above the plot.
+		 *
+		 * **Warning**: this is rendered as raw HTML and is not sanitized, so it must never be set
+		 * from unsanitized user input, as doing so would create an XSS vulnerability.
 		 */
-		subTitle?: string;
+		subtitle?: string;
+		/**
+		 * Optional eyebrow (kicker label) shown above the title.
+		 */
+		eyebrow?: string;
+		/**
+		 * Title emphasis (the primary-slot rule): `primary` renders the dominant title; `secondary`
+		 * yields the primary slot and renders the title as an eyebrow — e.g. when this chart sits
+		 * inside a `Card` that owns the primary title.
+		 */
+		emphasis?: 'primary' | 'secondary';
+		/**
+		 * The heading level of the title, passed to `TitleGroup`. It changes the element, not the styling;
+		 * leave it unset for a title that isn't a heading.
+		 */
+		headingLevel?: 2 | 3 | 4 | 5 | 6;
+		/**
+		 * Optional help affordance shown beside the title. A string opens an `Overlay`
+		 * (`hintType` selects tooltip / popover / modal); pass a snippet via `ChromeHeader` for full control.
+		 */
+		hint?: string;
+		/** Overlay form used when `hint` is a string. */
+		hintType?: 'tooltip' | 'popover' | 'modal';
+		/** Modal heading when `hintType="modal"`. */
+		hintTitle?: string;
 		/**
 		 * Alt-text for the plot.
 		 */
@@ -37,19 +79,20 @@
 		 * * `byline` (string) - statement of who created the visualization
 		 * * `source` (string) - statement of where the data came from
 		 * * `note` (string) - any additional footnotes
+		 *
+		 * **Warning**: these are rendered as raw HTML and are not sanitized, so they must never be
+		 * set from unsanitized user input, as doing so would create an XSS vulnerability.
 		 */
 		source?: string;
 		byline?: string;
 		note?: string;
 		/**
-		 * Data Download Button in the footer
+		 * The data formats offered by the download button in the footer.
 		 *
-		 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
-		 * Set to false to hide completely.
-		 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
-		 *
+		 * Defaults to `true`, which offers 'CSV' and 'JSON'. An array of formats offers only those formats.
+		 * `false` offers no data formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		dataDownloadButton?: true | false | ('CSV' | 'JSON')[];
+		dataDownload?: DataDownloadOption;
 		/**
 		 * The file name to be used for the downloaded data or image file.
 		 */
@@ -59,14 +102,17 @@
 		 */
 		data?: { [key: string]: any }[] | undefined;
 		/**
-		 * Image Download Button in the footer
+		 * The image formats offered by the download button in the footer.
 		 *
-		 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
-		 * Set to false to hide completely.
-		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
-		 *
+		 * Defaults to `true`, which offers 'PNG' and 'SVG'. An array of formats offers only those formats.
+		 * `false` offers no image formats. When neither data nor image formats are offered, the button is hidden.
 		 */
-		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
+		imageDownload?: ImageDownloadOption;
+		/**
+		 * How the download button in the footer is shown: a text button with the text "Download"
+		 * (`standard`), an icon-only button (`compact`), or an outline button with the text "Download" (`outline`).
+		 */
+		downloadButtonVariant?: 'standard' | 'compact' | 'outline';
 		/**
 		 * Tailwind class to set chart area height
 		 */
@@ -82,88 +128,180 @@
 		 */
 		alignMultiple?: boolean;
 		/**
-		 * Description of the chart for use in a modal for sighted users.
+		 * A longer description of the chart (data, trends). Optional but recommended. When provided
+		 * it is exposed to screen readers (visually hidden, `aria-describedby`) and to sighted users
+		 * via a "View description" Modal in the footer. Accepts a string or a snippet.
 		 */
-		chartDescription?: string;
+		description?: string | import('svelte').Snippet;
 		controls?: import('svelte').Snippet;
 		legend?: import('svelte').Snippet;
 		children?: import('svelte').Snippet;
-		description?: import('svelte').Snippet;
+
+		/**
+		 * Optional id to apply to the chart container div.
+		 * This can be ueful if you are mebedding multiple charts in a report
+		 * page, and want to be able to directly link to individual charts.
+		 */
+		id?: string;
+
+		/**
+		 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the downloaded file.
+		 */
+		columnMapping?: undefined | { [oldName: string]: string };
 	}
 
 	let {
 		title = '',
-		subTitle = '',
+		subtitle = '',
+		eyebrow = '',
+		emphasis = 'primary',
+		headingLevel = undefined,
+		hint = undefined,
+		hintType = 'tooltip',
+		hintTitle = undefined,
 		alt = '',
 		source = '',
 		byline = '',
 		note = '',
-		dataDownloadButton = true,
+		dataDownload = true,
 		filename = '',
 		data = undefined,
-		imageDownloadButton = true,
+		imageDownload = true,
+		downloadButtonVariant = 'standard',
 		chartHeight = 'h-60',
 		overrideClass = '',
 		chartWidth = 'w-full',
 		alignMultiple = false,
-		chartDescription = '',
+		description = undefined,
 		controls,
 		legend,
 		children,
-		description
+		id = 'captureElement',
+		columnMapping = undefined
 	}: Props = $props();
 
 	let chartClass = $derived(
 		classNames('relative', chartHeight, overrideClass, alignMultiple ? 'min-w-0' : '')
 	);
 	let classes = $derived(
-		classNames(chartWidth, alignMultiple ? 'contents not-prose' : 'flex flex-col not-prose')
+		classNames(
+			chartWidth,
+			'break-inside-avoid',
+			alignMultiple ? 'contents typeset-product chart' : 'flex flex-col typeset-product chart'
+		)
+	);
+
+	let hasDescription = $derived(!!description);
+	let descriptionIsString = $derived(typeof description === 'string');
+	let downloads = $derived(
+		resolveDownloadFormats({
+			dataDownload,
+			imageDownload,
+			hasData: !!data,
+			hasImage: !!chartToCapture
+		})
+	);
+	let hasActions = $derived(
+		!!(source || byline || note || hasDescription || downloads.hasDownload)
 	);
 </script>
 
-<div class={classes} bind:this={chartToCapture} id="captureElement">
+<div class={classes} {id}>
+	{#if title || subtitle || eyebrow || hint}
+		<div class="mb-2">
+			<ChromeHeader
+				{title}
+				{subtitle}
+				{eyebrow}
+				{emphasis}
+				{headingLevel}
+				{hint}
+				{hintType}
+				{hintTitle}
+			/>
+		</div>
+	{/if}
+
 	{#if alt}
 		<p class="sr-only">{alt}</p>
 	{/if}
 
-	<!-- eslint-disable svelte/no-at-html-tags -->
-	{#if title || subTitle}
-		<div class="mb-4">
-			{#if title}
-				<Title>{@html title}</Title>
-			{/if}
-			{#if subTitle}
-				<SubTitle>{@html subTitle}</SubTitle>
-			{/if}
-		</div>
-	{/if}
-	<!-- eslint-enable svelte/no-at-html-tags -->
-
 	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
 	{@render controls?.()}
 
-	<!-- separate slot for legend, so that main chart can be aligned if legends wrap over different number of lines-->
+	<!-- separate snippet for the legend, so the main chart can be aligned if legends wrap over a different number of lines-->
 	{@render legend?.()}
 
 	<!-- Visualisation goes here -->
-	<div class={chartClass}>
+	<div
+		class={chartClass}
+		bind:this={chartToCapture}
+		aria-describedby={hasDescription ? `${id}-description` : undefined}
+	>
 		{@render children?.()}
 	</div>
 
-	<!-- long description for screen readers -->
-	{@render description?.()}
+	<!-- long description, visually hidden — the screen-reader copy referenced by aria-describedby -->
+	{#if hasDescription}
+		<div id="{id}-description" class="sr-only">
+			{@render descriptionBody()}
+		</div>
+	{/if}
 
-	{#if source || byline || note || chartDescription || dataDownloadButton || imageDownloadButton}
-		<Footer {source} {byline} {note} {chartDescription}>
-			{#snippet exportBtns()}
-				<ExportBtns
-					{chartToCapture}
-					{filename}
-					dataForDownload={data}
-					{dataDownloadButton}
-					{imageDownloadButton}
-				/>
-			{/snippet}
-		</Footer>
+	{#if hasActions}
+		<div class="mt-2">
+			<ChromeFooter
+				{source}
+				{byline}
+				{note}
+				footnoteExtra={hasDescription ? descriptionTrigger : undefined}
+				actions={downloads.hasDownload ? downloadBtn : undefined}
+			/>
+		</div>
 	{/if}
 </div>
+
+{#snippet downloadBtn()}
+	<DownloadButton
+		htmlNode={chartToCapture}
+		{filename}
+		{data}
+		dataFormats={downloads.dataFormats}
+		imageFormats={downloads.imageFormats}
+		{columnMapping}
+		compact={downloadButtonVariant === 'compact'}
+		outline={downloadButtonVariant === 'outline'}
+	/>
+{/snippet}
+
+{#snippet descriptionBody()}
+	{#if descriptionIsString}
+		{description}
+	{:else if description}
+		{@render (description as import('svelte').Snippet)()}
+	{/if}
+{/snippet}
+
+{#snippet descriptionTrigger()}
+	<Modal bind:open={descriptionOpen}>
+		{#snippet trigger()}
+			<li data-capture-ignore>
+				<Button
+					variant="text"
+					size="xs"
+					emphasis="secondary"
+					slim
+					onclick={() => (descriptionOpen = true)}>View description</Button
+				>
+			</li>
+		{/snippet}
+
+		{#snippet title()}
+			Description
+		{/snippet}
+
+		{#snippet description()}
+			{@render descriptionBody()}
+		{/snippet}
+	</Modal>
+{/snippet}
