@@ -52,4 +52,31 @@ describe('RadioButton', () => {
 
 		await expect.element(radio).toBeChecked();
 	});
+
+	it('uses id as the input id, so an external label can name it', async () => {
+		const label = document.createElement('label');
+		label.htmlFor = 'foo';
+		label.textContent = 'External label';
+		document.body.appendChild(label);
+
+		render(RadioButton, { id: 'foo', selectedId: '' });
+
+		const radio = page.getByLabelText('External label');
+		await expect.element(radio).toHaveAttribute('id', 'foo');
+
+		await label.click();
+
+		await expect.element(radio).toBeChecked();
+
+		label.remove();
+	});
+
+	it('uses value in place of id when one is given', async () => {
+		render(RadioButton, { id: 'foo-input', value: 'foo', label: 'Foo', selectedId: 'foo' });
+
+		const radio = page.getByLabelText('Foo');
+		await expect.element(radio).toHaveAttribute('id', 'foo-input');
+		await expect.element(radio).toHaveAttribute('value', 'foo');
+		await expect.element(radio).toBeChecked();
+	});
 });
