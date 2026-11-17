@@ -7,7 +7,6 @@
 
 	import { theme } from '../theme/themeState.svelte';
 
-	import Tooltip from '../tooltip/Tooltip.svelte';
 	import { classNames } from '../utils/classNames';
 
 	interface Props {
@@ -56,11 +55,10 @@
 		return array.join(' ');
 	};
 
-	const activeOptionClasses =
-		'ring-inset ring-2 ring-offset-2 ring-color-surface ring-offset-color-border hover:ring-offset-color-border focus-visible:ring-offset-color-border';
+	const swatchClasses =
+		'flex h-8 w-8 items-center justify-center rounded-full bg-color-surface hover:ring-2 hover:ring-color-border-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-color-interactive-focus';
 
-	const optionClasses =
-		'rounded-full bg-color-surface hover:bg-color-surface hover:ring-inset hover:ring-offset-2 hover:ring-offset-color-border-muted hover:ring-2 hover:ring-color-surface focus-visible:ring-offset-color-border-muted';
+	const activeSwatchClasses = '!ring-2 !ring-color-border';
 </script>
 
 {#if disabled && !alwaysShowcolorChip}
@@ -71,23 +69,26 @@
 		aria-hidden="true"
 	/>
 {:else if disabled && alwaysShowcolorChip}
-	<div
-		class="relative h-[22px] w-[22px] rounded-full border"
-		style:background={activeColorName
-			? theme.tokenNameToValue(activeColorName, theme.currentTheme)
-			: ''}
-		title="Layer color is not editable."
-	></div>
+	<div class="flex h-6 w-6 items-center justify-center" title="Layer color is not editable.">
+		<div
+			class="h-[22px] w-[22px] rounded-full border"
+			style:background={activeColorName
+				? theme.tokenNameToValue(activeColorName, theme.currentTheme)
+				: ''}
+		></div>
+	</div>
 {:else}
 	<Popover>
 		{#snippet trigger(props)}
 			<Trigger {...props} size="xs" aria-label="Click to open {label} layer colour picker">
-				<div
-					class="relative h-[22px] w-[22px] rounded-full border"
-					style:background={activeColorName
-						? theme.tokenNameToValue(activeColorName, theme.currentTheme)
-						: ''}
-				></div>
+				<span class="flex h-6 w-6 items-center justify-center">
+					<span
+						class="h-[22px] w-[22px] rounded-full border"
+						style:background={activeColorName
+							? theme.tokenNameToValue(activeColorName, theme.currentTheme)
+							: ''}
+					></span>
+				</span>
 			</Trigger>
 		{/snippet}
 
@@ -97,30 +98,25 @@
 
 		<span class="caption-sm mb-2 inline-block">Click to assign a colour to this layer.</span>
 
-		<div class="flex flex-wrap gap-0.5">
+		<div class="flex flex-wrap gap-1" role="group" aria-label="{label} layer colours">
 			{#each colorNames as colorOption}
-				<Tooltip>
-					{#snippet trigger()}
-						<Trigger
-							variant="square"
-							size="sm"
-							class={classNames(
-								activeColorName === colorOption ? activeOptionClasses : '',
-								optionClasses
-							)}
-							onclick={() => {
-								activeColorName = colorOption;
-							}}
-						>
-							<div
-								class="h-6 w-6 rounded-full"
-								style:background={theme.tokenNameToValue(colorOption, theme.currentTheme)}
-							></div>
-						</Trigger>
-					{/snippet}
-					<span class="sr-only">Color code:</span>
-					{trimTokenName(colorOption)}
-				</Tooltip>
+				<button
+					type="button"
+					aria-label={trimTokenName(colorOption)}
+					aria-pressed={activeColorName === colorOption}
+					class={classNames(
+						swatchClasses,
+						activeColorName === colorOption ? activeSwatchClasses : ''
+					)}
+					onclick={() => {
+						activeColorName = colorOption;
+					}}
+				>
+					<span
+						class="h-6 w-6 rounded-full"
+						style:background={theme.tokenNameToValue(colorOption, theme.currentTheme)}
+					></span>
+				</button>
 			{/each}
 		</div>
 	</Popover>
