@@ -139,7 +139,7 @@
 	}: Props = $props();
 </script>
 
-<div class="flex items-center space-x-1">
+<div class="flex items-center gap-1">
 	<div class="mr-1">
 		{#if mutuallyExclusive}
 			<RadioButton
