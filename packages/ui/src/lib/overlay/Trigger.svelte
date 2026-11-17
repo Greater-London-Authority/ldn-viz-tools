@@ -3,6 +3,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { Snippet } from 'svelte';
 	import Button from '../button/Button.svelte';
+	import { classNames } from '../utils/classNames.js';
 	import type { ButtonProps } from '../button/types.js';
 
 	type Props = ButtonProps & {
@@ -40,11 +41,19 @@
 		variant = 'text',
 		slim = true,
 		children,
+		class: classes = '',
 		...restProps
 	}: Props = $props();
 </script>
 
-<Button {size} {emphasis} {variant} {slim} {...restProps} class="!justify-end">
+<Button
+	{size}
+	{emphasis}
+	{variant}
+	{slim}
+	{...restProps}
+	class={classNames('!justify-end', classes)}
+>
 	{#if children}
 		{@render children()}
 	{:else}
