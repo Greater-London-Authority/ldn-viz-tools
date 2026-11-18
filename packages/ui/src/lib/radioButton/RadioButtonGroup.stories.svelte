@@ -81,7 +81,7 @@
 			<RadioButtonGroup
 				{...args}
 				options={optionsForGroup}
-				name="station-type"
+				name="station-type-1"
 				bind:selectedId={selectedId2}
 				hint="Radio ga ga"
 			/>
@@ -96,7 +96,7 @@
 			<RadioButtonGroup
 				{...args}
 				options={optionsForGroup}
-				name="station-type"
+				name="station-type-2"
 				bind:selectedId={selectedId3}
 			>
 				{#snippet customOverlay()}
@@ -119,7 +119,7 @@
 		<RadioButtonGroup
 			{...args}
 			options={optionsForGroup}
-			name="station-type"
+			name="station-type-3"
 			bind:selectedId={selectedId4}
 			label="Transport method"
 			description="Pick you preferred method of transport - taxis are currently not available"
@@ -133,7 +133,7 @@
 		<RadioButtonGroup
 			{...args}
 			options={optionsWithColor}
-			name="station-type"
+			name="station-type-4"
 			bind:selectedId={selectedId5}
 			label="Transport method"
 			description="Pick you preferred method of transport - taxis are currently not available"
@@ -147,7 +147,7 @@
 		<RadioButtonGroup
 			{...args}
 			options={optionsForGroup}
-			name="station-type"
+			name="station-type-5"
 			bind:selectedId={selectedId6}
 			label="Transport method"
 			description="Pick you preferred method of transport - taxis are currently not available"
@@ -162,7 +162,7 @@
 		<RadioButtonGroup
 			{...args}
 			options={optionsForGroup}
-			name="station-type"
+			name="station-type-6"
 			bind:selectedId={selectedId7}
 			label="Transport method"
 			allowClear={false}
@@ -177,7 +177,7 @@
 		<RadioButtonGroup
 			{...args}
 			options={manyLongOptions}
-			name="station-type"
+			name="station-type-7"
 			bind:selectedId={selectedId11}
 			label="Transport method"
 			orientation="horizontal"
@@ -191,7 +191,7 @@
 		<RadioButtonGroup
 			{...args}
 			options={optionsForGroup}
-			name="station-type"
+			name="station-type-8"
 			bind:selectedId={selectedId8}
 			label="Transport method"
 			allowClear={false}
@@ -206,7 +206,7 @@
 		<RadioButtonGroup
 			{...args}
 			options={optionsForGroup}
-			name="station-type"
+			name="station-type-9"
 			bind:selectedId={selectedId9}
 			label="Transport method"
 			optional
@@ -220,7 +220,7 @@
 		<RadioButtonGroup
 			{...args}
 			options={optionsForGroup}
-			name="station-type"
+			name="station-type-10"
 			bind:selectedId={selectedId10}
 			label="Transport method"
 		/>
@@ -233,7 +233,7 @@
 		<RadioButtonGroup
 			{...args}
 			options={optionsForGroup}
-			name="station-type"
+			name="station-type-11"
 			bind:selectedId={selectedIdForError}
 			label="Transport method"
 			allowClear={false}
