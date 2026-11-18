@@ -51,6 +51,9 @@
 </script>
 
 <script lang="ts">
+	import { DownloadSimple } from '@steeze-ui/phosphor-icons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import Button from '../button/Button.svelte';
 	import LogoByCiu from '../logos/LogoByCIU.svelte';
 
 	let htmlNode: HTMLElement = $state() as HTMLElement;
@@ -166,5 +169,41 @@
 			<DownloadButton {...args} {htmlNode} disabled />
 			<DownloadButton {...args} {htmlNode} compact disabled />
 		</div>
+	{/snippet}
+</Story>
+
+<!-- A custom `label` prop can be provided to replace the default label ("Download") -->
+<Story name="Custom label">
+	{#snippet template(args)}
+		<DownloadButton {...args} {htmlNode} label="Click me to download!" />
+	{/snippet}
+</Story>
+
+<!--
+A custom `trigger` snippet can be provided to replace the whole button.
+This needs to pass through the `props` that it receives as an argument (with `{...props}`), or else the click event won't be handled.
+-->
+<Story name="Custom trigger">
+	{#snippet template(args)}
+		<DownloadButton {...args} {htmlNode} title="Download">
+			{#snippet trigger(props)}
+				<Button {...props} variant="solid">
+					Download <Icon src={DownloadSimple} class="ml-2" size="18px" aria-hidden="true" />
+				</Button>
+			{/snippet}
+		</DownloadButton>
+	{/snippet}
+</Story>
+
+<!-- The `disabled` prop passes through from the `DownloadButton` to the `trigger` -->
+<Story name="Custom trigger (disabled)">
+	{#snippet template(args)}
+		<DownloadButton {...args} {htmlNode} title="Download" disabled>
+			{#snippet trigger(props)}
+				<Button {...props} variant="solid">
+					Download <Icon src={DownloadSimple} class="ml-2" size="18px" aria-hidden="true" />
+				</Button>
+			{/snippet}
+		</DownloadButton>
 	{/snippet}
 </Story>
