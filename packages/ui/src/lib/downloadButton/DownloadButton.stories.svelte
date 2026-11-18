@@ -187,8 +187,8 @@ This needs to pass through the `props` that it receives as an argument (with `{.
 	{#snippet template(args)}
 		<DownloadButton {...args} {htmlNode} title="Download">
 			{#snippet trigger(props)}
-				<Button {...props} variant="square" emphasis="secondary" size="lg">
-					<Icon src={DownloadSimple} size="18px" aria-hidden="true" />
+				<Button {...props} variant="solid">
+					Download <Icon src={DownloadSimple} class="ml-2" size="18px" aria-hidden="true" />
 				</Button>
 			{/snippet}
 		</DownloadButton>
@@ -200,8 +200,8 @@ This needs to pass through the `props` that it receives as an argument (with `{.
 	{#snippet template(args)}
 		<DownloadButton {...args} {htmlNode} title="Download" disabled>
 			{#snippet trigger(props)}
-				<Button {...props} variant="square" emphasis="secondary" size="lg">
-					<Icon src={DownloadSimple} size="18px" aria-hidden="true" />
+				<Button {...props} variant="solid">
+					Download <Icon src={DownloadSimple} class="ml-2" size="18px" aria-hidden="true" />
 				</Button>
 			{/snippet}
 		</DownloadButton>
