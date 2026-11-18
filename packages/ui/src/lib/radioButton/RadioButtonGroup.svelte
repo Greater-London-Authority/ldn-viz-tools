@@ -20,7 +20,7 @@
 
 		/**
 		 * Each element of this array defines a radio button, and is an object with the properties:
-		 * * `id` (string) - the value written to `selectedId` when this option is selected. The option's `<input>` has the `id` `{group id}-{option id}`, so two groups on a page can use the same option ids. To point an external `<label for>` at an option, set the group's `id` and use that combined value.
+		 * * `id` (string) - the id of the group, used to disambiguate between options with the same id in different groups on the page (the option's `<input>` has the `id` `{group id}-{option id}`). To point an external `<label for>` at an option, set the group's `id` and use that combined value.
 		 * * `label` (string) - the text displayed next to the checkbox
 		 * * `disabled` (boolean, optional) - if `true`, users cannot change whether the checkbox is checked
 		 * * `color` (string, optional) - CSS color of the checkbox
