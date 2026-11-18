@@ -190,7 +190,7 @@
 					{...props}
 					variant={compact || outline ? 'outline' : 'text'}
 					emphasis="secondary"
-					size={'xs'}
+					size="xs"
 					slim={!compact && !outline}
 					fullWidth={fullWidth && !compact}
 					data-capture-ignore
