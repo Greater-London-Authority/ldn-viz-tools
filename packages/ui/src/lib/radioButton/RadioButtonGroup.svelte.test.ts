@@ -86,4 +86,18 @@ describe('RadioButtonGroup', () => {
 	// RadioButton is a plain native <input type="radio">. Because all options share the same
 	// `name`, arrow-key navigation between them is handled entirely by the browser's native radio
 	// group behaviour rather than any code in this component, so it is not re-tested here.
+
+	it('gives each input a unique id when two groups share option ids', async () => {
+		render(RadioButtonGroup, { id: 'first', options, name: 'first', selectedId: '' });
+		render(RadioButtonGroup, { id: 'second', options, name: 'second', selectedId: '' });
+
+		const busRadios = page.getByLabelText('Bus stops');
+		await expect.element(busRadios.nth(0)).toHaveAttribute('id', 'first-bus');
+		await expect.element(busRadios.nth(1)).toHaveAttribute('id', 'second-bus');
+
+		await page.getByText('Bus stops').nth(1).click();
+
+		await expect.element(busRadios.nth(1)).toBeChecked();
+		await expect.element(busRadios.nth(0)).not.toBeChecked();
+	});
 });

@@ -2,6 +2,7 @@
 	import Trigger from '../overlay/Trigger.svelte';
 	import Popover from '../popover/Popover.svelte';
 	import RadioButtonGroup from '../radioButton/RadioButtonGroup.svelte';
+	import { randomId } from '../utils/randomId';
 
 	import { AdjustmentsHorizontal, NoSymbol } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -62,6 +63,9 @@
 
 	let { label, disabled = false, fillType = $bindable() }: Props = $props();
 
+	// Radios that share a name form one group in the browser, so each instance needs its own name.
+	const groupName = `fill-type-${randomId()}`;
+
 	const clickPattern = (name: string) => {
 		fillType = name;
 	};
@@ -92,7 +96,7 @@
 			<div class="flex flex-wrap gap-0.5">
 				<RadioButtonGroup
 					options={fillOptions}
-					name="station-type"
+					name={groupName}
 					bind:selectedId={fillType!}
 					allowClear
 				/>

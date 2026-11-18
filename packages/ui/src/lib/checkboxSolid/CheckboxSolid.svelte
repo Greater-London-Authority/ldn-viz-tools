@@ -55,7 +55,7 @@
 	{/if}
 {/snippet}
 
-<div class="flex w-full">
+<div class="relative flex w-full">
 	<input
 		{id}
 		{name}
