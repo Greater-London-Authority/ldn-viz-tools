@@ -1,5 +1,17 @@
 # ldn-viz-tools-charts
 
+## 11.0.1
+
+### Patch Changes
+
+- 82e6051: FIXED: themes are correctly applied to `axisY` in a case when data (as well as on options object) are provided
+- Updated dependencies [bc8989b]
+- Updated dependencies [cd76d0b]
+- Updated dependencies [5045f44]
+- Updated dependencies [b830cf0]
+- Updated dependencies [b830cf0]
+  - @ldn-viz/ui@26.1.0
+
 ## 11.0.0
 
 ### Major Changes
