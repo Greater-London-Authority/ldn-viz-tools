@@ -30,7 +30,7 @@
 			disabled
 				? '!bg-color-interactive-disabled-muted !text-color-interactive-disabled cursor-not-allowed'
 				: 'bg-color-interactive-secondary-muted text-color-text cursor-pointer',
-			'typeset-product label-md ring-color-surface-muted hover:bg-color-interactive-primary-muted-hover peer-checked:text-color-static-white peer-checked:bg-color-interactive-on peer-checked:[font-weight:var(--primitive-typography-font-weight-semi-bold)] flex min-h-11 w-full flex-col items-center justify-center p-2 text-center ring-1',
+			'typeset-product label-md ring-color-surface-muted hover:bg-color-interactive-primary-muted-hover peer-checked:text-color-static-white peer-checked:bg-color-interactive-on peer-checked:[font-weight:var(--primitive-typography-font-weight-semi-bold)] flex min-h-10 w-full flex-col items-center justify-center p-2 text-center ring-1',
 			'peer-focus-visible:ring-offset-color-interactive-focus peer-focus-visible:ring-color-surface peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-inset peer-focus-visible:ring-offset-2'
 		)
 	);
@@ -54,7 +54,7 @@
 	{/if}
 {/snippet}
 
-<div class="flex w-full">
+<div class="relative flex w-full">
 	<input
 		id={inputID}
 		type="radio"

@@ -21,6 +21,10 @@
 		 * `id` of the selected radio button in group.
 		 */
 		selectedId?: string;
+		/**
+		 * Value set as the `value` attribute of the `<input>` element, and written to `selectedId` when the radio button is selected (defaults to `id`).
+		 */
+		value?: string;
 	}
 
 	let {
@@ -28,24 +32,23 @@
 		selectedId = $bindable(),
 		label,
 		id,
+		value = undefined,
 		name = undefined,
 		disabled = false,
 		hint = '',
 		hintLabel = '',
 		customOverlay = undefined
 	}: Props = $props();
-
-	let inputID = $derived(`input-${id}`);
 </script>
 
-<label class="flex items-center">
+<div class="flex items-center">
 	<input
-		id={inputID}
+		{id}
 		class="form-radio"
 		type="radio"
 		bind:group={selectedId}
 		{name}
-		value={id}
+		value={value ?? id}
 		aria-disabled={disabled}
 		{disabled}
 		style={color
@@ -53,7 +56,7 @@
 			: ''}
 	/>
 	{#if label}
-		<span class="form-label ml-2">{label}</span>
+		<label class="form-label ml-2" for={id}>{label}</label>
 	{/if}
 
 	{#if hint}
@@ -68,7 +71,7 @@
 	{#if customOverlay}
 		{@render customOverlay()}
 	{/if}
-</label>
+</div>
 
 <style>
 	.form-radio:before {

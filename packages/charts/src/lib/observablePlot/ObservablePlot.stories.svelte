@@ -5,6 +5,9 @@
 	/**
 	 * The `ObservablePlot` component allows the rendering of visualisations using the [Observable Plot](https://observablehq.com/plot/) library, wrapping an `ObservablePlotInner` component in a [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation) wrapper.
 	 * If you do not require the extra chrome applied by the `ChartContainer`, or need to include several plots in the same container, then use the [ObservablePlotInner](./?path=/docs/charts-components-observableplotinner--documentation) component directly.
+	 *
+	 * Note that to apply the correct syling to marks, you should import `Plot` from `@ldn-viz/charts`, not from `@observablehq/plot`;
+	 * you must also create the the axes explicitly with `Plot.axisX()` and `Plot.axisY()` as they will otherwise be defined implicity and use the default Observable Plot styling.
 	 */
 
 	const { Story } = defineMeta({

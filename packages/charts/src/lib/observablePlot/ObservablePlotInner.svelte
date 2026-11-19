@@ -4,6 +4,9 @@
 	 * It does *not* apply the  [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation) as a wrapper:
 	 * if you require this, use the [ObservablePlot](./?path=/docs/charts-components-observableplot--documentation) component instead.
 	 *
+	 * Note that to apply the correct syling to marks, you should import `Plot` from `@ldn-viz/charts`, not from `@observablehq/plot`;
+	 * you must also create the the axes explicitly with `Plot.axisX()` and `Plot.axisY()` as they will otherwise be defined implicity and use the default Observable Plot styling.
+	 *
 	 * **Note**: if you use this instead of the `ObservablePlot` component, ensure you add a description of the chart somewhere on the page with an `id` equal to the value of `ariaDescribedBy` for screen reader use.
 	 *  @component
 	 */

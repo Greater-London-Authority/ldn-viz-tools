@@ -285,7 +285,11 @@ describe('Plot.axisY', () => {
 		expect(result.args).toEqual([{ ...getDefault('defaultYAxis'), ...options }]);
 	});
 
-	it('documents a real bug: the 2-arg form looks up "defaultYaxis" (lowercase axis), which has no matching default and throws', () => {
-		expect(() => Plot.axisY(data, { label: 'Custom' })).toThrow();
+	it('2-arg form merges defaultYAxis underneath the caller options', () => {
+		const options = { label: 'Custom' };
+
+		const result = Plot.axisY(data, options) as never as { args: unknown[] };
+
+		expect(result.args).toEqual([data, { ...getDefault('defaultYAxis'), ...options }]);
 	});
 });

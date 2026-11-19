@@ -7,7 +7,7 @@ type DefaultPlotStyleFunctions = {
 	[key: string]: () => any;
 };
 
-export const defaultPlotStyleFunctions: DefaultPlotStyleFunctions = {
+export const defaultPlotStyleFunctions = {
 	defaultStyle: () => defaultStyle(),
 	defaultSize: () => defaultSize,
 	defaultSizeFacet: () => defaultSizeFacet,
@@ -30,12 +30,18 @@ export const defaultPlotStyleFunctions: DefaultPlotStyleFunctions = {
 	defaultAnnotationRange: () => defaultAnnotationRange(),
 	defaultBar: () => defaultBar(),
 	defaultRect: () => defaultRect()
+} satisfies DefaultPlotStyleFunctions;
+
+export type DefaultPlotStyleKey = keyof typeof defaultPlotStyleFunctions;
+
+export type DefaultPlotStyles = {
+	[K in DefaultPlotStyleKey]: ReturnType<(typeof defaultPlotStyleFunctions)[K]>;
 };
 
-export const getDefaultPlotStyles = () => {
+export const getDefaultPlotStyles = (): DefaultPlotStyles => {
 	return Object.fromEntries(
 		Object.entries(defaultPlotStyleFunctions).map(([key, val]) => [key, val()])
-	);
+	) as DefaultPlotStyles;
 };
 
 const defaultStyle = () => ({

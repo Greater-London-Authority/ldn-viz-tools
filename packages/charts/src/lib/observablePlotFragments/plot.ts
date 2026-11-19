@@ -25,7 +25,12 @@ import type {
 	TipOptions
 } from '@observablehq/plot';
 import * as ObservablePlot from '@observablehq/plot';
-import { defaultPlotStyleFunctions, getDefaultPlotStyles } from './observablePlotFragments';
+import {
+	defaultPlotStyleFunctions,
+	getDefaultPlotStyles,
+	type DefaultPlotStyleKey,
+	type DefaultPlotStyles
+} from './observablePlotFragments';
 
 export const plot = (options: PlotOptions = {}) => {
 	const {
@@ -83,7 +88,8 @@ export const plot = (options: PlotOptions = {}) => {
 	return ObservablePlot.plot(specWithDefaultsApplied as PlotOptions);
 };
 
-export const getDefault = (element: any) => defaultPlotStyleFunctions[element]();
+export const getDefault = <K extends DefaultPlotStyleKey>(element: K): DefaultPlotStyles[K] =>
+	defaultPlotStyleFunctions[element]() as DefaultPlotStyles[K];
 
 /**
  * Object contains a custom function for each mark, that wraps the existing mark but provides default styling and props
@@ -115,7 +121,7 @@ export const Plot = {
 			: ObservablePlot.axisX({ ...getDefault('defaultXAxis'), ...args[0] }),
 	axisY: (...args: [data?: Data, options?: AxisYOptions] | [options?: AxisYOptions]) =>
 		args.length > 1
-			? ObservablePlot.axisY(args[0] as Data, { ...getDefault('defaultYaxis'), ...args[1] })
+			? ObservablePlot.axisY(args[0] as Data, { ...getDefault('defaultYAxis'), ...args[1] })
 			: ObservablePlot.axisY({ ...getDefault('defaultYAxis'), ...args[0] }),
 	dashedLine: (data?: Data, options?: LineOptions) => {
 		return ObservablePlot.line(data, { ...getDefault('defaultDashedLine'), ...options });

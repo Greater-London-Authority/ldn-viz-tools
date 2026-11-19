@@ -10,6 +10,7 @@
 	import { DownloadSimple } from '@steeze-ui/phosphor-icons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { DropdownMenu } from 'bits-ui';
+	import type { Snippet } from 'svelte';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import Button from '../button/Button.svelte';
 	import { classNames } from '../utils/classNames';
@@ -70,6 +71,14 @@
 		filename?: string;
 
 		/**
+		 * Snippet which, if provided, is rendered instead of the button.
+		 * This needs to pass through the `props` that it receives as an argument (with `{...props}`), or else the click event won't be handled.
+		 * Any other button attributes passed to `DownloadButton` are included in `props`.
+		 * The snippet replaces the default button, so `label`, `compact`, `outline`, `fullWidth` and `class` are ignored.
+		 */
+		trigger?: Snippet<[Record<string, any>]>;
+
+		/**
 		 * The text on the button. In a compact button it is the accessible name.
 		 */
 		label?: string;
@@ -110,6 +119,7 @@
 		padding = 30,
 		scaleFactor = 2,
 		filename = 'download',
+		trigger,
 		label = 'Download',
 		compact = false,
 		outline = false,
@@ -165,32 +175,44 @@
 	};
 </script>
 
+{#snippet dropdownTrigger()}
+	{#if trigger}
+		<DropdownMenu.Trigger disabled={isDisabled}>
+			{#snippet child({ props })}
+				{@render trigger({ ...restProps, ...props, 'data-capture-ignore': true })}
+			{/snippet}
+		</DropdownMenu.Trigger>
+	{:else}
+		<DropdownMenu.Trigger disabled={isDisabled}>
+			{#snippet child({ props })}
+				<Button
+					{...restProps}
+					{...props}
+					variant={compact || outline ? 'outline' : 'text'}
+					emphasis="secondary"
+					size="xs"
+					slim={!compact && !outline}
+					fullWidth={fullWidth && !compact}
+					data-capture-ignore
+					class={classNames(compact ? compactClasses : standardClasses, className)}
+					disabled={isDisabled}
+					aria-label={compact ? label : undefined}
+					title={compact ? label : undefined}
+				>
+					{#if compact}
+						<Icon src={DownloadSimple} size="18px" aria-hidden="true" />
+					{:else}
+						{label}
+						<Icon src={DownloadSimple} size="18px" aria-hidden="true" />
+					{/if}
+				</Button>
+			{/snippet}
+		</DropdownMenu.Trigger>
+	{/if}
+{/snippet}
+
 <DropdownMenu.Root>
-	<DropdownMenu.Trigger disabled={isDisabled}>
-		{#snippet child({ props })}
-			<Button
-				{...restProps}
-				{...props}
-				variant={compact || outline ? 'outline' : 'text'}
-				emphasis="secondary"
-				size={'xs'}
-				slim={!compact && !outline}
-				fullWidth={fullWidth && !compact}
-				data-capture-ignore
-				class={classNames(compact ? compactClasses : standardClasses, className)}
-				disabled={isDisabled}
-				aria-label={compact ? label : undefined}
-				title={compact ? label : undefined}
-			>
-				{#if compact}
-					<Icon src={DownloadSimple} size="18px" aria-hidden="true" />
-				{:else}
-					{label}
-					<Icon src={DownloadSimple} size="18px" aria-hidden="true" />
-				{/if}
-			</Button>
-		{/snippet}
-	</DropdownMenu.Trigger>
+	{@render dropdownTrigger()}
 
 	<DropdownMenu.Portal>
 		<DropdownMenu.Content

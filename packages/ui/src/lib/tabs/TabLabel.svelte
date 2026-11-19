@@ -24,7 +24,7 @@
 
 	const orientationClasses = {
 		vertical: 'label-md w-20 h-20 p-2 flex flex-col items-center justify-center text-center',
-		horizontal: 'label-md py-1 px-4 flex items-center select-none'
+		horizontal: 'label-md min-h-10 py-1 px-4 flex items-center select-none'
 	};
 
 	const tabLabelClasses = classNames(
