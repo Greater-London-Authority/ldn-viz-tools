@@ -50,7 +50,6 @@
 				if (sidebarState?.isAlwaysOpen === false || sidebarState?.isAlwaysOpen === undefined) {
 					// if we're expanded, clicking the currently selected tab label triggers collapse
 					sidebarState.isOpen = !sidebarState?.isOpen;
-					selectedTabId = '';
 				}
 			} else {
 				// if we're expanded, clicking a different tab label switched tab
