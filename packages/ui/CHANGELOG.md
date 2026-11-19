@@ -1,5 +1,29 @@
 # ldn-viz-tools-ui
 
+## 26.1.0
+
+### Minor Changes
+
+- cd76d0b: CHANGED: `DownloadButton` now accepts an optional `trigger` prop to be used in place of the default button.
+- b830cf0: CHANGED: `RadioButton` uses `id` as the `id` of its `<input>` instead of `input-{id}`, matching `Checkbox`. An external `<label for={id}>` can now name the input. Anything that targets `#input-{id}` needs updating.
+
+  ADDED: `value` prop on `RadioButton`. It sets the input's `value` and defaults to `id`.
+
+  CHANGED: inputs in `RadioButtonGroup` use `{group id}-{option id}` as their `id`, so two groups with the same option ids no longer clash. `selectedId` still holds the option `id`.
+
+  FIXED: in a `LayerControl` with `mutuallyExclusive` set, the layer label now names the radio button, and clicking the label selects the layer.
+
+  FIXED: each `FillTypeControl` uses its own radio `name`, so its radio buttons no longer form one browser group with the fill controls of other layers.
+
+### Patch Changes
+
+- bc8989b: FIXED: `CheckboxSolid` and `RadioButtonSolid` have a minimum height of 40px, down from 44px, so they line up with the default `Button` and with inputs.
+  FIXED: horizontal `Tabs` have a minimum height of 40px. Vertical tabs are unchanged.
+- 5045f44: FIXED: `Trigger` adds its `!justify-end` class to a `class` passed by the caller. Before, it replaced the caller's classes.
+  FIXED: the `ColorPicker` swatches are white circles with the colour centred, and a ring marks the selected colour. Each swatch has the colour name as its accessible name, and `aria-pressed` on the selected one. The colour name no longer shows as a tooltip on hover.
+  FIXED: the `LayerControl` popover arrows point at the centre of their trigger. The colour chip is centred in its focus outline.
+- b830cf0: FIXED: selecting an option in `RadioButtonGroupSolid` or `CheckboxSolid` no longer scrolls the page to the top. The hidden input is now positioned within its own button.
+
 ## 26.0.0
 
 ### Major Changes
