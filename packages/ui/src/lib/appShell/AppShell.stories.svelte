@@ -36,6 +36,17 @@
 
 	let state = $state({ isOpen: true });
 	let selectedTabId = $state('markers');
+
+	// Simulated routing for the "Navigate on tab selection" story.
+	let routedTabId = $state('markers');
+	let tabWrites: { value: string; navigated: boolean }[] = $state([]);
+
+	const getRoutedTabId = () => routedTabId;
+	const setRoutedTabId = (value: string) => {
+		const navigated = value !== routedTabId;
+		tabWrites.push({ value, navigated });
+		routedTabId = value;
+	};
 </script>
 
 {#snippet sidebar()}
@@ -57,6 +68,28 @@
 
 {#snippet sidebarWithTabs()}
 	<Sidebar {tabs} {selectedTabId} />
+{/snippet}
+
+{#snippet sidebarWithRouting()}
+	<Sidebar {tabs} bind:selectedTabId={getRoutedTabId, setRoutedTabId} />
+{/snippet}
+
+{#snippet mainWithRouting()}
+	<DemoSidebarOpener />
+	<div class="typeset-product flow-standard p-4">
+		<p>Current URL: <code>/app/{routedTabId}</code></p>
+		<p>Writes to <code>selectedTabId</code>, newest first:</p>
+		<ol>
+			{#each tabWrites.toReversed() as write, i (tabWrites.length - i)}
+				<li>
+					<code>{JSON.stringify(write.value)}</code>
+					{write.navigated ? '(navigates)' : '(same tab, no navigation)'}
+				</li>
+			{:else}
+				<li>None yet</li>
+			{/each}
+		</ol>
+	</div>
 {/snippet}
 
 {#snippet mainWithControl()}
@@ -352,5 +385,12 @@ when it is provided.
 			></AppShell>
 			<Footer showCiuLogo showCookieMenu />
 		</div>
+	{/snippet}
+</Story>
+
+<!-- A consumer binds `selectedTabId` with a setter that navigates when the tab changes. The page lists every value the sidebar writes. Select a tab, click it again to collapse the sidebar, then reopen the sidebar with "Toggle sidebar". The URL keeps the tab that was open. -->
+<Story name="Navigate on tab selection">
+	{#snippet template(args)}
+		<AppShell {...args} main={mainWithRouting} sidebar={sidebarWithRouting}></AppShell>
 	{/snippet}
 </Story>
