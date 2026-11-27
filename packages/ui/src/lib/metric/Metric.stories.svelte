@@ -131,6 +131,32 @@
 	{/snippet}
 </Story>
 
+<!-- Every size, layout, hero and status, in the same order as the Metric component set in Figma -->
+<Story name="All variants">
+	{#snippet template(args)}
+		<div class="grid grid-cols-2 gap-x-12 gap-y-8">
+			{#each ['lg', 'sm'] as const as size (size)}
+				{#each ['vertical', 'horizontal'] as const as layout (layout)}
+					<div class="flex flex-col gap-6">
+						{#each [{ comparisonValue: 90000 }, { comparisonValue: 110000 }, { comparisonValue: 100000 }] as status, i (i)}
+							{#each ['value', 'change'] as const as hero (hero)}
+								<Metric
+									{...args}
+									{size}
+									{layout}
+									{hero}
+									comparisonValue={status.comparisonValue}
+									showChangeAs="percentage"
+								/>
+							{/each}
+						{/each}
+					</div>
+				{/each}
+			{/each}
+		</div>
+	{/snippet}
+</Story>
+
 <Story name="Without icon" args={{ showIcon: false }} />
 
 <Story name="Custom Primary renderer">
