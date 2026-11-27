@@ -22,23 +22,35 @@
 	let { label, primary, secondary, layout = 'vertical', size }: Props = $props();
 
 	let labelRole = $derived(size === 'lg' ? 'label-md' : 'label-sm');
+	let horizontal = $derived(layout === 'horizontal');
 </script>
 
-<div class={classNames('typeset-product space-y-1')} data-testid="metric">
+<div class="typeset-product" data-testid="metric">
 	{#if label}
 		<p class={classNames(labelRole, 'text-color-text-muted')}>{label}</p>
 	{/if}
 
-	<div class={classNames('flex', layout === 'vertical' ? 'flex-col gap-1' : 'flex-row gap-1')}>
+	<!--
+		Horizontal layout: the label sits on its own row above, so it never sets the width of the
+		figure. The secondary lines use a tighter line height, and the row aligns on the last
+		baseline, so the comparison line shares the figure's baseline.
+	-->
+	<div
+		class={classNames(
+			'flex',
+			horizontal ? 'flex-row gap-x-2 [align-items:last_baseline]' : 'flex-col gap-1'
+		)}
+	>
 		<div data-testid="metric-primary">
 			{@render primary()}
 		</div>
 
-		<!-- N.B Micro adjustments of margin required below to line things up visually across breakpoints -->
 		<div
 			class={classNames(
 				'flex',
-				layout === 'vertical' ? 'flex-row gap-1' : '-mt-1 flex-col sm:-mt-0.5 md:mt-0 xl:mt-1'
+				horizontal
+					? '-mt-1 flex-col [--label-md-line-height:1] [--label-sm-line-height:1]'
+					: 'flex-row items-baseline gap-1'
 			)}
 			data-testid="metric-secondary"
 		>

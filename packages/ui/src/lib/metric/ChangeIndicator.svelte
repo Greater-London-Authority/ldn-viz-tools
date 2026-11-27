@@ -123,12 +123,20 @@
 	});
 </script>
 
-<div class="flex">
+<!-- The icon centres on the figure's line box. The figure takes part in baseline alignment, so the indicator's baseline is the figure's baseline and it lines up with text beside it -->
+<div class="flex items-center gap-1">
 	<!-- The direction comes from the change, not the value's sign; the status after the figure says whether it is good, from goodIs -->
 	<span class="sr-only">{changeLabel[change]}</span>
 	{#if icon}
-		<Icon src={icon} class={classNames(iconSize, statusTextClass[status])} aria-hidden="true" />
+		<Icon
+			src={icon}
+			theme="solid"
+			class={classNames(iconSize, 'shrink-0', statusTextClass[status])}
+			aria-hidden="true"
+		/>
 	{/if}
-	<span class={classNames(changeSize, statusTextClass[status])}>{formattedChange}</span>
+	<span class={classNames(changeSize, 'self-baseline', statusTextClass[status])}
+		>{formattedChange}</span
+	>
 	<span class="sr-only">{status}</span>
 </div>

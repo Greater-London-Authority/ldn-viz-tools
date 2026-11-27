@@ -106,7 +106,7 @@
 
 <!-- Default primary group (Big number) -->
 {#snippet primaryGroup()}
-	<div class="flex items-end gap-1">
+	<div class="flex items-baseline gap-1">
 		{#if heroIsChange}
 			<ChangeIndicator
 				{showIcon}
