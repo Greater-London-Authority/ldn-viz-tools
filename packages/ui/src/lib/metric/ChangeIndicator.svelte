@@ -123,7 +123,6 @@
 	});
 </script>
 
-<!-- The icon centres on the figure's line box. The figure takes part in baseline alignment, so the indicator's baseline is the figure's baseline and it lines up with text beside it -->
 <div class="flex items-center gap-1">
 	<!-- The direction comes from the change, not the value's sign; the status after the figure says whether it is good, from goodIs -->
 	<span class="sr-only">{changeLabel[change]}</span>
